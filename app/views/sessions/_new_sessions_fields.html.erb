@@ -1,0 +1,11 @@
+<% @new_files.each do |session, files|%>
+  <p><%= session %></p>
+  <ul>
+    <% files.each do |file| %>
+      <li>
+        <%= check_box_tag "sessions["+ session +"][]", file %>
+        <%= label_tag :song, file %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>

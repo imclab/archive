@@ -1,0 +1,6 @@
+<article id="songs">
+<h3>ALL SONGS!</h3>
+<% @songs.each do |s| %>
+  <p class="song"><%= link_to s.file_name, song_path(s) %></p>
+<% end %>
+</article>

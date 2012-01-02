@@ -1,0 +1,5 @@
+<h3>Add new sessions</h3>
+<%= form_tag sessions_path, :method => :post do %>
+  <%= render :partial => 'sessions/new_sessions_fields' %>
+  <%= submit_tag 'Add selected files' %>
+<% end %>

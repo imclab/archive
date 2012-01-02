@@ -1,0 +1,12 @@
+<article id="sessions">
+<h3>ALL SESSIONS!</h3>
+<% @sessions.each do |s| %>
+  <div class="session"><h4><%= s.session_date %></h4>
+    <ul>
+    <% s.songs.each do |song| %>
+      <li><%= song.file_name %></li>
+    <% end %>
+  </ul>
+  </div>
+<% end %>
+</article>

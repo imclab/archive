@@ -1,0 +1,46 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!-- Consider adding an manifest.appcache: h5bp.com/d/Offline -->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <title><%= title %></title>
+  <meta charset="utf-8">
+  <meta name="description" content="Howling Vibes, a rock'n'roll band from Berlin">
+  <meta name="author" content="Howling Vibes">
+
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+  <%= stylesheet_link_tag "application" %>
+  <%= csrf_meta_tag %>
+  <%= javascript_include_tag "application" %>
+
+  <!-- Google Webfonts - Oswald -->
+  <link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
+  <!-- Droid Sans - normal and bold -->
+  <link href='http://fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet' type='text/css'>
+
+</head>
+
+<body>
+  <div id="container">
+
+    <header>
+    <%= render 'layouts/header' %>
+    </header>
+
+    <div id="main" role="main">
+      <%= render_flash %>
+      <%= yield %>
+    </div>
+
+    <footer>
+    <%= render 'layouts/footer' %>
+    <%= debug(params) if Rails.env.development? %>
+    </footer>
+  </div> <!--! end of #container -->
+
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+  </body>
+</html>

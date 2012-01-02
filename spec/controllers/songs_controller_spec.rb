@@ -23,7 +23,8 @@ describe SongsController do
   describe "GET 'show'" do
 
     before(:each) do
-      @song = Song.create!(file_name: "01.breaking.bad.mp3") 
+      @session = Session.create!(session_date: Time.now)
+      @song = @session.songs.create!(file_name: "01.breaking.bad.mp3") 
     end
 
     it "should be successful" do
@@ -34,11 +35,6 @@ describe SongsController do
     it "should find the right song" do
       get :show, :id => @song
       assigns(:song).should == @song
-    end
-    
-    it "should show the right file" do
-      get :show, :id => @song
-      response.should have_selector("h4", :content => @song.file_name)
     end
   end
 end

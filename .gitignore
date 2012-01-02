@@ -15,3 +15,7 @@
 /tmp
 
 .sass-cache/
+
+
+# Ignore vim *.swp files
+*.swp

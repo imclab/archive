@@ -40,5 +40,25 @@ describe Song do
       end
     end
   end
+  
+  describe "tagging" do
+    
+    before(:each) do
+      @song = Song.create!(:file_name => "01.testing.mp3")
+      @tag = Tag.create!(:name => "great!")
+    end
 
+    it "should have a song_tags method" do
+      @song.should respond_to(:song_tags)
+    end
+
+    it "should have a tags method" do
+      @song.should respond_to(:tags)
+    end
+
+    it "should show the right tag" do
+      @song.song_tags.create(:tag_id => @tag.id)
+      @song.tags.find(@tag).should == @tag
+    end
+  end
 end

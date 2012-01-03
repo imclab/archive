@@ -12,6 +12,9 @@
 class Song < ActiveRecord::Base
   belongs_to :session
 
+  has_many :song_tags
+  has_many :tags, :through => :song_tags
+
   validates :file_name, :presence => true
   validate :file_has_to_be_audio
 

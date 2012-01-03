@@ -61,7 +61,7 @@ describe Song do
       @song.tags.find(@tag).should == @tag
     end
 
-    it "should have a add_tag method" do
+    it "should have an add_tag method" do
       @song.should respond_to(:add_tag)
     end
 
@@ -74,6 +74,14 @@ describe Song do
       @song.add_tag("great!")
       @song.add_tag("great!")
       @song.tags.where(name: "great!").count.should eql(1)
+    end
+
+    it "should be possible for two files to have the same tag" do
+      @song.add_tag("great!")
+      @song2 = Song.create!(file_name: "02.testing.mp3")
+      @song2.add_tag("great!")
+      @song.should have_tag("great!")
+      @song2.should have_tag("great!")
     end
   end
 end

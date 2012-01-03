@@ -60,5 +60,20 @@ describe Song do
       @song.song_tags.create(:tag_id => @tag.id)
       @song.tags.find(@tag).should == @tag
     end
+
+    it "should have a add_tag method" do
+      @song.should respond_to(:add_tag)
+    end
+
+    it "should get tag via add_tag method" do
+      @song.add_tag("great!")
+      @song.should have_tag("great!")
+    end
+
+    it "should not have duplicates of a tag" do
+      @song.add_tag("great!")
+      @song.add_tag("great!")
+      @song.tags.where(name: "great!").count.should eql(1)
+    end
   end
 end

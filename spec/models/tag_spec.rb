@@ -17,6 +17,12 @@ describe Tag do
       invalid_tag = Tag.new(name: long_tag_name)
       invalid_tag.should_not be_valid
     end
+
+    it "should have an unique name" do
+      valid_tag = Tag.create(name: "great")
+      invalid_tag = Tag.new(name: "great")
+      invalid_tag.should_not be_valid
+    end
   end
 
   describe "tagging songs" do

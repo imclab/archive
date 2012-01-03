@@ -18,6 +18,17 @@ class Song < ActiveRecord::Base
   validates :file_name, :presence => true
   validate :file_has_to_be_audio
 
+  def add_tag(new_tag_name)
+    tag = Tag.find_or_create_by_name(name: new_tag_name)
+    song_tags.find_or_create_by_tag_id(tag_id: tag.id)
+  end
+
+  def has_tag?(tag_name)
+    tag = Tag.find_by_name(tag_name)
+    return nil  if tag.nil?
+    return true if song_tags.find_by_id(tag.id)
+  end
+
   private
 
     def file_has_to_be_audio

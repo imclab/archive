@@ -9,11 +9,11 @@ module ApplicationHelper
     end
   end
 
-  def render_flash
+  def render_flash_messages
     unless flash.empty?
-      flash.each do |key, value|
-        value.each do |m|
-          content_tag(:div, m, :class => "flash #{key}")
+      flash.each do |type, messages|
+        messages.each do |m|
+          concat content_tag :div, m, :class => "flash #{type}"
         end
       end
     end

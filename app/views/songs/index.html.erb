@@ -1,6 +1,6 @@
-<article id="songs">
 <h3>ALL SONGS!</h3>
+<ul class="song-index">
 <% @songs.each do |s| %>
-  <p class="song"><%= link_to s.file_name, song_path(s) %></p>
+  <li><%= link_to s.file_name, song_path(s) %></li>
 <% end %>
-</article>
+</ul>

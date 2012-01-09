@@ -44,5 +44,17 @@ describe Tag do
       @song.song_tags.create(:tag_id => @tag)
       @tag.songs.find(@song).should == @song
     end
+
+    it "should respond to a all_associated_with_songs method" do
+      Tag.should respond_to(:all_associated_with_songs)
+    end
+
+    it "should return all tags associated with songs when called" do
+      @song.song_tags.create(:tag_id => @tag)
+      tag_not_associated = Tag.create!(name: "notassociated")
+
+      Tag.all_associated_with_songs.should include(@tag)
+      Tag.all_associated_with_songs.should_not include(tag_not_associated)
+    end
   end
 end

@@ -14,7 +14,7 @@ class SessionsController < ApplicationController
   def create
     params[:sessions].each do |new_session, new_songs| 
       session = Session.find_or_initialize_by_session_date(:session_date =>
-                                                           folder_name_to_date(new_session))
+                                            folder_name_to_date(new_session))
       new_songs.each do |song|
         session.songs.build(:file_name => song)
       end

@@ -5,4 +5,8 @@ class Tag < ActiveRecord::Base
   validates :name, :presence => true, 
                    :length   => { :maximum => 20 }
   validates_uniqueness_of :name
+
+  def self.all_associated_with_songs
+    SongTag.all.map { |st| Tag.find(st.tag_id) if Song.find(st.song_id) }.uniq
+  end
 end

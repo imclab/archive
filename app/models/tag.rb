@@ -6,6 +6,8 @@ class Tag < ActiveRecord::Base
                    :length   => { :maximum => 20 }
   validates_uniqueness_of :name
 
+  default_scope :order => 'tags.name ASC'
+
   def self.all_associated_with_songs
     SongTag.all.map { |st| Tag.find(st.tag_id) if Song.find(st.song_id) }.uniq
   end

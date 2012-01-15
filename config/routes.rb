@@ -1,5 +1,7 @@
 Archive::Application.routes.draw do
-  resources :sessions, :songs, :tags
+  resources :sessions
+  resources :songs
+  resources :tags
   root :to => "sessions#index"
   # The priority is based upon order of creation:
   # first created -> highest priority.

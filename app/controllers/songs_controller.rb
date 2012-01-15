@@ -6,6 +6,7 @@ class SongsController < ApplicationController
 
   def show
     @song = Song.find(params[:id])
+    @tag = Tag.new
     @title = @song.file_name
   end
 end

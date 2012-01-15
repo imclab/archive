@@ -56,4 +56,46 @@ describe TagsController do
       assigns(:songs).should == [@song1, @song2]
     end
   end
+
+  describe "POST 'create'" do
+
+    before(:each) do
+      @song = Song.create(file_name: "testing.mp3")
+    end
+
+    describe "failure" do
+      before(:each) do
+        @attr = { :name => "", :song_id => @song.id }
+      end
+
+      it "should not create a tag" do
+        lambda do
+          post :create, :tag => @attr
+        end.should_not change(Tag, :count).by(1)
+      end
+
+      it "should render the songs page" do
+        post :create, :tag => @attr
+        response.should redirect_to(song_path(@song.id))
+      end
+    end
+
+    describe "success" do
+
+      before(:each) do
+        @attr = { :name => "greeeat!", :song_id => @song.id }
+      end
+
+      it "should create a tag" do
+        lambda do 
+          post :create, :tag => @attr
+        end.should change(Tag, :count).by(1)
+      end
+
+      it "should redirect to songs page" do
+        post :create, :tag => @attr
+        response.should redirect_to(song_path(@song.id))
+      end
+    end
+  end
 end

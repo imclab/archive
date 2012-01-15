@@ -1,0 +1,4 @@
+<h3>All songs tagged with "<%= @tag.name %>"</h3>
+<% @songs.each do |song| %>
+  <%= link_to song.file_name, song_path(song) %>
+<% end %>

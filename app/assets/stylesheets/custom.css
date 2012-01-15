@@ -283,6 +283,16 @@ div #main {
   color: hsla(0, 0%, 80%, 0.3);
 }
 
+.tag {
+  color: black;
+  background: yellow;
+  margin: 0 5px 0 5px;
+}
+.tag a {
+  color: black;
+  background: yellow;
+}
+
 
 /* Rails Debug Output */
 .debug_dump {

@@ -41,7 +41,7 @@ describe Song do
     end
   end
   
-  describe "tagging" do
+  describe "tag associations" do
     
     before(:each) do
       @song = Song.create!(:file_name => "01.testing.mp3")
@@ -68,6 +68,14 @@ describe Song do
     it "should get tag via add_tag method" do
       @song.add_tag("great!")
       @song.should have_tag("great!")
+    end
+
+    it "should show tags sorted by name" do
+      @tag1 = Tag.create!(:name => "zzz")
+      @tag2 = Tag.create!(:name => "awesome")
+      @song.song_tags.create(:tag_id => @tag1.id)
+      @song.song_tags.create(:tag_id => @tag2.id)
+      @song.tags.should == [@tag2, @tag1] 
     end
 
     it "should not have duplicates of a tag" do

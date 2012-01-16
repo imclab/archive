@@ -1,8 +1,12 @@
 <article id="tags">
 <h3>ALL TAGS!</h3>
-<% @tags.each do |tag| %>
-  <span class="tag">
-    <%= link_to tag.name, tag_path(tag) %>
-  </span>
-<% end %>
+<div class="tags-index">
+  <p>
+  <% @tags.each do |tag| %>
+    <span class="tag">
+      <%= link_to tag.name, tag_path(tag) %>
+    </span>
+  <% end %>
+  </p>
+</div>
 </article>

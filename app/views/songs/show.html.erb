@@ -1,2 +1,12 @@
 <h3><%= @song.file_name %></h3>
-<%= render :partial => 'songs/song_info' %>
+<div class="song-info">
+  <h4>Listen to this song:</h4>
+  <div class="listen">
+    <%= audio_tag("http://howlingvibes.com/aufnahmen/2012.01.04/01.jj.mp3",
+                    :controls => true) %>
+  </div>
+  <h4>Tags:</h4>
+  <div class="song-tags">
+    <%= render partial: "songs/tags", locals: { :song => @song, :tag => @tag } %>
+  </div>
+</div>

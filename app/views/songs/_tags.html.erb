@@ -1,0 +1,16 @@
+<p>
+<% if song.tags.any? %>
+  <% song.tags.each do |tag| %>
+    <span class="tag"><%= link_to tag.name, tag_path(tag) %></span>
+  <% end %>
+<% else %>
+  <span class="no-tags">This song has no tags! Add some!</span>
+<% end %>
+</p>
+<p>
+<%= form_for tag do |f| %>
+  <%= f.hidden_field :song_id, :value => song.id %>
+  <%= f.text_field :name %>
+  <%= f.submit "Add Tag!" %>
+<% end %>
+</p>

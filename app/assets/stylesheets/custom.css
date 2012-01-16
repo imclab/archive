@@ -52,9 +52,9 @@ text-shadow: 3px 3px 0px #DB5E1E;
 Links
 ========================================================================== */
 
-a { color: #00e; }
-a:visited { color: #551a8b; }
-a:hover { color: #06e; }
+a { color: hsla(301, 90%, 53%, 1); }
+a:visited { color: hsla(301, 76%, 40%, 1); }
+a:hover { color: hsla(301, 100%, 60%, 1); }
 a:focus { outline: thin dotted; }
 
 /* Improve readability when focused and hovered in all browsers: h5bp.com/h */
@@ -254,24 +254,43 @@ div #main {
   width: 940px; 
   padding: 10px 20px;
   background:rgba(0, 0, 0, 0.5);
+  border: 1px solid hsla(301, 100%, 53%, 0.2);
   margin: 10px auto 0 auto;
 }
-.session{
-  margin: 20px 0px 5px 0px;
-  padding: 2px 10px 2px 10px;
-  padding-left: 10px;
-  background: hsla(290, 85%, 15%, 0.8);
-  border: 1px solid hsla(290, 85%, 20%, 0.8);
+
+/* Headers */
+h3 {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.5em;
+  font-weight: normal;
+  letter-spacing: 0.1em;
+  color: #FFCD36;
+  text-shadow: 1px 1px 0px #DB5E1E;	
+  text-decoration: none;
+  margin: 0px 5px 10px 5px;
 }
-.session-name {
+h4 {
   font-size: 1.3em;
   font-weight: 400;
   margin: 0.3em 0 0.2em 0;
   color: hsla(45, 100%, 45%, 1);
 }
+
+/* ========== */
+/* /sessions/ */
+/* ========== */
+.session {
+  margin: 5px 0px 20px 0px;
+  padding: 2px 10px 2px 10px;
+  background: hsla(290, 85%, 15%, 0.8);
+  border: 1px solid hsla(290, 85%, 20%, 0.8);
+}
+.session ul {
+  padding-left: 5px;
+}
 .file {
   padding: 5px; 
-  margin: 5px 0px 5px 0px;
+  margin: 2px 0px 2px 0px;
   color: hsla(0, 0%, 90%, 0.9);
 }
 .file-active {
@@ -283,14 +302,45 @@ div #main {
   color: hsla(0, 0%, 80%, 0.3);
 }
 
+/* ================== */
+/* /songs/ and /tags/ */
+/* ================== */
+.songs-index {
+  margin: 5px 0px 20px 0px;
+  padding: 2px 10px 2px 10px;
+  background: hsla(290, 85%, 15%, 0.8);
+  border: 1px solid hsla(290, 85%, 20%, 0.8);
+}
+.songs-index ul {
+  padding-left: 5px;
+}
+.song-tags {
+  margin: 5px 0px 5px 0px;
+  padding: 2px 10px 2px 10px;
+  padding-left: 10px;
+  background: hsla(290, 85%, 15%, 0.8);
+  border: 1px solid hsla(290, 85%, 20%, 0.8);
+}
+.tags-index {
+  margin: 5px 0px 20px 0px;
+  padding: 2px 10px 2px 10px;
+  background: hsla(290, 85%, 15%, 0.8);
+  border: 1px solid hsla(290, 85%, 20%, 0.8);
+}
+.tags-index ul {
+  padding-left: 5px;
+}
 .tag {
   color: black;
-  background: yellow;
+  /*background: hsla(49, 97%, 85%, 1);*/
+  background: hsla(301, 90%, 53%, 0.6);
   margin: 0 5px 0 5px;
+  padding: 2px;
+  border: 1px solid hsla(301, 100%, 53%, 0.9);
 }
 .tag a {
-  color: black;
-  background: yellow;
+  color: hsla(49, 97%, 50%, 1);
+  text-decoration: none;
 }
 
 

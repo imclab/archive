@@ -12,21 +12,24 @@ class SessionsController < ApplicationController
   end
 
   def create
-    params[:sessions].each do |new_session, new_songs| 
-      session = Session.find_or_initialize_by_session_date(:session_date =>
-                                            folder_name_to_date(new_session))
-      new_songs.each do |song|
-        session.songs.build(:file_name => song)
+    if params.has_key? :sessions
+      params[:sessions].each do |new_session, new_songs| 
+        session = Session.find_or_initialize_by_session_date(:session_date =>
+                                              folder_name_to_date(new_session))
+        new_songs.each do |song|
+          session.songs.build(:file_name => song)
+        end
+        if session.save
+          flash_message :success, "Session #{new_session} saved!" 
+        else
+          flash_message :error, "Session #{new_session} could not be saved!"
+        end
       end
-
-      if session.save
-        flash_message :success, "Session #{new_session} saved!" 
-      else
-        flash_message :error, "Session #{new_session} could not be saved!"
-      end
+      redirect_to sessions_path
+    else
+      flash_message :notification, "Please select some files!"
+      redirect_to new_session_path
     end
-    
-    redirect_to sessions_path
   end
 
   private

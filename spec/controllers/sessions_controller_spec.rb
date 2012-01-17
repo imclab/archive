@@ -12,54 +12,12 @@ describe SessionsController do
       get :index
       response.should be_success
     end
-
-    it "should have the right title" do
-      get :index
-      response.should have_selector("title",
-                      :content => @base_title + " | All sessions")
-    end
-
   end
 
   describe "GET 'new'" do
     it "should be successful" do
       get :new
       response.code.should eq("200")
-    end
-    
-    it "should have the right title" do
-      get :new
-      response.body.should have_selector("title", :content => "Add session")
-    end
-
-    it "should show files in fixtures/archive" do
-      get :new
-      response.should have_selector("li", :content => "01.down.south.mp3") 
-    end
-
-    it "should NOT show a song that is already in DB" do
-      se1 = Session.new(:session_date => Date.strptime("2011.07.14","%Y.%m.%d"))
-      se1.songs.build(:file_name => "01.golden_fields.mp3")
-      se1.save
-      get :new
-      response.should_not have_selector("li", :content =>"01.golden_fields.mp3")
-    end
-
-    it "should show a session with some files not yet in DB" do
-      se1 = Session.new(:session_date => Date.strptime("2011.07.14","%Y.%m.%d"))
-      se1.songs.build(:file_name => "01.golden_fields.mp3")
-      se1.save
-      get :new
-      response.should have_selector("li", :content => "02.grapevine.mp3")
-    end
-
-    it "should NOT show a session with all files already in DB" do
-      se1 = Session.new(:session_date => Date.strptime("2011.07.14","%Y.%m.%d"))
-      se1.songs.build(:file_name => "01.golden_fields.mp3")
-      se1.songs.build(:file_name => "02.grapevine.mp3")
-      se1.save
-      get :new
-      response.should_not have_selector("p", :content => "2011.07.14")
     end
   end
 

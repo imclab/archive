@@ -15,7 +15,7 @@ class TagsController < ApplicationController
     @association = @tag.song_tags.find_or_create_by_tag_id_and_song_id(@tag.id,
                                                                        @song.id)
     if @tag.errors.any?
-      flash_message :error, "Tag \"#{@tag.name}\" could not be added!"
+      flash_message :error, "Tag could not be added!"
       redirect_to song_path(params[:tag][:song_id])
     else
       flash_message :success, "Tag \"#{@tag.name}\" saved!"

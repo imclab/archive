@@ -1,0 +1,5 @@
+<ul class="song-list">
+<% songs.each do |s| %>
+  <li><%= link_to s.file_name, song_path(s) %></li>
+<% end %>
+</ul>

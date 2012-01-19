@@ -2,6 +2,9 @@
 <div class="song-info">
   <h4>Listen to this song:</h4>
   <div class="listen">
+    <p>Use the player to listen to the song or download the file:
+    <a href="http://www.howlingvibes.com/aufnahmen/haha.mp3"><%= @song.file_name %>
+    </a></p>
     <%= audio_tag("http://howlingvibes.com/aufnahmen/2012.01.04/01.jj.mp3",
                     :controls => true) %>
   </div>

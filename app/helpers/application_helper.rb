@@ -18,4 +18,8 @@ module ApplicationHelper
       end
     end
   end
+
+  def pretty_session_date(datetime)
+    datetime.strftime("%d. %B %Y")
+  end
 end

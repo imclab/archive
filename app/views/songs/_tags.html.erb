@@ -11,6 +11,6 @@
 <%= form_for tag do |f| %>
   <%= f.hidden_field :song_id, :value => song.id %>
   <%= f.text_field :name %>
-  <%= f.submit "Add Tag!" %>
+  <%= f.submit "Add Tag!", :class => "submit" %>
 <% end %>
 </p>

@@ -264,6 +264,7 @@ div #main {
   background: hsla(293, 84%, 10%, 1);
   /* border: 1px solid hsla(293, 84%, 30%, 1); */
   margin: 10px auto 0 auto;
+  border-radius: 5px;
 }
 
 /* Headers */
@@ -278,11 +279,14 @@ h3 {
   padding-bottom: 5px;
   border-bottom: 1px solid hsla(45, 100%, 61%, 1);
 }
+h4:first-child {
+  margin: 0.3em 0 0.2em 0;
+}
 h4 {
   font-family: 'Oswald', sans-serif;
   font-size: 1.2em;
   font-weight: normal;
-  margin: 0.3em 0 0.2em 0;
+  margin: 1.5em 0 0.2em 0;
   color: hsla(45, 100%, 61%, 1);
 }
 
@@ -392,13 +396,23 @@ input[type="submit"] {
   margin: 5px 0px 20px 0px;
 }
 .song-list li {
-  padding: 5px 0 5px 5px;
+  padding: 5px 5px 5px 5px;
   background: hsla(301, 90%, 40%, 0.05);
   margin-bottom: 5px;
+  border-radius: 5px;
 }
 .song-list li:last-child {
   margin-bottom: 0;
 }
+.song-list li span {
+  float: right;
+  color: hsla(301, 85%, 100%, 0.3);
+}
+.song-list li b {
+  font-style: italic;
+  font-weight: normal;
+}
+
 
 /* ================== */
 /* /songs/ 
@@ -409,7 +423,12 @@ input[type="submit"] {
   margin-bottom: 10px;
 }
 audio {
-  width: 70%;
+  width: 80%;
+  display: block;
+  margin: 5px auto 5px auto;
+}
+.song-tags form {
+  text-align: right;
 }
 
 /* ================= */

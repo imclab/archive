@@ -22,4 +22,11 @@ module ApplicationHelper
   def pretty_session_date(datetime)
     datetime.strftime("%d. %B %Y")
   end
+
+  def short_song_info(song)
+    if song.tags.any?
+      sentence = "Tags: "
+      raw sentence += song.tags.collect { |t| "<b>#{t.name}</b>" }.to_sentence
+    end
+  end
 end

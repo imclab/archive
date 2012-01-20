@@ -1,5 +1,8 @@
 <ul class="song-list">
 <% songs.each do |s| %>
-  <li><%= link_to s.file_name, song_path(s) %></li>
+  <li>
+    <%= link_to s.file_name, song_path(s) %> 
+    <span><%= short_song_info(s) %></span>
+  </li>
 <% end %>
 </ul>

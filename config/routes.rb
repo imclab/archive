@@ -2,6 +2,9 @@ Archive::Application.routes.draw do
   resources :sessions
   resources :songs
   resources :tags
+  resources :users
+  match '/signup' => 'users#new'
+
   root :to => "sessions#index"
   # The priority is based upon order of creation:
   # first created -> highest priority.

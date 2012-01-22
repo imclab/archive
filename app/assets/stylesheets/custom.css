@@ -224,7 +224,24 @@ Author: Thorsten Ball
 
 body { background: url("bg_brighter.png"); }
 
+/* User Bar */
+#user-bar {
+  color: hsla(301, 85%, 100%, 0.9);
+  font-size: 1em;
+  font-weight: normal;
+  text-align: right;
+  width: 940px; 
+  padding: 1px 20px 1px 20px;
+  background: hsla(293, 84%, 10%, 1);
+  margin: 5px auto 0 auto;
+  border-radius: 5px;
+}
+#user-bar p {
+  margin: 5px;
+}
+
 header { text-align: center; }
+
 
 #main-heading { 
   font-family: 'Oswald', sans-serif;
@@ -237,7 +254,10 @@ header { text-align: center; }
 
 }
 
-#main-nav { display: block; }
+#main-nav {
+  display: block; 
+  padding-bottom: 14px;
+}
 #main-nav a {
   font-family: 'Oswald', sans-serif;
   font-size: 2.5em; 

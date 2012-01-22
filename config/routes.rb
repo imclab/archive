@@ -5,6 +5,11 @@ Archive::Application.routes.draw do
   resources :users
   match '/signup' => 'users#new'
 
+  resources :user_sessions, :only => [:new, :create, :destroy]
+  match '/signin'  => 'user_sessions#new'
+  match '/signout' => 'user_sessions#destroy'
+
+
   root :to => "sessions#index"
   # The priority is based upon order of creation:
   # first created -> highest priority.

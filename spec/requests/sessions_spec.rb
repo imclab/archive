@@ -11,7 +11,12 @@ describe "Sessions" do
     end
   end
 
-  describe "GET 'new'" do
+  describe "GET 'new' as admin" do
+    before(:each) do
+      admin = create_user
+      admin.toggle!(:admin)
+      integration_sign_in
+    end
 
     it "should show files in fixtures/archive" do
       visit '/sessions/new'
@@ -74,6 +79,18 @@ describe "Sessions" do
       click_button 'Add selected files' 
       page.should have_css('div.notification')
       page.should have_content('Please select some files!')
+    end
+  end
+
+  describe "GET 'new' as non-admin user" do
+    before(:each) do
+      create_user
+      integration_sign_in
+    end
+    it "should redirect to sessions_path and give notice" do
+      visit '/sessions/new'
+      page.should have_css('div.notification',
+                           :text => "Sorry, you are not allowed to do this")
     end
   end
 end

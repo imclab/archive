@@ -15,6 +15,8 @@ describe "Songs" do
     before(:each) do
       @session = Session.create!(session_date: Time.now)
       @song = @session.songs.create!(file_name: "01.breaking.bad.mp3") 
+      create_user
+      integration_sign_in
     end
 
     describe "song tags" do
@@ -31,6 +33,7 @@ describe "Songs" do
       end
 
       describe "adding tags via form" do
+
         it "should add a tag when submitted via form and display it" do
           visit song_path(@song)
           fill_in "tag[name]", :with => 'superduper'

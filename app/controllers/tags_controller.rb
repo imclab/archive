@@ -1,4 +1,6 @@
 class TagsController < ApplicationController
+  before_filter :authorize, :only => [:create]
+
   def index
     @title = "All tags"
     @tags = Tag.all_associated_with_songs

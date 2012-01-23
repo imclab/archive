@@ -44,6 +44,8 @@ describe TagsController do
 
     before(:each) do
       @song = Song.create(file_name: "testing.mp3")
+      @user = create_user
+      controller_sign_in(@user)
     end
 
     describe "failure" do
@@ -78,6 +80,21 @@ describe TagsController do
       it "should redirect to songs page" do
         post :create, :tag => @attr
         response.should redirect_to(song_path(@song.id))
+      end
+    end
+  end
+
+  describe "authentication of 'create action'" do
+    before(:each) do
+      @song = Song.create(file_name: "testing.mp3")
+      @attr = { :name => "greeeat!", :song_id => @song.id }
+      @user = create_user
+    end
+
+    describe "for non-signed in users" do
+      it "should deny access to 'new'" do
+        post :create, :tag => @attr
+        response.should redirect_to(signin_path)
       end
     end
   end

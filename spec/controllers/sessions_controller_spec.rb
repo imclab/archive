@@ -15,13 +15,24 @@ describe SessionsController do
   end
 
   describe "GET 'new'" do
-    it "should be successful" do
+    before(:each) do
+      @user = create_user
+      @user.toggle!(:admin)
+      controller_sign_in(@user)
+    end
+
+    it "should be successful for admins" do
       get :new
       response.code.should eq("200")
     end
   end
 
-  describe "POST 'create'" do
+  describe "POST 'create' as admin" do
+    before(:each) do
+      @user = create_user
+      @user.toggle!(:admin)
+      controller_sign_in(@user)
+    end
 
     describe "success with one session" do
 
@@ -68,6 +79,28 @@ describe SessionsController do
         post :create, :sessions => @attr
         flash[:success].should include "Session 2011.08.09 saved!"
         flash[:success].should include "Session 2011.08.09 saved!"
+      end
+    end
+  end
+
+  describe "authentication of new/create actions" do
+    before(:each) do
+      @user = create_user
+      controller_sign_in(@user)
+    end
+
+    describe "for signed in (non-admin) users" do
+
+      it "should deny access to 'new'" do
+        get :new
+        response.should redirect_to(sessions_path)
+      end
+
+      it "should deny access to 'create'" do
+        @attr = { "2011.08.09" => ["01.testing.mp3", "02.testing.mp3"],
+                  "2011.09.09" => ["01.testing.mp3", "02.testing.mp3"] }
+        post :create, :sessions => @attr
+        response.should redirect_to(sessions_path)
       end
     end
   end

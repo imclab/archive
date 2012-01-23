@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120120141957) do
+ActiveRecord::Schema.define(:version => 20120123160533) do
 
   create_table "sessions", :force => true do |t|
     t.date     "session_date"
@@ -49,6 +49,7 @@ ActiveRecord::Schema.define(:version => 20120120141957) do
     t.string   "password_digest"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "admin",           :default => false
   end
 
 end

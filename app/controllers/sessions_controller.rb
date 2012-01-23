@@ -1,4 +1,5 @@
 class SessionsController < ApplicationController
+  before_filter :authorize_admin, :only => [:new, :create]
 
   def index 
     @title = "All sessions"

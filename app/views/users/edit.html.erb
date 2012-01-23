@@ -1,0 +1,22 @@
+<h3>Edit your profile</h3>
+<%= form_for @user do |f| %>
+  <%= render :partial => 'shared/error_messages',
+    :locals => { :object => f.object } %>
+  <p>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+  </p>
+  <p>
+  <%= f.label :email %>
+  <%= f.text_field :email %>
+  </p>
+  <p>
+  <%= f.label :password %>
+  <%= f.password_field :password, size: 40 %>
+  </p>
+  <p>
+  <%= f.label :password_confirmation %>
+  <%= f.password_field :password_confirmation, size: 40 %>
+  </p>
+  <%= f.submit "Update your profile" %>
+<% end %>

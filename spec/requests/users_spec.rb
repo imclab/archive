@@ -104,18 +104,16 @@ describe "User" do
   end
 
   describe "wants to log in" do
+
     it "should show a login form" do
       visit '/signin'
       page.should have_css('h3', :text => "Log in")
       page.should have_css('form.new_user_session')
     end
 
-
     describe "failure" do
-
       before(:each) do
-        User.create!(:name => "John Doe",
-                     :email => "john@doe.org",
+        User.create!(:name => "John Doe", :email => "john@doe.org",
                      :password => "password",
                      :password_confirmation => "password")
       end
@@ -130,7 +128,6 @@ describe "User" do
         page.should have_css("div.error", :text => "Invalid email or password")
       end
     end
-
     describe "success" do
       before(:each) do
         @user = User.create!(:name => "John Doe",
@@ -138,7 +135,6 @@ describe "User" do
                      :password => "password",
                      :password_confirmation => "password")
       end
-
       it "should welcome user" do
         visit '/signin'
         within(".new_user_session") do
@@ -149,6 +145,42 @@ describe "User" do
         page.should have_css('div.success',
             :text => "Hello John Doe, you successfully logged in!")
         page.should have_css('a', :text => 'Sign out')
+      end
+    end
+  end
+
+  describe "wants to sign out" do
+    it "should log user out after clicking 'Sign out' link" do
+      create_user
+      integration_sign_in
+      click_link 'Sign out'
+      page.should have_css('div.notification',
+                           :text => 'You successfully logged out.')
+    end
+  end
+
+  describe "wants to update his profile information" do
+    describe "visits the 'edit' page for his profile" do
+      it "should not see a 'Edit Profile' link" do
+        @user = create_user("foobar@foobar.com", "password")
+        visit root_path
+        page.should_not have_css('a', :text => "Edit profile")
+      end
+      it "should see the profile, make changes and submit it" do
+        @user = create_user("foobar@foobar.com", "password")
+        integration_sign_in("foobar@foobar.com", "password")
+        click_link "Edit profile"
+        page.should have_css('h3', :text => "Edit your profile")
+        page.should have_css('form.edit_user')
+        fill_in 'Name', :with => "Keef Richards"
+        fill_in 'Email', :with => "foobar@foobar.org"
+        fill_in 'Password', :with => 'password'
+        fill_in 'Password confirmation', :with => 'password'
+        click_button "Update your profile"
+        page.should have_css('div.success',
+              :text => "You successfully updated your profile!")
+        page.should have_content('Hello, Keef Richards')
+        page.should have_css('h3', :text => "ALL SESSIONS!")
       end
     end
   end

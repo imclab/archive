@@ -5,7 +5,7 @@ class UserSessionsController < ApplicationController
   def create
     user = User.find_by_email(params[:user_session][:email])
     if user && user.authenticate(params[:user_session][:password])
-      session[:user_id] = user.id
+      sign_in user 
       flash_message :success, "Hello #{user.name}, you successfully logged in!"
       redirect_to sessions_path 
     else
@@ -15,7 +15,7 @@ class UserSessionsController < ApplicationController
   end
 
   def destroy
-    session[:user_id] = nil
+    sign_out
     flash_message :notification, "You successfully logged out."
     redirect_to sessions_path
   end

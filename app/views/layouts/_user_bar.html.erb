@@ -2,6 +2,7 @@
 <% if signed_in? %>
   Hello, <%= current_user.name %>
   <span id="user-controls">
+  <%= link_to "Edit profile", edit_user_path(current_user) %> | 
   <%= link_to "Sign out", signout_path, :method => :delete %>
   </span>
 <% else %>

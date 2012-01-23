@@ -1,8 +1,8 @@
 Archive::Application.routes.draw do
-  resources :sessions
-  resources :songs
-  resources :tags
-  resources :users
+  resources :sessions, :except => [:update, :edit]
+  resources :songs, :except => [:update, :edit]
+  resources :tags, :except => [:update, :edit]
+  resources :users, :except => :show
   match '/signup' => 'users#new'
 
   resources :user_sessions, :only => [:new, :create, :destroy]

@@ -19,3 +19,6 @@
 
 # Ignore vim *.swp files
 *.swp
+
+# .DS_Store
+*.DS_Store

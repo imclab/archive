@@ -2,21 +2,35 @@
 <%= form_for @user do |f| %>
   <%= render :partial => 'shared/error_messages',
     :locals => { :object => f.object } %>
-  <p>
-  <%= f.label :name %>
-  <%= f.text_field :name %>
-  </p>
-  <p>
-  <%= f.label :email %>
-  <%= f.text_field :email %>
-  </p>
-  <p>
-  <%= f.label :password %>
-  <%= f.password_field :password, size: 40 %>
-  </p>
-  <p>
-  <%= f.label :password_confirmation %>
-  <%= f.password_field :password_confirmation, size: 40 %>
-  </p>
+  <div class="clearfix">
+    <%= f.label :name %>
+    <div class="input">
+      <%= f.text_field :name %>
+      <span class="help-input">
+        Your name can be up to 20 characters long
+      </span>
+    </div>
+  </div>
+  <div class="clearfix">
+    <%= f.label :email %>
+    <div class="input">
+    <%= f.text_field :email %>
+    </div>
+  </div>
+  <div class="clearfix">
+    <%= f.label :password %>
+    <div class="input">
+      <%= f.password_field :password, size: 40 %>
+      <span class="help-input">
+        Your password can be up to 40 characters long (min. 6)
+      </span>
+    </div>
+  </div>
+  <div class="clearfix">
+    <%= f.label :password_confirmation %>
+    <div class="input">
+    <%= f.password_field :password_confirmation, size: 40 %>
+    </div>
+  </div>
   <%= f.submit "Update your profile" %>
 <% end %>

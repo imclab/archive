@@ -1,5 +1,4 @@
 class SongsController < ApplicationController
-  skip_filter :authorize
 
   def index
     @songs = Song.all

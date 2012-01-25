@@ -39,7 +39,7 @@ class ApplicationController < ActionController::Base
     end
 
     def authorize_admin
-      unless current_user.admin?
+      unless current_user && current_user.admin
         flash_message :notification, "Sorry, you are not allowed to do this"
         redirect_to sessions_path
       end

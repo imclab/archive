@@ -3,11 +3,16 @@ require 'spec_helper'
 describe "Songs" do
 
   describe "GET 'index'" do
-    it "should have the right title" do
+    before(:each) do
+      @song = Song.create!(file_name: "01.testing.mp3")
+    end
+    it "should show a songs list" do
       visit '/songs'
       current_path.should == songs_path
       page.should have_css("title",
                            :title => "Howling Vibes Archive | All songs")
+      page.should have_css("ul.song-list")
+      page.should have_link(@song.file_name, :href => song_path(@song))
     end
   end
 

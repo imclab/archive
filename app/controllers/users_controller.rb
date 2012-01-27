@@ -1,7 +1,11 @@
 class UsersController < ApplicationController
-  before_filter :authorize,    :only => [:edit, :update, :destroy]
-  before_filter :correct_user, :only => [:edit, :update] 
-  before_filter :authorize_admin, :only => :destroy 
+  before_filter :authorize,       :only => [:edit, :update, :index, :destroy]
+  before_filter :correct_user,    :only => [:edit, :update] 
+  before_filter :authorize_admin, :only => [:destroy, :index]
+
+  def index
+    @users = User.all
+  end
 
   def new 
     @user = User.new

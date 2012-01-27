@@ -1,5 +1,6 @@
 require 'spec_helper'
 
+
 describe "User" do
 
   describe "wants to sign up" do

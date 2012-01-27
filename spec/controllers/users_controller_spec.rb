@@ -99,13 +99,11 @@ describe UsersController do
     end
   end
 
-  describe "authentication of edit/update actions" do
+  describe "authentication of edit/update/index actions" do
     before(:each) do
       @user = create_user
     end
-
     describe "for non-signed in users" do
-
       it "should deny access to 'edit'" do
         get :edit, :id => @user
         response.should redirect_to(signin_path)
@@ -113,6 +111,11 @@ describe UsersController do
 
       it "should deny access to 'update'" do
         put :update, :id => @user, :user => {}
+        response.should redirect_to(signin_path)
+      end
+
+      it "should deny access to 'index'" do
+        get :index
         response.should redirect_to(signin_path)
       end
     end
@@ -132,8 +135,26 @@ describe UsersController do
         put :update, :id => @user, :user => {}
         response.should redirect_to(root_path)
       end
+
+      it "should require admin privileges for 'index'" do
+        get :index
+        response.should redirect_to(sessions_path)
+      end
     end
   end
+
+  describe "GET 'index' as admin" do
+    before(:each) do
+      @admin = create_user("admin@admin.com")
+      @admin.toggle!(:admin)
+      controller_sign_in(@admin)
+    end
+    it "should be a success" do
+      get :index
+      response.should be_success
+    end
+  end
+
   describe "DELETE 'destroy'" do
 
     before(:each) do

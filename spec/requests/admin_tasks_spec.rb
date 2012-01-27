@@ -106,4 +106,19 @@ describe "Admin Tasks" do
                             href: "/songs/#{@song.id}")
     end
   end
+
+  describe "DELETE a user in users index page" do
+    describe "GET 'index'" do
+      before(:each) do
+        @testuser = create_user("test@user.com", "Test User")
+      end
+
+      it "should show a delete link" do
+        visit '/users'
+        page.should have_css("ul.user-list")
+        page.should have_link('Delete this user', 
+                              href: "/users/#{@testuser.id}")
+      end
+    end
+  end
 end

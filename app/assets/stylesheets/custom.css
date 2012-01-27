@@ -239,6 +239,15 @@ body { background: url("bg_brighter.png"); }
 #user-bar p {
   margin: 5px;
 }
+#user-bar .admin_tasks {
+  float: left;
+}
+#user-bar .admin_tasks a {
+  color: hsla(45, 100%, 61%, 1);
+}
+#user-bar .admin_tasks a:hover {
+  color: hsla(45, 100%, 70%, 1);
+}
 
 header { text-align: center; }
 
@@ -386,6 +395,20 @@ input[type="submit"] {
      -moz-box-shadow: inset 0px 0px 3px hsla(293, 90%, 40%, 1);
        -o-box-shadow: inset 0px 0px 3px hsla(293, 90%, 40%, 1);
 	        box-shadow: inset 0px 0px 3px hsla(293, 90%, 40%, 1);
+}
+
+
+/* ========== */
+/* DELETE Links */
+/* ========== */
+span.delete {
+  float: right;
+}
+span.delete a {
+  text-decoration: none;
+}
+span.delete a:hover {
+  text-decoration: none;
 }
 
 /* ========== */

@@ -1,7 +1,13 @@
 <h3>ALL SESSIONS!</h3>
 <% @sessions.each do |s| %>
   <div class="session">
-  <h4><%= s.session_date %></h4>
+  <h4>
+      <%= s.session_date %>
+      <span class="delete">
+        <%= link_to 'Delete this session', s, :method => :delete,
+                                              :confirm => "Are you sure?" %>
+      </span>
+  </h4>
   <%= render :partial => 'shared/song_list', :locals => { :songs => s.songs } %>
   </div>
 <% end %>

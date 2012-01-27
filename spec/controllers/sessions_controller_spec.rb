@@ -104,4 +104,64 @@ describe SessionsController do
       end
     end
   end
+
+  describe "DELETE 'destroy'" do
+    before(:each) do
+      @user = create_user
+      @session = Session.create!(:session_date => Time.now)
+      @song1 = @session.songs.create!(:file_name => "01.file.mp3")
+      @song2 = @session.songs.create!(:file_name => "02.file.mp3")
+    end
+
+    describe "as non-signed-in user" do
+      it "should deny access" do
+        delete :destroy, :id => @session
+        response.should redirect_to(signin_path)
+      end
+    end
+
+    describe "as non-admin user" do
+      before(:each) do
+        controller_sign_in(@user)
+      end
+
+      it "should protect page and redirect" do
+        delete :destroy, :id => @session
+        response.should redirect_to(sessions_path)
+      end
+    end
+
+    describe "as admin user" do
+      before(:each) do
+        @user.toggle!(:admin)
+        controller_sign_in(@user)
+      end
+
+      it "should delete the session" do
+        lambda do
+          delete :destroy, :id => @session
+        end.should change(Session, :count).by(-1)
+      end
+
+      it "should delete associated songs" do
+        lambda do
+          delete :destroy, :id => @session
+        end.should change(Song, :count).by(-2)
+      end
+
+      it "should delete tags associated to songs" do
+        @song1.add_tag("great")
+        @song2.add_tag("super")
+        lambda do
+          delete :destroy, :id => @session
+        end.should change(Tag, :count).by(-2)
+      end
+
+      
+      it "should redirect" do
+        delete :destroy, :id => @session
+        response.should redirect_to(sessions_path)
+      end
+    end
+  end
 end

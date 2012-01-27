@@ -1,6 +1,12 @@
 <h3><%= @song.file_name %></h3>
 <div class="song-info">
-  <h4>Listen to this song:</h4>
+  <h4>
+    Listen to this song:
+    <span class="delete">
+      <%= link_to 'Delete this song', @song, :method => :delete,
+                                            :confirm => "Are you sure?" %>
+    </span>
+  </h4>
   <div class="listen">
     <p>Use the player to listen to the song or download the file:
     <a href="http://www.howlingvibes.com/aufnahmen/haha.mp3"><%= @song.file_name %>

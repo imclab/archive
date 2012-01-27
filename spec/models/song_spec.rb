@@ -57,7 +57,7 @@ describe Song do
     end
 
     it "should show the right tag" do
-      @song.song_tags.create(:tag_id => @tag.id)
+      @song.tags << @tag
       @song.tags.find(@tag).should == @tag
     end
 
@@ -71,11 +71,12 @@ describe Song do
     end
 
     it "should show tags sorted by name" do
-      @tag1 = Tag.create!(:name => "zzz")
-      @tag2 = Tag.create!(:name => "awesome")
-      @song.song_tags.create(:tag_id => @tag1.id)
-      @song.song_tags.create(:tag_id => @tag2.id)
-      @song.tags.should == [@tag2, @tag1] 
+      tag1 = Tag.create!(:name => "zzz")
+      tag2 = Tag.create!(:name => "awesome")
+      # @song.song_tags.create(:tag_id => tag1.id)
+      # @song.song_tags.create(:tag_id => tag2.id)
+      @song.tags << [tag1, tag2]
+      @song.tags.should == [tag2, tag1] 
     end
 
     it "should not have duplicates of a tag" do
@@ -90,6 +91,23 @@ describe Song do
       @song2.add_tag("great!")
       @song.should have_tag("great!")
       @song2.should have_tag("great!")
+    end
+
+    it "should delete SongTags association when deleted" do
+      @song.tags << @tag
+      lambda do
+        @song.destroy
+      end.should change(SongTag, :count).by(-1)
+    end
+
+    it "should delete tags that are only associated with this song" do
+      @song.tags << @tag
+      song2 = Song.create!(file_name: "02.different_song.mp3")
+      tag2 = Tag.create!(name: "differenttag")
+      song2.tags << tag2
+      lambda do
+        @song.destroy
+      end.should change(Tag, :count).by(-1)
     end
   end
 end

@@ -77,6 +77,12 @@ describe TagsController do
         end.should change(Tag, :count).by(1)
       end
 
+      it "should add association" do
+        lambda do 
+          post :create, :tag => @attr
+        end.should change(SongTag, :count).by(1)
+      end
+
       it "should redirect to songs page" do
         post :create, :tag => @attr
         response.should redirect_to(song_path(@song.id))
@@ -95,6 +101,55 @@ describe TagsController do
       it "should deny access to 'new'" do
         post :create, :tag => @attr
         response.should redirect_to(signin_path)
+      end
+    end
+  end
+  describe "DELETE 'destroy'" do
+    before(:each) do
+      @user = create_user
+      @song = Song.create!(file_name: "testing.mp3")
+      @tag = @song.tags.create!(:name => "great")
+    end
+
+    describe "as non-signed-in user" do
+      it "should deny access" do
+        delete :destroy, :id => @tag
+        response.should redirect_to(signin_path)
+      end
+    end
+
+    describe "as non-admin user" do
+      before(:each) do
+        controller_sign_in(@user)
+      end
+
+      it "should protect page and redirect" do
+        delete :destroy, :id => @tag
+        response.should redirect_to(sessions_path)
+      end
+    end
+
+    describe "as admin user" do
+      before(:each) do
+        @user.toggle!(:admin)
+        controller_sign_in(@user)
+      end
+
+      it "should delete the tag" do
+        lambda do
+          delete :destroy, :id => @tag
+        end.should change(Tag, :count).by(-1)
+      end
+
+      it "should delete associated SongTags" do
+        lambda do
+          delete :destroy, :id => @tag
+        end.should change(SongTag, :count).by(-1)
+      end
+
+      it "should redirect" do
+        delete :destroy, :id => @tag
+        response.should redirect_to(sessions_path)
       end
     end
   end

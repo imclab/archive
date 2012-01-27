@@ -1,5 +1,6 @@
 class SessionsController < ApplicationController
-  before_filter :authorize_admin, :only => [:new, :create]
+  before_filter :authorize,       :only => [:new, :destroy]
+  before_filter :authorize_admin, :only => [:new, :create, :destroy]
 
   def index 
     @title = "All sessions"
@@ -17,9 +18,10 @@ class SessionsController < ApplicationController
       params[:sessions].each do |new_session, new_songs| 
         session = Session.find_or_initialize_by_session_date(:session_date =>
                                               folder_name_to_date(new_session))
-        new_songs.each do |song|
-          session.songs.build(:file_name => song)
-        end
+        # new_songs.each do |song|
+        #   session.songs.build(:file_name => song)
+        # end
+        new_songs.each { |song| session.songs.build(file_name: song) }
         if session.save
           flash_message :success, "Session #{new_session} saved!" 
         else
@@ -31,6 +33,12 @@ class SessionsController < ApplicationController
       flash_message :notification, "Please select some files!"
       redirect_to new_session_path
     end
+  end
+
+  def destroy
+    Session.find(params[:id]).destroy
+    flash_message :notification, "You successfully deleted a session"
+    redirect_to sessions_path
   end
 
   private

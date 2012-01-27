@@ -10,10 +10,11 @@
 #
 
 class Song < ActiveRecord::Base
-  belongs_to :session
+  before_destroy :destroy_ghost_tags
 
+  belongs_to :session
   has_many :song_tags
-  has_many :tags, through: :song_tags
+  has_many :tags, through: :song_tags, :dependent => :destroy
 
   validates :file_name, presence: true, format: {
     with: %r{\.(mp3|wav|flac)$}i,
@@ -29,4 +30,13 @@ class Song < ActiveRecord::Base
     tag = Tag.find_by_name(tag_name)
     tag.present? && song_tags.find_by_tag_id_and_song_id(tag.id, id).present?
   end
+
+  private
+    
+    def destroy_ghost_tags
+      self.tags.each do |tag|
+        tag.songs.delete(self)
+        tag.destroy if tag.songs.empty?
+      end
+    end
 end

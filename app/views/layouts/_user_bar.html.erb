@@ -3,7 +3,8 @@
   Hello, <%= current_user.name %>
   <% if current_user.admin %>
     <span class="admin_tasks">
-      <%= link_to "Add new sessions", new_session_path %>
+      <%= link_to "Add new sessions", new_session_path %> |
+      <%= link_to "List users", users_path %>
     </span>
   <% end %>
   <span id="user-controls">

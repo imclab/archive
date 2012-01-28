@@ -13,6 +13,10 @@ describe "Admin Tasks" do
       page.should have_css('span.admin_tasks')
       page.should have_link('Add new sessions',  :href => new_session_path)
     end
+    it "should show a link to list users" do
+      visit root_path
+      page.should have_link('List users', :href => users_path)
+    end
   end
 
   describe "Adding new sessions" do

@@ -284,14 +284,12 @@ header { text-align: center; }
 }
 
 div #main {
-  /* color: #FFF; */
   color: hsla(301, 85%, 100%, 0.9);
   font-size: 1em;
   font-weight: normal;
   width: 940px; 
   padding: 10px 20px 5px 20px;
   background: hsla(293, 84%, 10%, 1);
-  /* border: 1px solid hsla(293, 84%, 30%, 1); */
   margin: 10px auto 0 auto;
   border-radius: 5px;
 }
@@ -302,7 +300,6 @@ h3 {
   font-size: 1.6em;
   font-weight: normal;
   color: hsla(45, 100%, 61%, 1);
-  /* text-shadow: 1px 1px 0px #DB5E1E;	 */
   text-decoration: none;
   margin: 0px 5px 10px 5px;
   padding-bottom: 5px;
@@ -358,30 +355,16 @@ input {
 
   text-decoration: none;
 	color: hsla(293, 84%, 5%, 1);
+	text-shadow: 0px 1px 2px hsla(293, 84%, 40%, 1);
 
-	border: 1px solid hsla(0, 0%, 0%, 0.8);
+	border: 1px solid hsla(301, 90%, 53%, 0.4);
 	border-radius: 2px;
-
 	background-color: hsla(293, 84%, 19%, 1);
-  /* background-image: -webkit-gradient(linear, left top, left bottom, */
-  /*                                     from(hsla(301, 90%, 40%, 1)), */
-  /*                                      to(hsla(301, 90%, 20%, 1))); */
   background-image: -webkit-linear-gradient(top, hsla(293, 90%, 35%, 1), hsla(293, 90%, 20%, 1));
 	background-image:    -moz-linear-gradient(top, hsla(293, 90%, 35%, 1), hsla(293, 90%, 20%, 1));
 	background-image:     -ms-linear-gradient(top, hsla(293, 90%, 35%, 1), hsla(293, 90%, 20%, 1));
 	background-image:      -o-linear-gradient(top, hsla(293, 90%, 35%, 1), hsla(293, 90%, 20%, 1));
 	background-image:         linear-gradient(top, hsla(293, 90%, 35%, 1), hsla(293, 90%, 20%, 1));
-  -webkit-box-shadow: hsla(293, 84%, 25%, 0.8) 0 1px 0, rgba(0, 0, 0, 1) 0 1px 3px 0px inset;
-     -moz-box-shadow: hsla(293, 84%, 25%, 0.8) 0 1px 0, rgba(0, 0, 0, 1) 0 1px 3px 0px inset;
-       -o-box-shadow: hsla(293, 84%, 25%, 0.8) 0 1px 0, rgba(0, 0, 0, 1) 0 1px 3px 0px inset;
-          box-shadow: hsla(293, 84%, 25%, 0.8) 0 1px 0, rgba(0, 0, 0, 1) 0 1px 3px 0px inset;
-
-	/* border: 1px solid hsla(301, 90%, 20%, 0.5); */
-	/* text-shadow: 0px 1px 2px hsla(293, 84%, 0%, 0.7); */
-
-	-webkit-transition: color 0.25s ease-in-out;
-	   -moz-transition: color 0.25s ease-in-out;
-	        transition: color 0.25s ease-in-out;
 }
 
 input:hover {

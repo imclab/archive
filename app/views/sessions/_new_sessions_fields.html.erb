@@ -3,8 +3,9 @@
   <ul>
     <% files.each do |file| %>
       <li>
-        <%= check_box_tag "sessions["+ session +"][]", file %>
-        <%= label_tag "sessions["+ session +"][]", file %>
+      <%= check_box_tag "sessions[#{session}][]", file, false,
+                                        { :id => "song_#{session}_#{file}" } %>
+      <%= label_tag "song_#{session}_#{file}", file %>
       </li>
     <% end %>
   </ul>

@@ -41,8 +41,8 @@ body, button, input, select, textarea { font-family: sans-serif; color: #222; }
  * These selection declarations have to be separate
  * Also: hot pink! (or customize the background color to match your design)
  */
-color: hsla(45, 100%, 61%, 1);
-text-shadow: 3px 3px 0px #DB5E1E;	
+/* color: hsla(45, 100%, 61%, 1); */
+/* text-shadow: 3px 3px 0px #DB5E1E;	 */
 
 ::-moz-selection { background: #DB5E1E; color: hsla(45, 100%, 61%, 1); text-shadow: none; }
 ::selection { background: #DB5E1E; color: hsla(45, 100%, 61%, 1); text-shadow: none; }
@@ -305,6 +305,9 @@ h3 {
   padding-bottom: 5px;
   border-bottom: 1px solid hsla(45, 100%, 61%, 1);
 }
+form.h4:first-child {
+  margin: 0.3em 0 0.2em 0;
+}
 h4:first-child {
   margin: 0.3em 0 0.2em 0;
 }
@@ -349,13 +352,14 @@ h4 {
 /* Inputs */
 
 input {
-  font-size: 0.8em;
+  font-size: 0.9em;
   padding: 5px;
   margin: 0 5px;
 
   text-decoration: none;
-	color: hsla(293, 84%, 5%, 1);
-	text-shadow: 0px 1px 2px hsla(293, 84%, 40%, 1);
+	/* color: hsla(293, 84%, 5%, 1); */
+  color: hsla(45, 100%, 61%, 1);
+	/* text-shadow: 0px 1px 2px hsla(293, 84%, 40%, 1); */
 
 	border: 1px solid hsla(301, 90%, 53%, 0.4);
 	border-radius: 2px;
@@ -395,15 +399,31 @@ span.delete a:hover {
 }
 
 /* ========== */
+/* Sign-Up and Edit-Profile form */
+/* ========== */
+form.new_user, form.edit_user {
+  padding: 10px 0 10px 10px;
+}
+form.new_user label, form.edit_user label {
+  float: left;
+  color: hsla(45, 100%, 61%, 1);
+}
+form.new_user div.clearfix, form.edit_user div.clearfix {
+  margin: 0 0 20px;
+}
+form.new_user div.input, form.edit_user div.input {
+  margin-left: 150px;
+}
+form.new_user span.help-input, form.edit_user span.help-input {
+  display: block;
+  font-size: 0.8em;
+  padding-top: 2px;
+  padding-left: 5px;
+}
+
+/* ========== */
 /* /sessions/ */
 /* ========== */
-.session {
-  /* padding: 2px 10px 2px 10px; */
-}
-/* .session ul { */
-/*   padding-left: 5px; */
-/*   margin: 5px 0px 20px 0px; */
-/* } */
 .sessions-new {
   padding-left: 10px; 
   padding-bottom: 10px;

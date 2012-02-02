@@ -3,10 +3,12 @@
   <div class="session">
   <h4>
       <%= s.session_date %>
+    <% if current_user && current_user.admin? %>
       <span class="delete">
         <%= link_to 'Delete this session', s, :method => :delete,
                                               :confirm => "Are you sure?" %>
       </span>
+    <% end %>
   </h4>
   <%= render :partial => 'shared/song_list', :locals => { :songs => s.songs } %>
   </div>

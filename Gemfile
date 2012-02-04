@@ -30,6 +30,9 @@ gem 'capistrano'
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
 
+group :production do
+  gem 'mysql2'
+end
 group :development do
   gem 'annotate'
   gem 'rspec-rails'

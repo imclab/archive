@@ -33,6 +33,7 @@ gem 'capistrano'
 group :production do
   gem 'mysql2'
 end
+
 group :development do
   gem 'annotate'
   gem 'rspec-rails'

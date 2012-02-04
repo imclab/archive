@@ -33,6 +33,15 @@ namespace :deploy do
   end
 end
 
+# Copying my production database.yml from shared/config to current/config
+namespace :db do  
+  task :copy_db_config, :except => { :no_release => true }, :role => :app do  
+    run "cp -f #{shared_path}/config/database.yml #{release_path}/config/database.yml"  
+  end  
+end  
+  
+after "deploy:finalize_update", "db:copy_db_config"
+
 # after "deploy:update_code", :bundle_install
 # desc "install the necessary prerequisites"
 # task :bundle_install, :roles => :app do

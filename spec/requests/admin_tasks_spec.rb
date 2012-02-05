@@ -100,7 +100,8 @@ describe "Admin Tasks" do
 
   describe "DELETE a song in show page" do
     before(:each) do
-      @song = Song.create(file_name: "01.testing.mp3")
+      @session = Session.create(session_date: Time.now)
+      @song = @session.songs.create(file_name: "01.testing.mp3")
       visit song_path(@song)
     end
 

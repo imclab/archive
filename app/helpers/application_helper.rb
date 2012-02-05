@@ -19,8 +19,8 @@ module ApplicationHelper
     end
   end
 
-  def pretty_session_date(datetime)
-    datetime.strftime("%d. %B %Y")
+  def prettify_date(date)
+    date.strftime("%Y.%m.%d")
   end
 
   def short_song_info(song)

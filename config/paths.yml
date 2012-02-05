@@ -1,0 +1,10 @@
+development:
+  archive: /Users/mrnugget/rails/archive/spec/fixtures/archive
+  download_url: file://testing/archive/
+
+test:
+  archive: /Users/mrnugget/rails/archive/spec/fixtures/archive
+
+production:
+  archive: /var/www/aufnahmen
+  download_url: http://91.121.150.109/aufnahmen/

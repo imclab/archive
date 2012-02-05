@@ -2,7 +2,7 @@
 <% @sessions.each do |s| %>
   <div class="session">
   <h4>
-      <%= s.session_date %>
+    <%= prettify_date(s.session_date) %>
     <% if current_user && current_user.admin? %>
       <span class="delete">
         <%= link_to 'Delete this session', s, :method => :delete,

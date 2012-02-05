@@ -4,12 +4,12 @@ class SessionsController < ApplicationController
 
   def index 
     @title = "All sessions"
-    @sessions = Session.all
+    @sessions = Session.order("session_date DESC")
   end
 
   def new
     @title = "Add session"
-    archive = SongsArchive::Directory.new(Rails.root.join("spec/fixtures/archive"))
+    archive = SongsArchive::Directory.new(Pathname.new(PATHS['archive']))
     @new_files = files_in_archive_not_in_db(archive)
   end
 
@@ -18,9 +18,6 @@ class SessionsController < ApplicationController
       params[:sessions].each do |new_session, new_songs| 
         session = Session.find_or_initialize_by_session_date(:session_date =>
                                               folder_name_to_date(new_session))
-        # new_songs.each do |song|
-        #   session.songs.build(:file_name => song)
-        # end
         new_songs.each { |song| session.songs.build(file_name: song) }
         if session.save
           flash_message :success, "Session #{new_session} saved!" 

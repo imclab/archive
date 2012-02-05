@@ -1,10 +1,13 @@
-# Module Archive
 #
+# Module SongsArchive
+# 
+# Directory - scans the specified folder for audio files
+# in session folders
 
 module SongsArchive
   class Directory
     def initialize(dir)
-      @directory = dir
+      @directory = Pathname.new(dir)
     end
 
 

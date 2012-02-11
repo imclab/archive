@@ -1,7 +1,11 @@
 <h3>Add new sessions</h3>
 <p>Please select the files on the harddrive you want to add to the Archive.</p>
 <%= form_tag sessions_path, :method => :post,
-      :class => "purplebox sessions-new" do %>
+                            :class  => "purplebox sessions-new" do %>
   <%= render :partial => 'sessions/new_sessions_fields' %>
+  <p>
+  <%= check_box_tag "check-all" %>
+  <%= label_tag "check-all", "All songs" %>
+  </p>
   <%= submit_tag 'Add selected files' %>
 <% end %>

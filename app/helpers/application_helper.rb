@@ -26,7 +26,8 @@ module ApplicationHelper
   def short_song_info(song)
     if song.tags.any?
       sentence = "Tags: "
-      raw sentence += song.tags.collect { |t| "<b>#{t.name}</b>" }.to_sentence
+      sentence += song.tags.collect { |t| "<b>#{t.name}</b>" }.to_sentence
+      raw truncate sentence, length: 120, separator: ","
     end
   end
 end

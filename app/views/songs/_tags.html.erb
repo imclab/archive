@@ -8,13 +8,13 @@
 <% end %>
 </p>
 <% if current_user %>
-  <%= form_for tag do |f| %>
+  <%= form_for(@tag, remote: true) do |f| %>
     <div class="clearfix">
       <%= f.hidden_field :song_id, :value => song.id %>
       <%= f.text_field :name, maxlength: 20, size: 20 %>
       <%= f.submit "Add Tag!", :class => "submit" %>
       <span id="tag-input-help" class="help-input">
-        A tag can be up to 20 characters long 
+        Tag can be up to 20 characters long 
       </span>
     </div>
   <% end %>

@@ -486,7 +486,7 @@ form.new_tag span.help-input {
   display: block;
   font-size: 0.8em;
   padding-top: 2px;
-  padding-right: 95px;
+  padding-right: 80px;
 }
 /* ================= */
 /*  /tags/ */
@@ -498,7 +498,9 @@ form.new_tag span.help-input {
  /* Main-Yellow: hsla(45, 100%, 61%, 1);*/
   font-size: 0.8em;
   padding: 5px;
-  margin: 0 5px;
+  margin: 5px 5px;
+
+  display: inline-block;
 
 	background-color: hsla(45, 100%, 61%, 1); 
   background-image: -webkit-gradient(linear, left top, left bottom,

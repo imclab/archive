@@ -473,10 +473,21 @@ audio {
   display: block;
   margin: 5px auto 5px auto;
 }
+.song-tags {
+  padding-left: 5px;
+}
 .song-tags form {
   text-align: right;
 }
-
+form.new_tag div.clearfix {
+  margin: 0 0 10px 0;
+}
+form.new_tag span.help-input {
+  display: block;
+  font-size: 0.8em;
+  padding-top: 2px;
+  padding-right: 95px;
+}
 /* ================= */
 /*  /tags/ */
 /* ================= */

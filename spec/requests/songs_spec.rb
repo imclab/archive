@@ -28,7 +28,7 @@ describe "Songs" do
       it "should show a message if no tags are associated" do
         visit song_path(@song)
         page.should have_css('span.no-tags',
-                             :text => 'This song has no tags! Add some!')
+                             :text => 'This song has no tags!')
       end
 
       it "should show the associated tags" do

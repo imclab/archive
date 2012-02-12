@@ -1,6 +1,6 @@
 <% @new_files.each do |session, files|%>
   <h4><%= session %> </h4>
-  <ul>
+  <ul class="song-list">
     <% files.each do |file| %>
       <li>
       <%= check_box_tag "sessions[#{session}][]", file, false,

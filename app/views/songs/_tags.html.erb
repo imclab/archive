@@ -4,13 +4,18 @@
     <span class="tag"><%= link_to tag.name, tag_path(tag) %></span>
   <% end %>
 <% else %>
-  <span class="no-tags">This song has no tags! Add some!</span>
+  <span class="no-tags">This song has no tags!</span>
 <% end %>
 </p>
-<p>
-<%= form_for tag do |f| %>
-  <%= f.hidden_field :song_id, :value => song.id %>
-  <%= f.text_field :name %>
-  <%= f.submit "Add Tag!", :class => "submit" %>
+<% if current_user %>
+  <%= form_for tag do |f| %>
+    <div class="clearfix">
+      <%= f.hidden_field :song_id, :value => song.id %>
+      <%= f.text_field :name, maxlength: 20, size: 20 %>
+      <%= f.submit "Add Tag!", :class => "submit" %>
+      <span id="tag-input-help" class="help-input">
+        A tag can be up to 20 characters long 
+      </span>
+    </div>
+  <% end %>
 <% end %>
-</p>

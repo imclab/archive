@@ -305,7 +305,7 @@ h3 {
   padding-bottom: 5px;
   border-bottom: 1px solid hsla(45, 100%, 61%, 1);
 }
-form.h4:first-child {
+.purplebox h4:first-child {
   margin: 0.3em 0 0.2em 0;
 }
 h4:first-child {

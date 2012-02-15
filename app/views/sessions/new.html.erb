@@ -4,11 +4,6 @@
   <%= form_tag sessions_path, :method => :post,
                               :class  => "purplebox sessions-new" do %>
     <%= render :partial => 'sessions/new_sessions_fields' %>
-    <p>
-    <%= check_box_tag "check-all" %>
-    <%= label_tag "check-all", "All songs" %>
-    </p>
-    <%= submit_tag 'Add selected files' %>
   <% end %>
 <% else %>
   <p>There currently are no new files on the harddrive.</p>

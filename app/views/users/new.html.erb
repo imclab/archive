@@ -1,36 +1,51 @@
 <h3>Create a new user account</h3>
 <%= form_for @user do |f| %>
-  <%= render :partial => 'shared/error_messages',
-    :locals => { :object => f.object } %>
-  <div class="clearfix">
+  <%= render partial: 'shared/error_messages',
+             locals: { :object => f.object } %>
+  <fieldset>
     <%= f.label :name %>
     <div class="input">
-      <%= f.text_field :name, size: 30 %>
-      <span class="help-input">
-        Your name can be up to 30 characters long
+      <%= f.text_field :name, maxlength: 30, size: 30 %>
+      <span class="input-notification invisible" id="name-notification">
       </span>
+      <p class="input-help" id="name-help">
+      Please enter the name you want to use here.</p>
     </div>
-  </div>
-  <div class="clearfix">
+  </fieldset>
+  <fieldset>
     <%= f.label :email %>
     <div class="input">
-      <%= f.text_field :email %>
+      <%= f.text_field :email, size: 30 %>
+      <span class="input-notification invisible" id="email-notification">
+      </span>
+      <p class="input-help" id="email-help">
+      Enter a valid e-mail adress here.
+      </p>
     </div>
-  </div>
-  <div class="clearfix">
+  </fieldset>
+  <fieldset>
     <%= f.label :password %>
     <div class="input">
-      <%= f.password_field :password, size: 40 %>
-      <span class="help-input">
-        Your password can be up to 40 characters long (min. 6)
+      <%= f.password_field :password, maxlength: 40, size: 40,
+                                      data: { minlength: 6 }  %>
+      <span class="input-notification invisible" id="password-notification">
       </span>
+      <p class="input-help" id="password-help">
+      Enter a password that's 6 to 40 characters long.
+      </p>
     </div>
-  </div>
-  <div class="clearfix">
+  </fieldset>
+  <fieldset>
     <%= f.label :password_confirmation %>
     <div class="input">
-      <%= f.password_field :password_confirmation, size: 40 %>
+      <%= f.password_field :password_confirmation, maxlength: 40, size: 40,
+                                                   data: { minlength: 6 }  %>
+      <span class="input-notification invisible" id="password-conf-notification">
+      </span>
+      <p class="input-help" id="password-conf-help">
+      Please confirm your password.
+      </p>
     </div>
-  </div>
+  </fieldset>
   <%= f.submit "Sign up" %>
 <% end %>

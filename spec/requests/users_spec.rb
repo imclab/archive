@@ -21,21 +21,6 @@ describe "User" do
           page.should have_content("can't be blank")
         end
       end
-      describe "with a too long name" do
-        it "should redirect to signup page and show error messages" do
-          visit '/users/new'
-          too_long_name = "a" * 31
-          within(".new_user") do
-            fill_in 'Name', :with => too_long_name
-            fill_in 'Email', :with => "foobar@foobar.org"
-            fill_in 'Password', :with => 'password'
-            fill_in 'Password confirmation', :with => 'password'
-          end
-          click_button 'Sign up'
-          page.should have_css('div.error')
-          page.should have_content("Name is too long")
-        end
-      end
 
       describe "with a too short password" do
         it "should redirect to signup page and show error messages" do
@@ -51,6 +36,7 @@ describe "User" do
           page.should have_content("Password is too short")
         end
       end
+
       describe "with an invalid email adress" do
         it "should redirect to signup page and show error messages" do
           visit '/users/new'

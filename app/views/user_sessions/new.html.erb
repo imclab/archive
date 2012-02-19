@@ -1,15 +1,15 @@
 <h3>Log in</h3>
 <%= form_for(:user_session, :url => user_sessions_path,
              :html => { :class => "new_user_session" } ) do |f| %>
-  <p>
+  <fieldset>
     <%= f.label :email %>
     <%= f.text_field :email %>
-  </p>
-  <p>
+  </fieldset>
+  <fieldset>
     <%= f.label :password %>
     <%= f.password_field :password %>
-  </p>
-  <p>
+  </fieldset>
+  <fieldset>
     <%= f.submit "Log in" %>
-  </p>
+  </fieldset>
 <% end %>

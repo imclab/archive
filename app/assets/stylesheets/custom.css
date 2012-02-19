@@ -349,17 +349,27 @@ h4 {
   border: 1px solid hsla(290, 85%, 20%, 0.8);
 }
 
+/* Delete Links */
+span.delete {
+  float: right;
+}
+span.delete a {
+  text-decoration: none;
+}
+span.delete a:hover {
+  text-decoration: none;
+}
+
+/* ======================== */
 /* Inputs */
+/* ======================== */
 
 input {
   font-size: 0.9em;
   padding: 5px;
-  margin: 0 5px;
 
   text-decoration: none;
-	/* color: hsla(293, 84%, 5%, 1); */
   color: hsla(45, 100%, 61%, 1);
-	/* text-shadow: 0px 1px 2px hsla(293, 84%, 40%, 1); */
 
 	border: 1px solid hsla(301, 90%, 53%, 0.4);
 	border-radius: 2px;
@@ -384,41 +394,45 @@ input[type="submit"] {
 	        box-shadow: inset 0px 0px 3px hsla(293, 90%, 40%, 1);
 }
 
-
-/* ========== */
-/* DELETE Links */
-/* ========== */
-span.delete {
-  float: right;
+span.input-notification {
+  font-size: 0.7em;
+  margin-left: 10px;
 }
-span.delete a {
-  text-decoration: none;
-}
-span.delete a:hover {
-  text-decoration: none;
+span.input-error {
+  padding: 4px;
+  background: hsla(0, 80%, 50%, 0.6);
+  border: 1px solid hsla(0, 80%, 90%, 0.8);
+  color: hsla(0, 80%, 90%, 1);
+  border-radius: 3px;
 }
 
 /* ========== */
-/* Sign-Up and Edit-Profile form */
+/* NEW and EDIT Users Form*/
 /* ========== */
-form.new_user, form.edit_user {
+form.new_user,
+form.edit_user {
   padding: 10px 0 10px 10px;
 }
-form.new_user label, form.edit_user label {
+form.new_user fieldset,
+form.edit_user fieldset, 
+form.new_user_session fieldset {
+  margin: 12px 0px;
+}
+form.new_user label,
+form.edit_user label {
   float: left;
+  width: 170px;
+  padding-top: 5px;
   color: hsla(45, 100%, 61%, 1);
+
 }
-form.new_user div.clearfix, form.edit_user div.clearfix {
-  margin: 0 0 20px;
+form.new_user div.input,
+form.edit_user div.input {
+  margin-left: 180px;
 }
-form.new_user div.input, form.edit_user div.input {
-  margin-left: 150px;
-}
-form.new_user span.help-input, form.edit_user span.help-input {
-  display: block;
+form.new_user p.input-help, form.edit_user p.input-help {
+  margin: 2px 0px;
   font-size: 0.8em;
-  padding-top: 2px;
-  padding-left: 5px;
 }
 
 /* ========== */
@@ -477,16 +491,10 @@ audio {
   padding-left: 5px;
 }
 .song-tags form {
-  text-align: right;
+  text-align: center;
 }
 form.new_tag div.clearfix {
   margin: 0 0 10px 0;
-}
-form.new_tag span.help-input {
-  display: block;
-  font-size: 0.8em;
-  padding-top: 2px;
-  padding-right: 80px;
 }
 /* ================= */
 /*  /tags/ */

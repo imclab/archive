@@ -364,7 +364,7 @@ span.delete a:hover {
 /* Inputs */
 /* ======================== */
 
-input {
+select, input {
   font-size: 0.9em;
   padding: 5px;
 
@@ -385,7 +385,7 @@ input:hover {
 	border: 1px solid hsla(301, 90%, 25%, 0.5);
 	border-radius: 2px;
 }
-input[type="submit"] {
+select, input[type="submit"] {
 	color: hsla(293, 84%, 5%, 1);
 	text-shadow: 0px 1px 2px hsla(293, 84%, 40%, 1);
 	-webkit-box-shadow: inset 0px 0px 3px hsla(293, 90%, 40%, 1);
@@ -393,7 +393,6 @@ input[type="submit"] {
        -o-box-shadow: inset 0px 0px 3px hsla(293, 90%, 40%, 1);
 	        box-shadow: inset 0px 0px 3px hsla(293, 90%, 40%, 1);
 }
-
 span.input-notification {
   font-size: 0.7em;
   margin-left: 10px;
@@ -424,7 +423,6 @@ form.edit_user label {
   width: 170px;
   padding-top: 5px;
   color: hsla(45, 100%, 61%, 1);
-
 }
 form.new_user div.input,
 form.edit_user div.input {
@@ -438,6 +436,14 @@ form.new_user p.input-help, form.edit_user p.input-help {
 /* ========== */
 /* /sessions/ */
 /* ========== */
+div.sorting {
+  display: inline;
+  float: right;
+  font-size: 0.6em;
+}
+div.sorting form {
+  display: inline;
+}
 .sessions-new {
   padding-left: 10px; 
   padding-bottom: 10px;

@@ -6,7 +6,11 @@ class SessionsController < ApplicationController
     @title = "All sessions"
     @sort_options = { "Oldest" => "session_date ASC",
                      "Newest" => "session_date DESC" }
-    @sort = (@sort_options.has_value? params[:show]) ? params[:show] : "session_date DESC"
+    if @sort_options.has_value? params[:show]
+      @sort = params[:show] 
+    else
+      @sort = "session_date DESC"
+    end
     @sessions = Session.order(@sort)
   end
 

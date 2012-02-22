@@ -4,7 +4,14 @@ class SessionsController < ApplicationController
 
   def index 
     @title = "All sessions"
-    @sessions = Session.order("session_date DESC")
+    @sort_options = { "Oldest" => "session_date ASC",
+                     "Newest" => "session_date DESC" }
+    if @sort_options.has_value? params[:show]
+      @sort = params[:show] 
+    else
+      @sort = "session_date DESC"
+    end
+    @sessions = Session.order(@sort)
   end
 
   def new

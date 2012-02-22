@@ -1,5 +1,6 @@
 Archive::Application.routes.draw do
   resources :sessions, :except => [:update, :edit]
+  match 'sessions/:sort' => 'session#index'
   resources :songs, :except => [:new, :update, :edit]
   resources :tags, :except => [:new, :update, :edit]
   resources :users, :except => :show

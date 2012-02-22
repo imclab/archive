@@ -1,0 +1,6 @@
+<div class="sorting">
+  <%= form_tag({controller: "sessions", action: "index"}, method: "get") do %>
+    <%= select_tag(:show, options_for_select(@sort_options, @sort),
+                  { onchange: 'this.form.submit()' }) %>
+  <% end %>
+</div>

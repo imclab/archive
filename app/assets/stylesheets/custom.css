@@ -391,19 +391,10 @@ select, input {
 	        box-shadow: inset 0px 0px 7px hsla(20, 76%, 15%, 0.5);
 }
 
-<<<<<<< Updated upstream
 input:hover {
 	border: 1px solid hsla(301, 90%, 25%, 0.5);
 	border-radius: 2px;
 }
-select, input[type="submit"] {
-	color: hsla(293, 84%, 5%, 1);
-	text-shadow: 0px 1px 2px hsla(293, 84%, 40%, 1);
-	-webkit-box-shadow: inset 0px 0px 3px hsla(293, 90%, 40%, 1);
-     -moz-box-shadow: inset 0px 0px 3px hsla(293, 90%, 40%, 1);
-       -o-box-shadow: inset 0px 0px 3px hsla(293, 90%, 40%, 1);
-	        box-shadow: inset 0px 0px 3px hsla(293, 90%, 40%, 1);
-=======
 select, input[type="submit"] {
 	/* color: hsla(293, 84%, 5%, 1); */
 	/* text-shadow: 0px 1px 2px hsla(293, 84%, 40%, 1); */

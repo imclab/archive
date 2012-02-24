@@ -3,7 +3,7 @@ class SongsController < ApplicationController
   before_filter :authorize_admin, :only => :destroy
 
   def index
-    @songs = Song.all
+    @songs = Song.find(:all, include: :tags).sort_by { |s| -s.tags.size }
     @title = "All songs"
   end
 

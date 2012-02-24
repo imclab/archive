@@ -1,2 +1,4 @@
-<h3>ALL SONGS!</h3>
+<h3>All Songs
+  <%# <%= render :partial => 'sorting' %>
+</h3>
 <%= render :partial => 'shared/song_list', :locals => { :songs => @songs } %>

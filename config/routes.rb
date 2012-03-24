@@ -1,4 +1,7 @@
 Archive::Application.routes.draw do
+  match 'sessions/oldest'   => 'sessions#index', sort: 'by_session_date'
+  match 'sessions/newest'   => 'sessions#index', sort: 'by_session_date',
+                                                 reverse: true
   resources :sessions, :except => [:update, :edit]
 
   match 'songs/most_tagged' => 'songs#index', sort: 'by_count_of_tags'
@@ -14,7 +17,6 @@ Archive::Application.routes.draw do
   resources :user_sessions, :only => [:new, :create, :destroy]
   match '/signin'  => 'user_sessions#new'
   match '/signout' => 'user_sessions#destroy'
-
 
   root :to => "sessions#index"
   # The priority is based upon order of creation:

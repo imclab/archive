@@ -3,17 +3,15 @@ class SessionsController < ApplicationController
   before_filter :authorize_admin, :only => [:new, :create, :destroy]
 
   def index
-    @title = "All sessions"
-    @sort_options = { "Oldest" => "session_date ASC",
-                     "Newest" => "session_date DESC" }
-
-    if @sort_options.has_value? params[:show]
-      @sort = params[:show]
+    valid_options = ["by_session_date"]
+    if valid_options.include? params[:sort]
+      @sessions = Session.send(params[:sort])
+      @sessions.reverse! if params[:reverse]
     else
-      @sort = "session_date DESC"
+      @sessions = Session.by_session_date
+      @sessions.reverse!
     end
-
-    @sessions = Session.order(@sort)
+    @title = "All sessions"
   end
 
   def new

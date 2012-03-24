@@ -30,6 +30,11 @@ describe Session do
     wrong_date_session.should_not be_valid
   end
 
+  it "should have a by_session_date method" do
+    Session.should respond_to(:by_session_date) 
+  end
+
+
   describe "Song associations" do
     before(:each) do
       @session = Session.create(:session_date => Time.now.to_date)

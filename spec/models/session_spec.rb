@@ -34,7 +34,6 @@ describe Session do
     Session.should respond_to(:by_session_date) 
   end
 
-
   describe "Song associations" do
     before(:each) do
       @session = Session.create(:session_date => Time.now.to_date)

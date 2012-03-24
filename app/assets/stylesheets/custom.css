@@ -376,9 +376,6 @@ div.sorting a {
 div.sorting a:hover {
   color: hsla(20, 76%, 60%, 1);
 }
-div.sorting form {
-  display: inline;
-}
 
 /* ======================== */
 /* Inputs */
@@ -432,7 +429,6 @@ input[type="submit"]:hover {
      -moz-box-shadow: inset 1px 1px 3px hsla(20, 76%, 25%, 1);
        -o-box-shadow: inset 1px 1px 3px hsla(20, 76%, 25%, 1);
 	        box-shadow: inset 1px 1px 3px hsla(20, 76%, 25%, 1);
->>>>>>> Stashed changes
 }
 span.input-notification {
   font-size: 0.7em;

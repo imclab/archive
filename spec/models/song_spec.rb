@@ -1,3 +1,4 @@
+#
 # == Schema Information
 #
 # Table name: songs
@@ -12,12 +13,9 @@
 require 'spec_helper'
 
 describe Song do
-  before(:each) do
-    @attr = { :file_name => "01.testing.mp3" }
-  end
 
   it "should create a new instance given file_name" do
-    Song.create!(@attr)
+    Song.create!(file_name: "01.testing.mp3")
   end
 
 
@@ -73,8 +71,6 @@ describe Song do
     it "should show tags sorted by name" do
       tag1 = Tag.create!(:name => "zzz")
       tag2 = Tag.create!(:name => "awesome")
-      # @song.song_tags.create(:tag_id => tag1.id)
-      # @song.song_tags.create(:tag_id => tag2.id)
       @song.tags << [tag1, tag2]
       @song.tags.should == [tag2, tag1] 
     end
@@ -108,6 +104,31 @@ describe Song do
       lambda do
         @song.destroy
       end.should change(Tag, :count).by(-1)
+    end
+  end
+
+  describe "ordering" do
+    before(:each) do
+      @song = Song.create!(file_name: "01.most_tagged_song_(RMX).mp3")
+      @song.tags.create!(name: "brbrbrilliant")
+      @song.tags.create!(name: "sellout")
+
+      @song2 = Song.create!(file_name: "02.indie_song.mp3")
+      @song2.tags.create!(name: "sensibel")
+    end
+
+    it "should respond to and have working 'by_count_of_tags' method" do
+      Song.by_count_of_tags.should == [@song, @song2]
+    end
+
+    it "should respond to and hae working 'by_session_date' method" do
+      @session = Session.create!(session_date: Time.now)
+      @session.songs << @song
+
+      @session2 = Session.create!(session_date: Time.now - 1.day)
+      @session2.songs << @song2
+
+      Song.by_session_date.should == [@song2, @song]
     end
   end
 end

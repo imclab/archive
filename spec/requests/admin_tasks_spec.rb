@@ -67,7 +67,7 @@ describe "Admin Tasks" do
         check 'zombies_in_hospital_beds.mp3'
         click_button 'Add selected files' 
 
-        page.should have_css('h3', :text => 'ALL SESSIONS!')
+        page.should have_css('h3', :text => 'All Sessions')
         current_path.should == sessions_path
         page.should have_content('zombies_in_hospital_beds.mp3')
       end

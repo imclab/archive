@@ -3,7 +3,13 @@ class SongsController < ApplicationController
   before_filter :authorize_admin, :only => :destroy
 
   def index
-    @songs = Song.find(:all, include: :tags).sort_by { |s| -s.tags.size }
+    valid_options = ["by_count_of_tags", "by_session_date"]
+    if valid_options.include? params[:sort]
+      @songs = Song.send(params[:sort])
+      @songs.reverse! if params[:reverse]
+    else
+      @songs = Song.all
+    end
     @title = "All songs"
   end
 

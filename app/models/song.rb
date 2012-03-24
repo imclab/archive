@@ -1,14 +1,3 @@
-# == Schema Information
-#
-# Table name: songs
-#
-#  id         :integer         not null, primary key
-#  file_name  :string(255)
-#  session_id :integer
-#  created_at :datetime
-#  updated_at :datetime
-#
-
 class Song < ActiveRecord::Base
   before_destroy :destroy_ghost_tags
 
@@ -29,6 +18,18 @@ class Song < ActiveRecord::Base
   def has_tag?(tag_name)
     tag = Tag.find_by_name(tag_name)
     tag.present? && song_tags.find_by_tag_id_and_song_id(tag.id, id).present?
+  end
+
+  # Returns all songs ordered by the count of their tags
+  # Default order is highest tag count to lowest
+  def self.by_count_of_tags
+    find(:all, include: :tags).sort_by { |s| -s.tags.count }
+  end
+
+  # Returns all songs ordered by their session's session_date
+  # Default order is oldest to newest
+  def self.by_session_date
+    find(:all, include: :session).sort_by { |s| s.session.session_date }
   end
 
   private

@@ -1,7 +1,12 @@
 Archive::Application.routes.draw do
   resources :sessions, :except => [:update, :edit]
-  match 'sessions/:sort' => 'session#index'
+
+  match 'songs/most_tagged' => 'songs#index', sort: 'by_count_of_tags'
+  match 'songs/oldest'      => 'songs#index', sort: 'by_session_date'
+  match 'songs/newest'      => 'songs#index', sort: 'by_session_date',
+                                              reverse: true
   resources :songs, :except => [:new, :update, :edit]
+
   resources :tags, :except => [:new, :update, :edit]
   resources :users, :except => :show
   match '/signup' => 'users#new'

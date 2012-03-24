@@ -167,7 +167,7 @@ describe "User" do
         page.should have_css('div.success',
               :text => "You successfully updated your profile!")
         page.should have_content('Hello, Keef Richards')
-        page.should have_css('h3', :text => "ALL SESSIONS!")
+        page.should have_css('h3', :text => "All Sessions")
       end
     end
   end

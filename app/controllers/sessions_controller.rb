@@ -2,13 +2,13 @@ class SessionsController < ApplicationController
   before_filter :authorize,       :only => [:new, :destroy]
   before_filter :authorize_admin, :only => [:new, :create, :destroy]
 
-  def index 
+  def index
     @title = "All sessions"
     @sort_options = { "Oldest" => "session_date ASC",
                      "Newest" => "session_date DESC" }
 
     if @sort_options.has_value? params[:show]
-      @sort = params[:show] 
+      @sort = params[:show]
     else
       @sort = "session_date DESC"
     end
@@ -24,12 +24,12 @@ class SessionsController < ApplicationController
 
   def create
     if params.has_key? :sessions
-      params[:sessions].each do |new_session, new_songs| 
+      params[:sessions].each do |new_session, new_songs|
         session = Session.find_or_initialize_by_session_date(:session_date =>
                                               folder_name_to_date(new_session))
         new_songs.each { |song| session.songs.build(file_name: song) }
         if session.save
-          flash_message :success, "Session #{new_session} saved!" 
+          flash_message :success, "Session #{new_session} saved!"
         else
           flash_message :error, "Session #{new_session} could not be saved!"
         end

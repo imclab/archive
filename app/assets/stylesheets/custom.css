@@ -359,6 +359,26 @@ span.delete a {
 span.delete a:hover {
   text-decoration: none;
 }
+/* Sorting links and form */
+
+div.sorting {
+  display: inline;
+  float: right;
+  font-size: 0.7em;
+  color: hsla(45, 100%, 61%, 1);
+  padding-top: 4px;
+}
+div.sorting a {
+  color: hsla(20, 76%, 49%, 1);
+  text-decoration: none;
+  padding: 0px 5px;
+}
+div.sorting a:hover {
+  color: hsla(20, 76%, 60%, 1);
+}
+div.sorting form {
+  display: inline;
+}
 
 /* ======================== */
 /* Inputs */
@@ -457,14 +477,6 @@ form.new_user p.input-help, form.edit_user p.input-help {
 /* ========== */
 /* /sessions/ */
 /* ========== */
-div.sorting {
-  display: inline;
-  float: right;
-  font-size: 0.6em;
-}
-div.sorting form {
-  display: inline;
-}
 .sessions-new {
   padding-left: 10px; 
   padding-bottom: 10px;

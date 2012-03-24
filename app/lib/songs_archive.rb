@@ -1,6 +1,6 @@
 #
 # Module SongsArchive
-# 
+#
 # Directory - scans the specified folder for audio files
 # in session folders
 
@@ -11,8 +11,8 @@ module SongsArchive
     end
 
 
-    def sessions 
-     @sessions ||= scan_for_sessions  
+    def sessions
+     @sessions ||= scan_for_sessions
     end
 
     def files_in_session(session)
@@ -24,7 +24,7 @@ module SongsArchive
       files
     end
 
-    private 
+    private
 
       def scan_for_sessions
         sessions = []
@@ -32,7 +32,7 @@ module SongsArchive
 
 
         d.entries.each do |e|
-          if correct_session_format?(e) 
+          if correct_session_format?(e)
             sessions.push(e)
           end
         end
@@ -44,7 +44,7 @@ module SongsArchive
         if File.directory?(@directory + folder) && folder =~ /\A\d{4}\.\d{2}\.\d{2}\z/
           return true
         else
-          return false 
+          return false
         end
       end
   end

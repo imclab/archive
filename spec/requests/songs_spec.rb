@@ -47,42 +47,58 @@ describe "Songs" do
 
   describe "GET 'show'" do
     before(:each) do
-      @session = Session.create!(session_date: Time.now)
+      @session = Session.create!(session_date: Time.parse("2012.03.26"))
       @song = @session.songs.create!(file_name: "01.breaking.bad.mp3") 
-      create_user
-      integration_sign_in
     end
 
-    describe "song tags" do
-      it "should show a message if no tags are associated" do
-        visit song_path(@song)
-        page.should have_css('span.no-tags',
-                             :text => 'This song has no tags!')
+    it "should show the session date of the song" do
+      visit song_path(@song)
+      # Timezone issues here...
+      page.should have_css('span.recorded-at', text: '2012.03.25')
+    end
+
+    describe "as logged-in user" do
+      before(:each) do
+        create_user
+        integration_sign_in
       end
-
-      it "should show the associated tags" do
-        @song.add_tag('great')
-        visit song_path(@song)
-        page.should have_css('span.tag', :text => 'great')
-      end
-
-      describe "adding tags via form" do
-
-        it "should add a tag when submitted via form and display it" do
+      describe "song tags" do
+        it "should show a message if no tags are associated" do
           visit song_path(@song)
-          fill_in "tag[name]", :with => 'superduper'
-          click_button 'Add Tag!'
-          page.should have_css('div.success', :text =>
-                               'Tag "superduper" saved!')
-          page.should have_css('span.tag', :text => 'superduper')
+          page.should have_css('span.no-tags',
+                               :text => 'This song has no tags!')
         end
 
-        it "should print an error message when empty field was submitted" do
+        it "should show the associated tags" do
+          @song.add_tag('great')
           visit song_path(@song)
-          # No filling here
-          click_button 'Add Tag!'
-          page.should have_css('div.error', :text => 'Tag could not be added!')
+          page.should have_css('span.tag', :text => 'great')
         end
+
+        describe "adding tags via form" do
+
+          it "should add a tag when submitted via form and display it" do
+            visit song_path(@song)
+            fill_in "tag[name]", :with => 'superduper'
+            click_button 'Add Tag!'
+            page.should have_css('div.success', :text =>
+                                 'Tag "superduper" saved!')
+            page.should have_css('span.tag', :text => 'superduper')
+          end
+
+          it "should print an error message when empty field was submitted" do
+            visit song_path(@song)
+            # No filling here
+            click_button 'Add Tag!'
+            page.should have_css('div.error', :text => 'Tag could not be added!')
+          end
+        end
+      end
+    end
+    describe "as not-logged-in user" do
+      it "should not show the form to add tags" do
+        visit song_path(@song)
+        page.should_not have_css('form.new_tag')
       end
     end
   end

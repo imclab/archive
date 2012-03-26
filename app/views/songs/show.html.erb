@@ -1,4 +1,9 @@
-<h3><%= @song.file_name %></h3>
+<h3>
+  <%= @song.file_name %>
+  <span class="recorded-at">
+    <%= prettify_date(@song.session.session_date) %>
+  </span>
+</h3>
 <div class="song-info">
   <h4>Listen to this song:
     <% if current_user && current_user.admin? %>

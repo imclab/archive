@@ -29,6 +29,7 @@ describe Tag do
 
     before(:each) do
       @song = Song.create!(:file_name => "01.testing.mp3")
+      :A
       @tag = Tag.create!(:name => "great")
     end
 

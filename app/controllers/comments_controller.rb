@@ -5,10 +5,11 @@ class CommentsController < ApplicationController
   def create
     @comment = Comment.new(params[:comment])
     if @comment.save
-      flash_message :success, "You successfully created an account!"
+      flash_message :success, "You successfully added a comment!"
       redirect_to song_path(params[:comment][:song_id])
     else
-      flash_message :error, "Sorry, you need to be logged in to do that"
+      flash_message :error, "Comment could not be added!"
+      redirect_to song_path(params[:comment][:song_id])
     end
   end
 

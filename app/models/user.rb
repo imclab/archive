@@ -12,4 +12,6 @@ class User < ActiveRecord::Base
   
   validates :password, :presence => { :on  => :create },
                        :length   => { :within => 6..40 }
+
+  has_many :comments
 end

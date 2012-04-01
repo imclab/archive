@@ -39,6 +39,21 @@ describe Song do
     end
   end
   
+  describe "comment associations" do
+    before(:each) do
+      @song = Song.create!(file_name: "01.testing.mp3")
+    end
+
+    it "should respond to :comments" do
+      @song.should respond_to(:comments)
+    end
+
+    it "should show the right comments" do
+      comment_one = Comment.create!(song_id: @song.id, text: "This rocks")
+      comment_two = Comment.create!(song_id: @song.id, text: "This is cool")
+    end
+  end
+
   describe "tag associations" do
     
     before(:each) do

@@ -102,4 +102,20 @@ describe User do
       @user.should be_admin
     end
   end
+
+  describe "association with comments" do
+    before(:each) do
+      @user = User.create(@attr)
+    end
+
+    it "should respond to 'comments'" do
+      @user.should respond_to(:comments)
+    end
+
+    it "should show the right comments" do
+      comment_one = Comment.create!(user_id: @user.id, text: "Stig was here!")
+      comment_two = Comment.create!(user_id: @user.id, text: "Here too")
+      @user.comments.should == [comment_one, comment_two]
+    end
+  end
 end

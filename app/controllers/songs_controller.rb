@@ -1,6 +1,7 @@
 class SongsController < ApplicationController
-  before_filter :authorize,       :only => :destroy
-  before_filter :authorize_admin, :only => :destroy
+  before_filter :authorize,             :only => :destroy
+  before_filter :authorize_admin,       :only => :destroy
+  before_filter :remember_current_path, :only => :show
 
   def index
     valid_options = ["by_count_of_tags", "by_session_date"]
@@ -21,9 +22,14 @@ class SongsController < ApplicationController
   end
 
   def destroy
-    song = Song.find(params[:id])
-    song.destroy
+    Song.find(params[:id]).destroy
     flash_message :notification, "You successfully deleted a song"
     redirect_to sessions_path
   end
+
+  protected
+
+    def remember_current_path
+      session[:return_to] = request.fullpath
+    end
 end

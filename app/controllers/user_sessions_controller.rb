@@ -7,7 +7,7 @@ class UserSessionsController < ApplicationController
     if user && user.authenticate(params[:user_session][:password])
       sign_in user 
       flash_message :success, "Hello #{user.name}, you successfully logged in!"
-      redirect_to sessions_path 
+      redirect_to session.delete(:return_to) || sessions_path
     else
       flash_message :error, "Invalid email or password"
       render "new"

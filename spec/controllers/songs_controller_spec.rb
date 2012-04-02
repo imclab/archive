@@ -1,8 +1,6 @@
 require 'spec_helper'
 
 describe SongsController do
-  render_views
-
   before(:each) do
     @base_title = "Howling Vibes Archive"
   end
@@ -29,6 +27,11 @@ describe SongsController do
     it "should find the right song" do
       get :show, :id => @song
       assigns(:song).should == @song
+    end
+
+    it "saves the current path in session variable" do
+      get :show, :id => @song
+      session[:return_to].should == song_path(@song)
     end
   end
 

@@ -19,6 +19,13 @@
     </p>
     <%= audio_tag(absolute_song_url(@song), :controls => true) %>
   </div>
+  <div class="voting">
+    <%= button_to 'Upvote', song_votes_path(@song, direction: 'up') %>
+    <span class="score">
+      <%= @song.score %>
+    </span>
+    <%= button_to 'Downvote', song_votes_path(@song, direction: 'down') %>
+  </div>
   <h4>Tags:</h4>
   <div class="song-tags">
     <%= render partial: "tags", locals: { :song => @song, :tag => @tag } %>

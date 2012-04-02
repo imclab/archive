@@ -8,7 +8,9 @@ Archive::Application.routes.draw do
   match 'songs/oldest'      => 'songs#index', sort: 'by_session_date'
   match 'songs/newest'      => 'songs#index', sort: 'by_session_date',
                                               reverse: true
-  resources :songs, :except => [:new, :update, :edit]
+  resources :songs, :except => [:new, :update, :edit] do
+    resources :votes, :only => :create
+  end
 
   resources :tags, :except => [:new, :update, :edit]
   resources :users, :except => :show

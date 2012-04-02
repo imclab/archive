@@ -55,7 +55,7 @@ class SessionsController < ApplicationController
 
           archive.files_in_session(archive_session).each do |archive_file|
             if Song.where(:file_name => archive_file,
-                              :session_id => session.id).empty?
+                          :session_id => session.id).empty?
               new_files[archive_session].push(archive_file)
             end
           end
@@ -65,8 +65,7 @@ class SessionsController < ApplicationController
           end
         end
       end
-      new_files.delete_if { |s, f| f.empty? }
-      return new_files
+      new_files.reject { |session, files| files.empty? }
     end
 
     def folder_name_to_date(folder_name)

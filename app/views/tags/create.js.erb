@@ -1,6 +1,5 @@
 if ($("span.no-tags").length > 0) {
-  $("span.no-tags").addClass("invisible");
-  $("span.no-tags").text("");
+  $("span.no-tags").addClass("invisible").text("");
   $("div.song-tags p").append("<span class='tag'><%=j link_to @tag.name, tag_path(@tag) %></span>");
 } else {
   $(".song-tags p").append("<span class='tag'><%=j link_to @tag.name, tag_path(@tag) %></span>");

@@ -1,9 +1,3 @@
-# create a user 
-def create_user(email = "johnny@foobar.com", password = "password")
-  User.create!(:name => email.split('@')[0], :email => email,
-               :password => password, :password_confirmation => password)
-end
-
 # Signs user in, for controller tests
 def controller_sign_in(user)
   controller.sign_in(user)

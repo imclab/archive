@@ -5,6 +5,8 @@ class Song < ActiveRecord::Base
   has_many :song_tags
   has_many :tags, through: :song_tags, :dependent => :destroy
 
+  has_many :comments, :dependent => :destroy
+
   validates :file_name, presence: true, format: {
     with: %r{\.(mp3|wav|flac)$}i,
     message: 'must be a mp3/wav/flac file.'

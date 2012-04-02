@@ -94,6 +94,40 @@ describe "Songs" do
           end
         end
       end
+      
+      describe "song commments" do
+        it "should show a message if no comments are added" do
+          visit song_path(@song)
+          page.should have_css('span.no-comments',
+                               text: 'This song has no comments, add some!')
+        end
+
+        it "should show the associated comments" do
+          comment = Comment.create!(song_id: @song.id, user_id: User.last.id,
+                                    text: "This is a test comment")
+          visit song_path(@song)
+          page.should have_css('p', text: "This is a test comment")
+        end
+
+        describe "adding comments via form" do
+
+          it "should add a comment when submitted via form and display it" do
+            visit song_path(@song)
+            fill_in "comment[text]", :with => 'This is a test comment'
+            click_button 'Add Comment!'
+            page.should have_css('div.success', :text =>
+                                 'You successfully added a comment!')
+            page.should have_css('p', :text => 'This is a test comment')
+          end
+
+          it "should print an error message when empty field was submitted" do
+            visit song_path(@song)
+            # No filling here
+            click_button 'Add Comment!'
+            page.should have_css('div.error', :text => 'Comment could not be added!')
+          end
+        end
+      end
     end
     describe "as not-logged-in user" do
       it "should not show the form to add tags" do

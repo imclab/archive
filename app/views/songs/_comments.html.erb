@@ -11,7 +11,11 @@
 <% if song.comments.any? %>
   <p>COOOMMENTS</p>
   <% song.comments.each do |c| %>
+<<<<<<< HEAD
     <div class="comment purplebox">
+=======
+    <div class="comment">
+>>>>>>> comments
       <span><%= c.user.name %></span>
       <p><%= c.text %></p>
     </div>

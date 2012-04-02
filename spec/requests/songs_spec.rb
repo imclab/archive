@@ -59,7 +59,7 @@ describe "Songs" do
 
     describe "as logged-in user" do
       before(:each) do
-        create_user
+        create_user # Name: johnny
         integration_sign_in
       end
       describe "song tags" do
@@ -94,7 +94,6 @@ describe "Songs" do
           end
         end
       end
-      
       describe "song commments" do
         it "should show a message if no comments are added" do
           visit song_path(@song)
@@ -129,10 +128,16 @@ describe "Songs" do
         end
       end
     end
+
     describe "as not-logged-in user" do
       it "should not show the form to add tags" do
         visit song_path(@song)
         page.should_not have_css('form.new_tag')
+      end
+
+      it "should not show the form to add comments" do
+        visit song_path(@song)
+        page.should_not have_css('form.new_comment')
       end
     end
   end

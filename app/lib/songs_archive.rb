@@ -28,24 +28,17 @@ module SongsArchive
 
       def scan_for_sessions
         sessions = []
-        d        = Dir.new(@directory)
+        dir      = Dir.new(@directory)
 
-
-        d.entries.each do |e|
-          if correct_session_format?(e)
-            sessions.push(e)
-          end
+        dir.entries.each do |entry|
+          sessions.push(entry) if correct_session_format?(entry)
         end
 
         sessions
       end
 
       def correct_session_format?(folder)
-        if File.directory?(@directory + folder) && folder =~ /\A\d{4}\.\d{2}\.\d{2}\z/
-          return true
-        else
-          return false
-        end
+        File.directory?(@directory + folder) && folder =~ /\A\d{4}\.\d{2}\.\d{2}\z/
       end
   end
 end

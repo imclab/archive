@@ -8,8 +8,7 @@ class SessionsController < ApplicationController
       @sessions = Session.send(params[:sort])
       @sessions.reverse! if params[:reverse]
     else
-      @sessions = Session.by_session_date
-      @sessions.reverse!
+      @sessions = Session.by_session_date.reverse
     end
     @title = "All sessions"
   end
@@ -21,22 +20,22 @@ class SessionsController < ApplicationController
   end
 
   def create
-    if params.has_key? :sessions
-      params[:sessions].each do |new_session, new_songs|
-        session = Session.find_or_initialize_by_session_date(:session_date =>
-                                              folder_name_to_date(new_session))
-        new_songs.each { |song| session.songs.build(file_name: song) }
-        if session.save
-          flash_message :success, "Session #{new_session} saved!"
-        else
-          flash_message :error, "Session #{new_session} could not be saved!"
-        end
-      end
-      redirect_to sessions_path
-    else
+    unless params.has_key? :sessions
       flash_message :notification, "Please select some files!"
       redirect_to new_session_path
+      return
     end
+    params[:sessions].each do |new_session, new_songs|
+      session = Session.find_or_initialize_by_session_date(:session_date =>
+                                            folder_name_to_date(new_session))
+      new_songs.each { |song| session.songs.build(file_name: song) }
+      if session.save
+        flash_message :success, "Session #{new_session} saved!"
+      else
+        flash_message :error, "Session #{new_session} could not be saved!"
+      end
+    end
+    redirect_to sessions_path
   end
 
   def destroy

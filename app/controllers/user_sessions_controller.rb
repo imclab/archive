@@ -19,5 +19,4 @@ class UserSessionsController < ApplicationController
     flash_message :notification, "You successfully logged out."
     redirect_to sessions_path
   end
-
 end

@@ -154,6 +154,5 @@ describe Song do
 
       Song.by_score.should == [@song2, @song]
     end
-
   end
 end

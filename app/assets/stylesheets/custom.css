@@ -414,6 +414,11 @@ select, input {
        -o-box-shadow: inset 0px 0px 7px hsla(20, 76%, 15%, 0.5);
 	        box-shadow: inset 0px 0px 7px hsla(20, 76%, 15%, 0.5);
 }
+textarea {
+  color: hsla(293, 100%, 100%, 1);
+  background: hsla(293, 90%, 15%, 1);
+  border: 1px solid hsla(293, 90%, 25%, 1);
+}
 
 input:hover {
 	border: 1px solid hsla(301, 90%, 25%, 0.5);
@@ -524,8 +529,10 @@ form.new_user p.input-help, form.edit_user p.input-help {
   float: right;
 }
 .listen {
+  width: 90%;
   padding-left: 5px;
   margin-bottom: 10px;
+  float: left;
 }
 audio {
   width: 80%;
@@ -546,6 +553,22 @@ audio {
 }
 .song-tags form {
   text-align: center;
+}
+.song-comments form {
+  width: 80%;
+  margin: auto;
+  margin-bottom: 3em;
+  text-align: center;
+}
+.song-comments form p {
+  text-align: right;
+}
+.comments .author {
+  font-weight: bold;
+  padding: 0.5em;
+}
+.comments i {
+  padding-right: 0.5em;
 }
 form.new_tag div.clearfix {
   margin: 0 0 10px 0;

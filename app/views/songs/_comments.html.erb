@@ -1,18 +1,17 @@
 <% if current_user %>
   <%= form_for comment do |f| %>
-    <div class="clearfix">
-      <%= f.hidden_field :song_id, :value => song.id %>
-      <%= f.hidden_field :user_id, :value => user.id %>
-      <%= f.text_area :text, maxlength: 500, size: 50 %>
-      <%= f.submit "Add Comment!", :class => "submit" %> 
-    </div>
+    <%= f.hidden_field :song_id, :value => song.id %>
+    <%= f.hidden_field :user_id, :value => user.id %>
+    <%= f.text_area :text, maxlength: 500, rows: 10, cols: 80 %>
+    <p>
+    <%= f.submit "Add Comment!", :class => "submit" %> 
+    </p>
   <% end %>
 <% end %>
 <% if song.comments.any? %>
-  <p>COOOMMENTS</p>
   <% song.comments.each do |c| %>
     <div class="comment purplebox">
-      <span><%= c.user.name %></span>
+      <span class="author"><i class="icon-user"></i><%= c.user.name %></span>
       <p><%= c.text %></p>
     </div>
   <% end %>

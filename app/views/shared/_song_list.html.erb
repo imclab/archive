@@ -1,6 +1,7 @@
 <ul class="song-list">
 <% songs.each do |s| %>
   <li>
+    <i class="icon-music"></i>
     <%= link_to s.file_name, song_path(s) %> 
     <span><%= short_song_info(s) %></span>
   </li>

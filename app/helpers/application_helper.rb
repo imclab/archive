@@ -20,10 +20,15 @@ module ApplicationHelper
   end
 
   def short_song_info(song)
+    sentence  = "#{song.score} Votes, "
+    sentence += "#{song.comments.count} Comments"
+
     if song.tags.any?
-      sentence = "Tags: "
+      sentence += ", Tags: "
       sentence += song.tags.collect { |t| "<b>#{t.name}</b>" }.to_sentence
-      raw truncate sentence, length: 120, separator: ","
+      sentence  = truncate sentence, length: 120, separator: ","
     end
+
+    raw sentence
   end
 end

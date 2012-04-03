@@ -10,17 +10,17 @@ it. Also, this is my first real rails app in deployment. I think you should know
 this.
 
 You can, in fact, look at the deployed version which is used as an online
-archive of rehearsal recordings at [howlingvibes.com/archive](www.howlingvibes.com/archive).
+archive of rehearsal recordings at [howlingvibes.com/archive](http://www.howlingvibes.com/archive).
 
 ## File Organisation
 
 The audio files are organised in a certain way. All single audio files are in
-different orders named after the day of recording. That's pretty much
+different directories named after the day of recording. That's pretty much
 self-explanatory, but here's an example:
 
-`2011.07.01/01.song.mp3
-2011.07.01/02.song.mp3
-2012.01.22/01.song.mp3
+`2011.07.01/01.song.mp3\
+2011.07.01/02.song.mp3\
+2012.01.22/01.song.mp3\
 2012.01.22/02.song.mp3`
 
 ## Configuration
@@ -28,6 +28,13 @@ self-explanatory, but here's an example:
 You can change the archive path (where the app is supposed to look for files) in
 the `config/paths.yml` file. You can also specify a `download_url` in there:
 this one is used as the base url when direct linking to the audio files.
+
+## Features
+
+- Visitors can create their own user accounts
+- Users can tag, comment and up/down-vote songs
+- Visitors can listen to the songs via HTML5 <audio> tag, or by clicking on the
+  direct link to the audio file
 
 ## TODO
 
@@ -39,13 +46,3 @@ Refactoring:
   cleaner to me.
 - Cleaning up the `custom.css` file and seperate the custom styles from the H5BP
   stuff, probably into a seperate file.
-
-New Features: 
-
-- `Songs#index` should provide a possibilty to sort the list via a select tag with
-  certain options: 
-
-  - Newest Songs
-  - Oldest Songs
-  - Most Tagged Songs
-  - Less Tagged Songs

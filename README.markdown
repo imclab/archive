@@ -18,10 +18,10 @@ The audio files are organised in a certain way. All single audio files are in
 different directories named after the day of recording. That's pretty much
 self-explanatory, but here's an example:
 
-`2011.07.01/01.song.mp3\
-2011.07.01/02.song.mp3\
-2012.01.22/01.song.mp3\
-2012.01.22/02.song.mp3`
+    2011.07.01/01.song.mp3
+    2011.07.01/02.song.mp3
+    2012.01.22/01.song.mp3
+    2012.01.22/02.song.mp3
 
 ## Configuration
 

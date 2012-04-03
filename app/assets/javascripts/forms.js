@@ -52,9 +52,8 @@ $(function() {
  
   // Songs#show
   // When a new tag is submitted, clear and unfocus the input
-  $("#new_tag").live("ajax:beforeSend", function(event,xhr,status){
-    $('#tag_name').val('');
-    $('#tag_name').blur();
+  $("#new_tag").live("ajax:beforeSend", function(){
+    $('#tag_name').val('').blur();
   });
 
   // Users#new and Users#edit

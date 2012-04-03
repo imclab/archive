@@ -23,17 +23,13 @@
   <div class="song-voting">
     <%= link_to '<i class="icon-arrow-up"></i>'.html_safe,
                 song_votes_path(@song, direction: 'up'),
-                { method: :post, remote: true },
-                title: 'Upvote'
-    %>
+                { method: :post, remote: true, title: 'Upvote' } %>
     <span class="score">
       <%= @song.score %>
     </span>
     <%= link_to '<i class="icon-arrow-down"></i>'.html_safe,
                 song_votes_path(@song, direction: 'down'),
-                { method: :post, remote: true },
-                title: 'Downvote'
-    %>
+                { method: :post, remote: true, title: 'Downvote' } %>
   </div>
   <h4>Tags:</h4>
   <div class="song-tags">

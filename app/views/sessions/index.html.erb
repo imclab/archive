@@ -4,6 +4,7 @@
 <% @sessions.each do |s| %>
   <div class="session">
   <h4>
+    <i class="icon-folder-open"></i>
     <%= prettify_date(s.session_date) %>
     <% if current_user && current_user.admin? %>
       <span class="delete">

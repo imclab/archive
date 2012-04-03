@@ -1,7 +1,10 @@
 <p>
 <% if song.tags.any? %>
   <% song.tags.each do |tag| %>
-    <span class="tag"><%= link_to tag.name, tag_path(tag) %></span>
+    <span class="tag">
+      <%= link_to "<i class='icon-tag'></i> #{tag.name}".html_safe,
+        tag_path(tag) %>
+    </span>
   <% end %>
 <% else %>
   <span class="no-tags">This song has no tags!</span>

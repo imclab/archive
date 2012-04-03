@@ -588,6 +588,9 @@ form.new_tag div.clearfix {
 	   -moz-transition: color 0.25s ease-in-out;
 	        transition: color 0.25s ease-in-out;
 }
+.tag i {
+  color: black;
+}
 .tag a {
 	color: hsla(45, 100%, 15%, 1);
   text-decoration: none;

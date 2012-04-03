@@ -34,6 +34,12 @@ class Song < ActiveRecord::Base
     find(:all, include: :session).sort_by { |s| s.session.session_date }
   end
 
+  # Returns all songs ordered by their score
+  # Default order is highest to lowest
+  def self.by_score
+    find(:all).sort_by { |s| -s.score }
+  end
+
   private
     
     def destroy_ghost_tags

@@ -4,7 +4,7 @@ class SongsController < ApplicationController
   before_filter :remember_current_path, :only => :show
 
   def index
-    valid_options = ["by_count_of_tags", "by_session_date"]
+    valid_options = ["by_count_of_tags", "by_session_date", "by_score"]
     if valid_options.include? params[:sort]
       @songs = Song.send(params[:sort])
       @songs.reverse! if params[:reverse]

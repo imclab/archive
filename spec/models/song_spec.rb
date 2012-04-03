@@ -125,18 +125,18 @@ describe Song do
   describe "ordering" do
     before(:each) do
       @song = Song.create!(file_name: "01.most_tagged_song_(RMX).mp3")
-      @song.tags.create!(name: "brbrbrilliant")
-      @song.tags.create!(name: "sellout")
-
       @song2 = Song.create!(file_name: "02.indie_song.mp3")
-      @song2.tags.create!(name: "sensibel")
     end
 
     it "should respond to and have working 'by_count_of_tags' method" do
+      @song.tags.create!(name: "brbrbrilliant")
+      @song.tags.create!(name: "sellout")
+      @song2.tags.create!(name: "sensibel")
+
       Song.by_count_of_tags.should == [@song, @song2]
     end
 
-    it "should respond to and hae working 'by_session_date' method" do
+    it "should respond to and have working 'by_session_date' method" do
       @session = Session.create!(session_date: Time.now)
       @session.songs << @song
 
@@ -145,5 +145,15 @@ describe Song do
 
       Song.by_session_date.should == [@song2, @song]
     end
+
+    it "should respond to and have working 'by_score' method" do
+      @song.score = 10
+      @song.save
+      @song2.score = 90
+      @song2.save
+
+      Song.by_score.should == [@song2, @song]
+    end
+
   end
 end

@@ -4,9 +4,10 @@ Archive::Application.routes.draw do
                                                  reverse: true
   resources :sessions, :except => [:update, :edit]
 
-  match 'songs/most_tagged' => 'songs#index', sort: 'by_count_of_tags'
-  match 'songs/oldest'      => 'songs#index', sort: 'by_session_date'
-  match 'songs/newest'      => 'songs#index', sort: 'by_session_date',
+  match 'songs/highest_score' => 'songs#index', sort: 'by_score'
+  match 'songs/most_tagged'   => 'songs#index', sort: 'by_count_of_tags'
+  match 'songs/oldest'        => 'songs#index', sort: 'by_session_date'
+  match 'songs/newest'        => 'songs#index', sort: 'by_session_date',
                                               reverse: true
   resources :songs, :except => [:new, :update, :edit] do
     resources :votes, :only => :create

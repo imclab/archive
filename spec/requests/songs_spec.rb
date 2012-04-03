@@ -19,7 +19,7 @@ describe "Songs" do
         @old_song = @old_session.songs.create!(file_name: "01.breaking.bad.mp3") 
         
         @new_session = Session.create!(session_date: Time.now)
-        @new_song = @new_session.songs.create!(file_name: "03.hello_joe.mp3")
+        @new_song = @new_session.songs.create!(file_name: "01.hello_joe.mp3")
       end
 
       it "should show the oldest songs when clicked on 'Oldest'" do
@@ -41,6 +41,16 @@ describe "Songs" do
         visit '/songs/'
         click_link "Most Tagged"
         page.body.should =~ /#{@old_song.file_name}.*#{@new_song.file_name}/m
+      end
+
+      it "should show the song with the highest score when clicked on 'Highest Score'" do
+        @old_song.score = 50
+        @old_song.save
+        @new_song.score = 80
+        @new_song.save
+        visit '/songs/'
+        click_link "Highest Score"
+        page.body.should =~ /#{@new_song.file_name}.*#{@old_song.file_name}/m
       end
     end
   end

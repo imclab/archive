@@ -22,7 +22,7 @@ gem 'jquery-rails'
 gem 'bcrypt-ruby', '~> 3.0.0'
 
 # Font Awesome
-gem 'font-awesome-rails'
+gem 'font-awesome-rails', :path => 'app/lib/font-awesome-rails'
 
 # Use unicorn as the web server
 # gem 'unicorn'

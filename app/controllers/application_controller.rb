@@ -2,6 +2,8 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   helper_method :current_user, :signed_in?
 
+  after_filter :save_last_activity
+
   def flash_message(type, text)
     flash[type] ||= []
     flash[type] << text
@@ -43,5 +45,9 @@ class ApplicationController < ActionController::Base
         flash_message :notification, "Sorry, you are not allowed to do this"
         redirect_to sessions_path
       end
+    end
+
+    def save_last_activity
+      cookies[:last_activity] = Time.now if current_user && request.get?
     end
 end

@@ -1,6 +1,5 @@
 <p>
 <% if signed_in? %>
-  Hello, <%= current_user.name %>
   <% if current_user.admin %>
     <span class="admin_tasks">
       <%= link_to "Add new sessions", new_session_path %> |
@@ -8,6 +7,12 @@
     </span>
   <% end %>
   <span id="user-controls">
+  Hello, <%= current_user.name %>
+  <% if comments_since_last_activity %>
+    <a href='#' id='new-comments-notification'>
+      <%= pluralize(comments_since_last_activity.count, 'new comment') %>
+    </a>
+  <% end %>
   <%= link_to "Edit profile", edit_user_path(current_user) %> | 
   <%= link_to "Sign out", signout_path, :method => :delete %>
   </span>

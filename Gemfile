@@ -47,6 +47,7 @@ group :test do
   gem 'turn', '0.8.2', :require => false
   gem 'rspec-rails'
   gem 'capybara'
+  gem 'database_cleaner'
 end
 
 # http://stackoverflow.com/questions/6282307/rails-3-1-execjs-and-could-not-find-a-javascript-runtime

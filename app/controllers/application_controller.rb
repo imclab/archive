@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  helper_method :current_user, :signed_in?
+  helper_method :current_user, :signed_in?, :comments_since_last_activity
 
   after_filter :save_last_activity
 
@@ -34,6 +34,12 @@ class ApplicationController < ActionController::Base
     redirect_to signin_path
   end
 
+  def comments_since_last_activity
+    if cookies[:last_activity]
+      @comments_since_last_activity ||= Comment.where('created_at > ?', cookies[:last_activity])
+    end
+  end
+
   protected
 
     def authorize
@@ -48,6 +54,6 @@ class ApplicationController < ActionController::Base
     end
 
     def save_last_activity
-      cookies[:last_activity] = Time.now if current_user && request.get?
+      cookies.permanent[:last_activity] = Time.now if current_user && request.get?
     end
 end

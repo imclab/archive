@@ -11,6 +11,12 @@ describe 'new comment notification' do
 
   it 'shows me comments that have been made since my last visit', js: true do
     integration_sign_in("peter@gmx.de")
+    click_on "SONGS"
+    puts "XXXXXXXXXXXXXXXXXXXXXXXXX"
+    puts "Cookie:"
+    puts cookies[:last_activity]
+    puts "Cookie.nil?:"
+    puts cookies[:last_activity].nil?
 
     click_on "1 new comment"
     click_on "klaus commented on 01.testing.mp3"
@@ -20,8 +26,19 @@ describe 'new comment notification' do
 
   it 'show me comments that have been made since my last activity' do
     integration_sign_in("peter@gmx.de")
-    Comment.create!(user: @klaus, song: @song, text: "This is a second comment")
-    Comment.create!(user: @klaus, song: @song, text: "This is a third comment")
+    click_on "TAGS"
+    # puts "XXXXXXXXXXXXXXXXXXXXXXXXX"
+    # puts "Cookie:"
+    # puts cookies[:last_activity]
+    # puts "Cookie.nil?:"
+    # puts cookies[:last_activity].nil?
+
+    newcomment1 = Comment.create!(user: @klaus, song: @song, text: "This is a second comment")
+    newcomment2 = Comment.create!(user: @klaus, song: @song, text: "This is a third comment")
+    puts "Comments:"
+    puts newcomment1.created_at
+    puts newcomment2.created_at
+    # puts "--------------------------"
 
     click_on "SONGS"
 

@@ -35,17 +35,8 @@ class ApplicationController < ActionController::Base
   end
 
   def comments_since_last_activity
-    puts "Cookie.nil?:"
-    puts cookies[:last_activity].nil?
-    puts "Cookie:"
-    puts cookies[:last_activity]
-
     if cookies[:last_activity]
-      puts "Time.now:"
-      puts Time.now
-      @comments_since_last_activity ||= Comment.where('created_at >= ?', cookies[:last_activity].to_date)
-      puts "Comments since last activity:"
-      puts @comments_since_last_activity
+      @comments_since_last_activity ||= Comment.where('created_at > ?', cookies[:last_activity])
     end
     @comments_since_last_activity || []
   end
@@ -64,6 +55,6 @@ class ApplicationController < ActionController::Base
     end
 
     def save_last_activity
-      cookies.permanent[:last_activity] = Time.now if current_user && request.get?
+      cookies.permanent[:last_activity] = Time.now.utc if current_user && request.get?
     end
 end

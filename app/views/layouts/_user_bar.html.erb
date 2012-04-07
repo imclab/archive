@@ -9,7 +9,7 @@
   <span id="user-controls">
   Hello, <%= current_user.name %>
   <% if comments_since_last_activity.count > 0 %>
-    <a href='#' id='new-comments-notification'>
+    <a href='#' id='new-comments-indicator'>
       <%= pluralize(comments_since_last_activity.count, 'new comment') %>
     </a>
   <% end %>
@@ -23,3 +23,15 @@
   </span>
 <% end %>
 </p>
+<div class="new-comments">
+  <% if comments_since_last_activity.count > 0 %>
+    <ul>
+      <% comments_since_last_activity.each do |comment| %>
+        <li class="link-to-new-comment">
+        <%= link_to "#{comment.user.name} commented on #{comment.song.file_name}",
+                    song_path(comment.song) %>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+</div>

@@ -43,10 +43,11 @@ class ApplicationController < ActionController::Base
     if cookies[:last_activity]
       puts "Time.now:"
       puts Time.now
-      @comments_since_last_activity ||= Comment.where('created_at >= ?', cookies[:last_activity])
+      @comments_since_last_activity ||= Comment.where('created_at >= ?', cookies[:last_activity].to_date)
       puts "Comments since last activity:"
       puts @comments_since_last_activity
     end
+    @comments_since_last_activity || []
   end
 
   protected

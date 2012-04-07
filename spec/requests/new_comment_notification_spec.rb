@@ -12,11 +12,11 @@ describe 'new comment notification' do
   it 'shows me comments that have been made since my last visit', js: true do
     integration_sign_in("peter@gmx.de")
     click_on "SONGS"
-    puts "XXXXXXXXXXXXXXXXXXXXXXXXX"
-    puts "Cookie:"
-    puts cookies[:last_activity]
-    puts "Cookie.nil?:"
-    puts cookies[:last_activity].nil?
+    # puts "XXXXXXXXXXXXXXXXXXXXXXXXX"
+    # puts "Cookie:"
+    # puts cookies[:last_activity]
+    # puts "Cookie.nil?:"
+    # puts cookies[:last_activity].nil?
 
     click_on "1 new comment"
     click_on "klaus commented on 01.testing.mp3"

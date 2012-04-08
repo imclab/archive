@@ -1,10 +1,7 @@
 require 'spec_helper'
 
 describe SongsController do
-  before(:each) do
-    @base_title = "Howling Vibes Archive"
-  end
-  
+
   describe "GET 'index'" do
     it "should be successful" do
       get :index
@@ -50,11 +47,8 @@ describe SongsController do
     end
 
     describe "as non-admin user" do
-      before(:each) do
-        controller_sign_in(@user)
-      end
-
       it "should protect page and redirect" do
+        controller_sign_in(@user)
         delete :destroy, :id => @song
         response.should redirect_to(sessions_path)
       end

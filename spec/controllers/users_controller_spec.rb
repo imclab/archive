@@ -13,8 +13,12 @@ describe UsersController do
 
     describe "failure" do
       before(:each) do
-        @attr = { :name => "", :email => "", :password => "",
-                  :password_confirmation => "" }
+        @attr = {
+          :name                  => "",
+          :email                 => "",
+          :password              => "",
+          :password_confirmation => ""
+        }
       end
 
       it "should not create a user" do
@@ -31,8 +35,12 @@ describe UsersController do
 
     describe "success" do
       before(:each) do
-        @attr = { :name => "New User", :email => "user@example.com",
-                  :password => "foobar", :password_confirmation => "foobar" }
+        @attr = {
+          :name                  => "New User",
+          :email                 => "user@example.com",
+          :password              => "foobar",
+          :password_confirmation => "foobar"
+        }
       end
       
       it "should create a user" do
@@ -49,15 +57,14 @@ describe UsersController do
   end
 
   describe "GET 'edit'" do
-    before(:each) do
-      @user = create_user
-      controller_sign_in(@user)
-    end
 
     it "should be successful" do
-      get :edit, :id => @user
+      user = create_user
+      controller_sign_in(user)
+      get :edit, :id => user
       response.should be_success
     end
+
   end
 
   describe "PUT 'update'" do
@@ -68,8 +75,12 @@ describe UsersController do
 
     describe "failure" do
       before(:each) do
-        @attr = { :email => "", :name => "", :password => "",
-                  :password_confirmation => "" }
+        @attr = {
+          :email                 => "",
+          :name                  => "",
+          :password              => "",
+          :password_confirmation => ""
+        }
       end
 
       it "should render the 'edit' page" do
@@ -80,9 +91,12 @@ describe UsersController do
 
     describe "success" do 
       before(:each) do
-        @attr = { :email => "johnny22@foobar.com", :name => "Johnny Second",
-                  :password => "password",
-                  :password_confirmation => "password" }
+        @attr = {
+          :email                 => "johnny22@feobar.com",
+          :name                  => "Johnny Second",
+          :password              => "password",
+          :password_confirmation => "password"
+        }
       end
 
       it "should change the user's attributes" do
@@ -100,9 +114,11 @@ describe UsersController do
   end
 
   describe "authentication of edit/update/index actions" do
+
     before(:each) do
       @user = create_user
     end
+
     describe "for non-signed in users" do
       it "should deny access to 'edit'" do
         get :edit, :id => @user
@@ -121,6 +137,7 @@ describe UsersController do
     end
 
     describe "for signed-in users" do
+
       before(:each) do
         wrong_user = create_user("evil@evil.com", "evilpass")
         controller_sign_in(wrong_user)
@@ -144,12 +161,10 @@ describe UsersController do
   end
 
   describe "GET 'index' as admin" do
-    before(:each) do
-      @admin = create_user("admin@admin.com")
-      @admin.toggle!(:admin)
-      controller_sign_in(@admin)
-    end
     it "should be a success" do
+      admin = create_user("admin@admin.com")
+      admin.toggle!(:admin)
+      controller_sign_in(admin)
       get :index
       response.should be_success
     end

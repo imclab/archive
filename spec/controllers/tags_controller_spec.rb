@@ -1,11 +1,6 @@
 require 'spec_helper'
 
 describe TagsController do
-  render_views
-
-  before(:each) do
-    @base_title = "Howling Vibes Archive"
-  end
 
   describe "GET 'index'" do
     it "should be successful" do
@@ -17,7 +12,7 @@ describe TagsController do
   describe "GET 'show'" do
 
     before(:each) do
-      @tag = Tag.create!(name: "testing")
+      @tag   = Tag.create!(name: "testing")
       @song1 = Song.create!(file_name: "01.testing.mp3")
       @song2 = Song.create!(file_name: "02.testing.mp3")
       @tag.song_tags.create!(song_id: @song1.id)
@@ -29,7 +24,7 @@ describe TagsController do
       response.should be_success
     end
 
-    it "should find the right user" do
+    it "should find the right tag" do
       get :show, :id => @tag
       assigns(:tag).should == @tag
     end

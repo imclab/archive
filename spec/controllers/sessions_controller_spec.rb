@@ -1,18 +1,6 @@
 require 'spec_helper'
 
 describe SessionsController do
-  render_views
-
-  before(:each) do
-    @base_title = "Howling Vibes Archive"
-  end
-
-  describe "GET 'index'" do
-    it "should be successful" do
-      get :index
-      response.should be_success
-    end
-  end
 
   describe "GET 'new'" do
     before(:each) do
@@ -157,7 +145,6 @@ describe SessionsController do
         end.should change(Tag, :count).by(-2)
       end
 
-      
       it "should redirect" do
         delete :destroy, :id => @session
         response.should redirect_to(sessions_path)

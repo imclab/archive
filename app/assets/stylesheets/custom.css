@@ -249,6 +249,21 @@ body { background: url("bg_brighter.png"); }
   color: hsla(45, 100%, 70%, 1);
 }
 
+/*Info Bar */
+#info-bar {
+  color: hsla(301, 85%, 100%, 0.8);
+  font-size: 1em;
+  font-weight: normal;
+  width: 940px;
+  padding: 1px 20px 1px 20px;
+  background: hsla(293, 84%, 10%, 0.6);
+  margin: 5px auto 0 auto;
+  border-radius: 5px;
+}
+#new-comments ul {
+  padding-left: 0.2em;
+}
+
 header { text-align: center; }
 
 

@@ -12,7 +12,7 @@ describe 'new comment notification' do
     # Making a visit, then logging out
     integration_sign_in("peter@gmx.de")
     click_on "Sign out"
-    # In the meantime: klaus posts a comment
+    # While I'm gone: klaus posts a comment
     Comment.create!(user_id: @klaus.id, song_id: @song.id, text: "This is a comment")
     # I sign in again
     integration_sign_in("peter@gmx.de")
@@ -25,11 +25,11 @@ describe 'new comment notification' do
   end
 
   it 'show me comments that have been made since my last activity' do
-    Comment.create!(user_id: @klaus.id, song_id: @song.id, text: "This is a comment")
+    # Comment.create!(user_id: @klaus.id, song_id: @song.id, text: "This is a comment")
     integration_sign_in("peter@gmx.de")
     click_on "TAGS"
-    newcomment1 = Comment.create!(user: @klaus, song: @song, text: "This is a second comment")
-    newcomment2 = Comment.create!(user: @klaus, song: @song, text: "This is a third comment")
+    Comment.create!(user: @klaus, song: @song, text: "This is a second comment")
+    Comment.create!(user: @klaus, song: @song, text: "This is a third comment")
 
     click_on "SONGS"
 

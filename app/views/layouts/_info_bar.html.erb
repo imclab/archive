@@ -1,0 +1,15 @@
+<div id="info-bar" >
+  <div id="new-comments">
+    <% if comments_since_last_activity.count > 0 %>
+      <ul>
+        <% comments_since_last_activity.each do |comment| %>
+          <li class="link-to-new-comment">
+            <%= link_to "#{comment.user.name} commented on #{comment.song.file_name}:",
+                        song_path(comment.song) %>
+            <%= truncate comment.text, length: 50 %>
+          </li>
+        <% end %>
+      </ul>
+    <% end %>
+  </div>
+</div>

@@ -1,3 +1,14 @@
+<% if song.comments.any? %>
+  <% song.comments.each do |c| %>
+    <div class="comment purplebox">
+      <span class="author"><i class="icon-user"></i><%= c.user.name %> wrote:</span>
+      <p class="text"><%= c.text %></p>
+      <span class="date">Posted <%= time_ago_in_words c.created_at %> ago</span>
+    </div>
+  <% end %>
+<% else %>
+  <p><span class="no-comments">This song has no comments, add some!</span></p>
+<% end %>
 <% if current_user %>
   <%= form_for comment do |f| %>
     <%= f.hidden_field :song_id, :value => song.id %>
@@ -7,14 +18,4 @@
     <%= f.submit "Add Comment!", :class => "submit" %> 
     </p>
   <% end %>
-<% end %>
-<% if song.comments.any? %>
-  <% song.comments.each do |c| %>
-    <div class="comment purplebox">
-      <span class="author"><i class="icon-user"></i><%= c.user.name %></span>
-      <p><%= c.text %></p>
-    </div>
-  <% end %>
-<% else %>
-  <p><span class="no-comments">This song has no comments, add some!</span></p>
 <% end %>

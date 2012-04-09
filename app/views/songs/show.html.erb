@@ -9,8 +9,8 @@
   <h4>Listen to this song:
     <% if current_user && current_user.admin? %>
       <span class="delete">
-        <%= link_to 'Delete this song', @song, :method  => :delete,
-                                               :confirm => "Are you sure?" %>
+        <%= link_to '<i class="icon-remove"></i>Delete this song'.html_safe,
+                    @song, :method  => :delete, :confirm => "Are you sure?" %>
       </span>
     <% end %>
   </h4>

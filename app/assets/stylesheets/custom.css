@@ -260,6 +260,10 @@ body { background: url("bg_brighter.png"); }
   margin: 5px auto 0 auto;
   border-radius: 5px;
 }
+#info-bar .date {
+  color: hsla(301, 85%, 100%, 0.2);
+  float: right;
+}
 #new-comments ul {
   padding-left: 0.2em;
 }
@@ -374,12 +378,16 @@ h4 {
 /* Delete Links */
 span.delete {
   float: right;
+  font-size: 0.8em;
 }
 span.delete a {
   text-decoration: none;
 }
 span.delete a:hover {
   text-decoration: none;
+}
+span.delete a i {
+  padding-right: 0.5em;
 }
 /* Sorting links and form */
 
@@ -556,6 +564,8 @@ audio {
 }
 .song-voting {
   font-size: 2em;
+  margin-top: 0.5em;
+  text-align: center;
 }
 .song-voting a {
   text-decoration: none;
@@ -586,12 +596,20 @@ audio {
 .song-comments textarea {
   width: 100%
 }
-.comments .author {
+.comment {
+  padding: 0.5em;
+  color: hsla(301, 85%, 100%, 0.2);
+}
+.comment .author {
+  color: hsla(45, 100%, 61%, 1);
   font-weight: bold;
   padding: 0.5em;
 }
-.comments i {
+.comment i {
   padding-right: 0.5em;
+}
+.comment .text {
+  color: hsla(301, 85%, 100%, 1);
 }
 form.new_tag div.clearfix {
   margin: 0 0 10px 0;

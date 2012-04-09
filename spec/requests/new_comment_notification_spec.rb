@@ -19,7 +19,9 @@ describe 'new comment notification' do
 
     # shows me new comments since last visit
     click_on "1 new comment"
-    click_on "klaus commented on 01.testing.mp3"
+    within ("#info-bar") do
+      click_on "01.testing.mp3"
+    end
     page.should have_content("This is a comment")
     current_path.should == song_path(@song)
   end

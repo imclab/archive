@@ -1,18 +1,18 @@
 <h3>All Sessions
   <%= render :partial => 'sorting' %>
 </h3>
-<% @sessions.each do |s| %>
+<% @sessions.each do |session| %>
   <div class="session">
   <h4>
     <i class="icon-folder-open"></i>
-    <%= prettify_date(s.session_date) %>
+    <%= prettify_date(session.session_date) %>
     <% if current_user && current_user.admin? %>
       <span class="delete">
-        <%= link_to 'Delete this session', s, :method => :delete,
-                                              :confirm => "Are you sure?" %>
+        <%= link_to '<i class="icon-remove"></i>Delete this session'.html_safe,
+                    session, :method => :delete, :confirm => "Are you sure?" %>
       </span>
     <% end %>
   </h4>
-  <%= render :partial => 'shared/song_list', :locals => { :songs => s.songs } %>
+  <%= render :partial => 'shared/song_list', :locals => { :songs => session.songs } %>
   </div>
 <% end %>

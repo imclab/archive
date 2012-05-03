@@ -2,8 +2,8 @@ require "spec_helper"
 
 describe "Admin Tasks" do
   before(:each) do
-    @user = create_user
-    @user.toggle!(:admin)
+    user = create_user
+    user.toggle!(:admin)
     integration_sign_in
   end
 
@@ -31,16 +31,9 @@ describe "Admin Tasks" do
         @se1.songs.create!(:file_name => "01.golden_fields.mp3")
       end
 
-      it "should render the correct template" do
-        visit '/sessions/new'
-        current_path.should == new_session_path
-        page.should have_css('title',
-                             :text => 'Howling Vibes Archive | Add session')
-        page.should have_css('h3', :text => 'Add new sessions')
-      end
-
       it "should not show a song that is already in DB" do
         visit '/sessions/new'
+
         page.should_not have_content('01.golden_fields.mp3')
       end
 

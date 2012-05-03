@@ -1,20 +1,20 @@
 class UsersController < ApplicationController
   before_filter :authorize,       :only => [:edit, :update, :index, :destroy]
-  before_filter :correct_user,    :only => [:edit, :update] 
+  before_filter :correct_user,    :only => [:edit, :update]
   before_filter :authorize_admin, :only => [:destroy, :index]
 
   def index
     @users = User.all
   end
 
-  def new 
+  def new
     @user = User.new
   end
 
   def create
     @user = User.new(params[:user])
     if @user.save
-      flash_message :success, "You successfully created an account!" 
+      flash_message :success, "You successfully created an account!"
       redirect_to sessions_path
     else
       render "new"
@@ -34,7 +34,7 @@ class UsersController < ApplicationController
       render "edit"
     end
   end
-  
+
   def destroy
     User.find(params[:id]).destroy
     flash_message :notification, "User successfully deleted."

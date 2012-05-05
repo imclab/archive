@@ -27,8 +27,12 @@ describe 'new comment notification' do
   end
 
   it 'show me comments that have been made since my last activity' do
-    Comment.create!(user_id: @klaus.id, song_id: @song.id, text: "This is a comment",
-                    created_at: Time.now - 5.days.ago)
+    Comment.create!(
+      user_id: @klaus.id,
+      song_id: @song.id,
+      text: "This is a comment",
+      created_at: Time.now - 5.days.ago
+    )
     integration_sign_in("peter@gmx.de")
     click_on "TAGS"
     Comment.create!(user: @klaus, song: @song, text: "This is a second comment")

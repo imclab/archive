@@ -35,8 +35,8 @@ describe CommentsController do
 
   describe "DELETE 'destroy'" do
     before(:each) do
-      @song = Song.create!(file_name: "01.testing.mp3")
-      @user = create_user
+      @song    = Song.create!(file_name: "01.testing.mp3")
+      @user    = create_user
       @comment = Comment.create!(song_id: @song.id, user_id: @user.id,
                                  text: "This is a testing comment!")
     end
@@ -48,14 +48,15 @@ describe CommentsController do
       end
     end
 
-    describe "as non-admin user" do
+    describe "as correct user" do
       before(:each) do
         controller_sign_in(@user)
       end
 
-      it "should protect page and redirect" do
-        delete :destroy, :id => @comment
-        response.should redirect_to(sessions_path)
+      it "should delete the comment" do
+        lambda do
+          delete :destroy, :id => @comment
+        end.should change(Comment, :count).by(-1)
       end
     end
 
@@ -77,5 +78,4 @@ describe CommentsController do
       end
     end
   end
-
 end

@@ -2,6 +2,14 @@
   <% song.comments.each do |c| %>
     <div class="comment purplebox">
       <span class="author"><i class="icon-user"></i><%= c.user.name %> wrote:</span>
+      <% if signed_in? %>
+        <% if current_user == c.user || current_user.admin %>
+          <span class="delete">
+            <%= link_to '<i class="icon-remove"></i>Delete this comment'.html_safe,
+                        c, :method  => :delete, :confirm => "Are you sure?" %>
+          </span>
+        <% end %>
+      <% end %>
       <p class="text"><%= c.text %></p>
       <span class="date">Posted <%= time_ago_in_words c.created_at %> ago</span>
     </div>
@@ -15,7 +23,7 @@
     <%= f.hidden_field :user_id, :value => user.id %>
     <%= f.text_area :text, maxlength: 500, rows: 10 %>
     <p>
-    <%= f.submit "Add Comment!", :class => "submit" %> 
+    <%= f.submit "Add Comment!", :class => "submit" %>
     </p>
   <% end %>
 <% end %>

@@ -25,19 +25,19 @@ class Song < ActiveRecord::Base
   # Returns all songs ordered by the count of their tags
   # Default order is highest tag count to lowest
   def self.by_count_of_tags
-    find(:all, include: :tags).sort_by { |s| -s.tags.count }
+    find(:all, include: [:session, :tags, :comments]).sort_by { |s| -s.tags.length }
   end
 
   # Returns all songs ordered by their session's session_date
   # Default order is oldest to newest
   def self.by_session_date
-    find(:all, include: :session).sort_by { |s| s.session.session_date }
+    find(:all, include: [:session, :tags, :comments]).sort_by { |s| s.session.session_date }
   end
 
   # Returns all songs ordered by their score
   # Default order is highest to lowest
   def self.by_score
-    find(:all).sort_by { |s| -s.score }
+    find(:all, include: [:session, :tags, :comments]).sort_by { |s| -s.score }
   end
 
   private

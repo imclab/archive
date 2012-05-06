@@ -9,7 +9,7 @@ class SongsController < ApplicationController
       @songs = Song.send(params[:sort])
       @songs.reverse! if params[:reverse]
     else
-      @songs = Song.all
+      @songs = Song.includes(:tags, :comments)
     end
     @title = "All songs"
   end

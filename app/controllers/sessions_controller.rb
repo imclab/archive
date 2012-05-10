@@ -51,11 +51,10 @@ class SessionsController < ApplicationController
 
       archive.sessions.each do |archive_session|
         new_files[archive_session] = []
-        if session = Session.find_by_session_date(folder_name_to_date(archive_session))
 
+        if session = Session.find_by_session_date(folder_name_to_date(archive_session))
           archive.files_in_session(archive_session).each do |archive_file|
-            if Song.where(:file_name => archive_file,
-                          :session_id => session.id).empty?
+            if Song.where(file_name: archive_file, session_id: session.id).empty?
               new_files[archive_session].push(archive_file)
             end
           end

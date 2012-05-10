@@ -17,6 +17,6 @@ class Session < ActiveRecord::Base
   # Returns all sessions ordered by their session_date
   # Default order is oldest to newest
   def self.by_session_date
-    order("session_date")
+    includes(:songs => [:comments, :tags]).order('session_date')
   end
 end

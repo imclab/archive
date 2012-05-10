@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
-  before_filter :authorize,       :only => [:create, :destroy]
-  before_filter :authorize_admin, :only => :destroy
+  before_filter :authorize,                only: :create
+  before_filter :correct_user_or_admin,    only: :destroy
 
   def create
     @comment = Comment.new(params[:comment])
@@ -18,7 +18,17 @@ class CommentsController < ApplicationController
     song = comment.song
 
     comment.destroy
-    flash_message :notification, "You successfully deleted a comment"
+    flash_message :notification, 'You successfully deleted a comment!'
     redirect_to song_path(song.id)
   end
+
+  private
+
+    def correct_user_or_admin
+      comment = Comment.find(params[:id])
+      song    = comment.song
+      unless current_user && (current_user?(comment.user) || current_user.admin)
+        redirect_to(signin_path)
+      end
+    end
 end

@@ -21,7 +21,7 @@ module ApplicationHelper
 
   def short_song_info(song)
     sentence  = "#{song.score} Votes, "
-    sentence += "#{song.comments.count} Comments"
+    sentence += "#{song.comments.length} Comments"
 
     if song.tags.any?
       sentence += ", Tags: "

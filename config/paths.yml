@@ -1,9 +1,9 @@
 development:
-  archive: /Users/mrnugget/rails/archive/spec/fixtures/archive
+  archive: /Users/mrnugget/code/projects/archive/spec/fixtures/archive
   download_url: file://localhost/Users/mrnugget/rails/archive/spec/fixtures/archive/
 
 test:
-  archive: /Users/mrnugget/rails/archive/spec/fixtures/archive
+  archive: /Users/mrnugget/code/projects/archive/spec/fixtures/archive
   download_url: file://Users/mrnugget/rails/archive/spec/fixtures/archive/
 
 production:

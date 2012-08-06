@@ -8,8 +8,7 @@
     <%= prettify_date(session.session_date) %>
     <% if current_user && current_user.admin? %>
       <span class="delete">
-        <%= link_to '<i class="icon-remove"></i>Delete this session'.html_safe,
-                    session, :method => :delete, :confirm => "Are you sure?" %>
+        <%= link_to '<i class="icon-remove"></i>Delete this session'.html_safe, session, method: :delete, data: {confirm: "Are you sure?"} %>
       </span>
     <% end %>
   </h4>

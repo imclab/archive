@@ -8,7 +8,7 @@ describe 'new comment notification' do
     @song   = session.songs.create!(file_name: "01.testing.mp3")
   end
 
-  it 'shows me comments that have been made since my last visit', js: true do
+  it 'shows me comments that have been made since my last visit' do
     # Making a visit, then logging out
     integration_sign_in("peter@gmx.de")
     click_on "Sign out"

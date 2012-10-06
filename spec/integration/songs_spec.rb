@@ -35,9 +35,9 @@ describe "Songs" do
       end
 
       it "should show the most tagged song on top when clicked on 'most tagged'" do
-        @old_song.add_tag("hello there")
-        @old_song.add_tag("and you")
-        @new_song.add_tag("one tag")
+        @old_song.tags.create!(name: 'hello there')
+        @old_song.tags.create!(name: 'and you')
+        @new_song.tags.create!(name: 'woohoo')
 
         visit '/songs/'
         click_link "Most Tagged"
@@ -97,7 +97,7 @@ describe "Songs" do
     end
 
     it "shows the associated tags" do
-      @song.add_tag('great')
+      @song.tags.create!(name: 'great')
 
       visit song_path(@song)
 

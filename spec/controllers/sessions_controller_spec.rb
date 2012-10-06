@@ -138,8 +138,8 @@ describe SessionsController do
       end
 
       it "should delete tags associated to songs" do
-        @song1.add_tag("great")
-        @song2.add_tag("super")
+        @song1.tags.create!(name: 'great')
+        @song2.tags.create!(name: 'super')
         lambda do
           delete :destroy, :id => @session
         end.should change(Tag, :count).by(-2)

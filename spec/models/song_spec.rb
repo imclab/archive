@@ -57,15 +57,6 @@ describe Song do
       @song.tags.find(@tag).should == @tag
     end
 
-    it "should have an add_tag method" do
-      @song.should respond_to(:add_tag)
-    end
-
-    it "should get tag via add_tag method" do
-      @song.add_tag("great!")
-      @song.should have_tag("great!")
-    end
-
     it "should show tags sorted by name" do
       tag1 = Tag.create!(:name => "zzz")
       tag2 = Tag.create!(:name => "awesome")
@@ -73,18 +64,13 @@ describe Song do
       @song.tags.should == [tag2, tag1] 
     end
 
-    it "should not have duplicates of a tag" do
-      @song.add_tag("great!")
-      @song.add_tag("great!")
-      @song.tags.where(name: "great!").count.should eql(1)
-    end
-
     it "should be possible for two files to have the same tag" do
-      @song.add_tag("great!")
-      @song2 = Song.create!(file_name: "02.testing.mp3")
-      @song2.add_tag("great!")
-      @song.should have_tag("great!")
-      @song2.should have_tag("great!")
+      @song.tags << Tag.find_or_create_by_name!('great!')
+      song2 = Song.create!(file_name: "02.testing.mp3")
+      song2.tags << Tag.find_or_create_by_name!('great!')
+
+      @song.tags.last.name.should == 'great!'
+      song2.tags.last.name.should == 'great!'
     end
 
     it "should delete SongTags association when deleted" do

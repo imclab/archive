@@ -26,9 +26,12 @@ describe "Admin Tasks" do
     end
 
     describe "showing addable sessions/songs" do
+      let(:session) do
+        Session.create!(:session_date => Date.strptime("2011.07.14","%Y.%m.%d"))
+      end
+
       before(:each) do
-        @se1 = Session.create!(:session_date => Date.strptime("2011.07.14","%Y.%m.%d"))
-        @se1.songs.create!(:file_name => "01.golden_fields.mp3")
+        session.songs.create!(:file_name => "01.golden_fields.mp3")
       end
 
       it "should not show a song that is already in DB" do
@@ -45,11 +48,11 @@ describe "Admin Tasks" do
       end
 
       it "should NOT show a session with all files already in DB" do
-        @se1.songs.create!(:file_name => "02.grapevine.mp3")
+        session.songs.create!(file_name: "02.grapevine.mp3")
 
         visit '/sessions/new'
 
-        page.should_not have_css('p', :text => '2011.07.14')
+        page.should_not have_css('p', text: '2011.07.14')
       end
     end
 
@@ -60,8 +63,6 @@ describe "Admin Tasks" do
         check 'zombies_in_hospital_beds.mp3'
         click_button 'Add selected files' 
 
-        page.should have_css('h3', :text => 'All Sessions')
-        current_path.should == sessions_path
         page.should have_content('zombies_in_hospital_beds.mp3')
       end
     end
@@ -70,7 +71,6 @@ describe "Admin Tasks" do
       visit '/sessions/new'
       page.should have_css('h3', :text => 'Add new sessions')
       
-      # Don't click a checkbox
       click_button 'Add selected files' 
       page.should have_css('div.notification', text: 'Please select some files!')
     end
@@ -92,7 +92,7 @@ describe "Admin Tasks" do
   describe "DELETE a song in show page" do
     before(:each) do
       @session = Session.create(session_date: Time.now)
-      @song = @session.songs.create(file_name: "01.testing.mp3")
+      @song    = @session.songs.create(file_name: "01.testing.mp3")
       visit song_path(@song)
     end
 

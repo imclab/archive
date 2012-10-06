@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe SongsController do
-
   describe "GET 'index'" do
     it "should be successful" do
       get :index
@@ -10,10 +9,9 @@ describe SongsController do
   end
 
   describe "GET 'show'" do
-
     before(:each) do
       @session = Session.create!(session_date: Time.now)
-      @song = @session.songs.create!(file_name: "01.breaking.bad.mp3") 
+      @song    = @session.songs.create!(file_name: "01.breaking.bad.mp3")
     end
 
     it "should be successful" do
@@ -34,9 +32,9 @@ describe SongsController do
 
   describe "DELETE 'destroy'" do
     before(:each) do
-      @user = create_user
-      @song = Song.create!(:file_name => "01.file.mp3")
-      @other_song = Song.create!(:file_name => "02.file.mp3")
+      @user       = create_user
+      @song       = Song.create!(file_name: '01.file.mp3')
+      @other_song = Song.create!(file_name: '02.file.mp3')
     end
 
     describe "as non-signed-in user" do

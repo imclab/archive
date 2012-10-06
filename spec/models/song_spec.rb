@@ -1,14 +1,11 @@
 require 'spec_helper'
 
 describe Song do
-
   it "should create a new instance given file_name" do
     Song.create!(file_name: "01.testing.mp3")
   end
 
-
   describe "file_name validations" do
-
     it "should take a mp3/flac/wav file" do
       files = %w[testing.mp3 01.testing.mp3 testing.wav 01.testing.wav 
                 testing.flac 01.testing.flac]
@@ -42,7 +39,6 @@ describe Song do
   end
 
   describe "tag associations" do
-    
     before(:each) do
       @song = Song.create!(:file_name => "01.testing.mp3")
       @tag  = Tag.create!(:name => "great!")

@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe Tag do
-
   describe "validation" do
     it "should create a new instance given file_name" do
       Tag.create!(name: "magnificient")
@@ -24,7 +23,6 @@ describe Tag do
   end
 
   describe "tagging songs" do
-
     before(:each) do
       @song = Song.create!(:file_name => "01.testing.mp3")
       @tag  = Tag.create!(:name => "great")

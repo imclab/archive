@@ -2,7 +2,6 @@ require 'spec_helper'
 
 
 describe "User" do
-
   describe "wants to sign up" do
     it "and should see the sign up page" do
       visit root_path
@@ -52,11 +51,13 @@ describe "User" do
           page.should have_content("Email is invalid")
         end
       end
+
       describe "with an email adress already in the database" do
         before(:each) do
           User.create!(name: "Henry The First", email: "henry@dude.org",
                        password: "password", password_confirmation: "password")
         end
+
         it "should redirect to signup page and show error messages" do
           visit '/users/new'
           within(".new_user") do
@@ -83,15 +84,13 @@ describe "User" do
             fill_in 'Password confirmation', :with => 'password'
           end
           click_button 'Sign up'
-          page.should have_css('div.success',
-            :text => "You successfully created an account!")
+          page.should have_css('div.success', :text => "You successfully created an account!")
         end.should change(User, :count).by(1)
       end
     end
   end
 
   describe "wants to log in" do
-
     it "should show a login form" do
       visit '/signin'
       page.should have_css('h3', :text => "Log in")
@@ -115,6 +114,7 @@ describe "User" do
         page.should have_css("div.error", :text => "Invalid email or password")
       end
     end
+
     describe "success" do
       before(:each) do
         @user = User.create!(:name => "John Doe",
@@ -122,6 +122,7 @@ describe "User" do
                      :password => "password",
                      :password_confirmation => "password")
       end
+
       it "should welcome user" do
         visit '/signin'
         within(".new_user_session") do

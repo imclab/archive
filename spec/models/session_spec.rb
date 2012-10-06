@@ -1,17 +1,6 @@
-# == Schema Information
-#
-# Table name: sessions
-#
-#  id           :integer         not null, primary key
-#  session_date :date
-#  created_at   :datetime
-#  updated_at   :datetime
-#
-
 require 'spec_helper'
 
 describe Session do
-
   it "should create a new instance given valid session_date" do
     Session.create!(session_date: Date.today)
   end

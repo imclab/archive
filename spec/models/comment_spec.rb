@@ -1,9 +1,7 @@
 require 'spec_helper'
 
 describe Comment do
-
   describe "validation" do
-
     it "should not be valid with blank text" do
       invalid_comment = Comment.new(text: "")
       invalid_comment.should_not be_valid
@@ -18,7 +16,6 @@ describe Comment do
   end
 
   describe "associations with song and user models" do
-
     it "should respond with the right models" do
       song = Song.create!(file_name: "01.testing.mp3")
       user = User.create!(

@@ -54,7 +54,6 @@ describe "Admin Tasks" do
     end
 
     describe "adding new sessions/songs via form" do
-
       it "should add selected sessions/songs" do
         visit '/sessions/new'
 
@@ -73,8 +72,7 @@ describe "Admin Tasks" do
       
       # Don't click a checkbox
       click_button 'Add selected files' 
-      page.should have_css('div.notification',
-                           text: 'Please select some files!')
+      page.should have_css('div.notification', text: 'Please select some files!')
     end
   end
   
@@ -87,8 +85,7 @@ describe "Admin Tasks" do
 
     it "should show a DELETE link next to the session name" do
       page.should have_css('span.delete')
-      page.should have_link('Delete this session', 
-                            href: "/sessions/#{@session.id}")
+      page.should have_link('Delete this session', href: "/sessions/#{@session.id}")
     end
   end
 
@@ -101,8 +98,7 @@ describe "Admin Tasks" do
 
     it "should show a DELETE link next to the songs name" do
       page.should have_css('span.delete')
-      page.should have_link('Delete this song',
-                            href: "/songs/#{@song.id}")
+      page.should have_link('Delete this song', href: "/songs/#{@song.id}")
     end
   end
 
@@ -115,8 +111,7 @@ describe "Admin Tasks" do
       it "should show a delete link" do
         visit '/users'
         page.should have_css("ul.user-list")
-        page.should have_link('Delete this user', 
-                              href: "/users/#{@testuser.id}")
+        page.should have_link('Delete this user', href: "/users/#{@testuser.id}")
       end
     end
   end

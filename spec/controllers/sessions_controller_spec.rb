@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe SessionsController do
-
   describe "GET 'new'" do
     before(:each) do
       @user = create_user
@@ -23,11 +22,10 @@ describe SessionsController do
     end
 
     describe "success with one session" do
-
       before(:each) do
         @attr = { "2011.08.09" => ["01.testing.mp3", "02.testing.mp3"] }
       end
-      
+
       it "should create a session" do
         lambda do
           post :create, :sessions => @attr
@@ -46,10 +44,11 @@ describe SessionsController do
     end
 
     describe "success with multiple sessions" do
-
       before(:each) do
-        @attr = { "2011.08.09" => ["01.testing.mp3", "02.testing.mp3"],
-                  "2011.09.09" => ["01.testing.mp3", "02.testing.mp3"] }
+        @attr = {
+          "2011.08.09" => ["01.testing.mp3", "02.testing.mp3"],
+          "2011.09.09" => ["01.testing.mp3", "02.testing.mp3"]
+        }
       end
 
       it "should create two sessions" do
@@ -78,7 +77,6 @@ describe SessionsController do
     end
 
     describe "for signed in (non-admin) users" do
-
       it "should deny access to 'new'" do
         get :new
         response.should redirect_to(sessions_path)

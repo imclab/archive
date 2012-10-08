@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
-  before_filter :authorize,       :only => [:new, :destroy]
-  before_filter :authorize_admin, :only => [:new, :create, :destroy]
+  before_filter :authorize,       only: [:new, :destroy]
+  before_filter :authorize_admin, only: [:new, :create, :destroy]
 
   def index
     valid_options = ["by_session_date"]
@@ -10,13 +10,13 @@ class SessionsController < ApplicationController
     else
       @sessions = Session.by_session_date.reverse
     end
+
     @title = "All sessions"
   end
 
   def new
-    @title = "Add session"
-    archive = SongsArchive::Directory.new(Pathname.new(PATHS['archive']))
-    @new_files = files_in_archive_not_in_db(archive)
+    @title     = "Add session"
+    @new_files = files_in_archive_not_in_db
   end
 
   def create
@@ -25,11 +25,9 @@ class SessionsController < ApplicationController
       redirect_to new_session_path
       return
     end
+
     params[:sessions].each do |new_session, new_songs|
-      session = Session.find_or_initialize_by_session_date(:session_date =>
-                                            folder_name_to_date(new_session))
-      new_songs.each { |song| session.songs.build(file_name: song) }
-      if session.save
+      if build_new_session(new_session, new_songs).save
         flash_message :success, "Session #{new_session} saved!"
       else
         flash_message :error, "Session #{new_session} could not be saved!"
@@ -46,25 +44,37 @@ class SessionsController < ApplicationController
 
   private
 
-    def files_in_archive_not_in_db(archive)
+    def archive
+      @archive ||= SongsArchive::Directory.new(Pathname.new(PATHS['archive']))
+    end
+
+    def build_new_session(session, songs)
+      session = Session.find_or_initialize_by_session_date(session_date: folder_name_to_date(session))
+      songs.each { |song| session.songs.build(file_name: song) }
+      session
+    end
+
+    def files_in_archive_not_in_db
       new_files = {}
 
       archive.sessions.each do |archive_session|
-        new_files[archive_session] = []
+        new_files[archive_session] = new_files_for_session(archive_session)
+      end
 
-        if session = Session.find_by_session_date(folder_name_to_date(archive_session))
-          archive.files_in_session(archive_session).each do |archive_file|
-            if Song.where(file_name: archive_file, session_id: session.id).empty?
-              new_files[archive_session].push(archive_file)
-            end
-          end
-        else
-          archive.files_in_session(archive_session).each do |archive_file|
-            new_files[archive_session].push(archive_file)
-          end
+      new_files.reject { |session, files| files.empty? }
+    end
+
+    def new_files_for_session(archive_session)
+      files   = []
+      session = Session.find_by_session_date(folder_name_to_date(archive_session))
+
+      archive.files_in_session(archive_session).each do |archive_file|
+        if !session || session.songs.where(file_name: archive_file).empty?
+          files.push(archive_file)
         end
       end
-      new_files.reject { |session, files| files.empty? }
+
+      files
     end
 
     def folder_name_to_date(folder_name)

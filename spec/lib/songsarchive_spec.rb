@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe SongsArchive::Directory do
-
   before(:each) do
     test_dir = Rails.root.join("spec/fixtures/archive")
     @archive = SongsArchive::Directory.new(test_dir)
@@ -12,7 +11,7 @@ describe SongsArchive::Directory do
   end
 
   it "should return a list of sessions, and only sessions" do
-    @archive.sessions.should_not include('Fuckstick', 'Superman', 'Sanchez')
+    @archive.sessions.should_not include('Brezel', 'Superman', 'Sanchez')
   end
 
   it "should return a list of files for a session" do
@@ -20,8 +19,6 @@ describe SongsArchive::Directory do
   end
 
   it "should only return audio files as session files" do
-    @archive.files_in_session('2011.07.21').should_not include('FICKBIATCH.txt',
-                                                              'lolzomat')
+    @archive.files_in_session('2011.07.21').should_not include('README.md', 'lolzomat')
   end
-
 end

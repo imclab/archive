@@ -1,9 +1,7 @@
 require 'spec_helper'
 
 describe "Sessions" do
-
   describe "GET 'index'" do
-
     describe "clicking on the 'Show' links" do
       before(:each) do
         old_session = Session.create!(session_date: Time.now - 2.days)
@@ -41,8 +39,7 @@ describe "Sessions" do
     end
     it "should redirect to sessions_path and give notice" do
       visit '/sessions/new'
-      page.should have_css('div.notification',
-                           :text => "Sorry, you are not allowed to do this")
+      page.should have_css('div.notification', text: "Sorry, you are not allowed to do this")
     end
   end
 end

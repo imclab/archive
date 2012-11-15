@@ -1,41 +1,37 @@
 require 'spec_helper'
 
 describe Session do
-  it "should create a new instance given valid session_date" do
-    Session.create!(session_date: Date.today)
+  it { should have(1).error_on(:session_date) }
+
+  it 'should not be valid with a wrong session_date' do
+    Session.new(session_date: 'foobar').should_not be_valid
   end
 
-  it "should require a session_date" do
-    Session.new(session_date: nil).should_not be_valid
+  describe '.by_session_date' do
+    it 'orders session by session_date' do
+      session_one = Session.create!(session_date: 2.days.ago)
+      session_two = Session.create!(session_date: Date.today)
+
+      Session.by_session_date.should == [session_one, session_two]
+    end
   end
 
-  it "should only be valid with a date as session_date" do
-    Session.new(:session_date => "String").should_not be_valid
-  end
-
-  it "should have a by_session_date method" do
-    Session.should respond_to(:by_session_date) 
-  end
-
-  describe "Song associations" do
+  describe 'song associations' do
     before(:each) do
-      @session = Session.create!(session_date: Date.today) 
+      @session = Session.create!(session_date: Date.today)
     end
 
-    it "should have a songs attribute" do
-      @session.should respond_to(:songs)
-    end
-
-    it "should validate :songs" do
+    it 'should validate :songs' do
       @session.songs.build(file_name: "dude.bmp")
       @session.should_not be_valid
     end
-    
-    it "should show songs in the right order" do
+
+    it 'should show songs in the right order' do
       song1 = @session.songs.create!(file_name: "03.testing.mp3")
       song2 = @session.songs.create!(file_name: "01.testing.mp3")
+
       @session.reload
-      
+
       @session.songs.should == [song2, song1]
     end
   end

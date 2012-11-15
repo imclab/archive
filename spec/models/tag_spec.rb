@@ -1,56 +1,33 @@
 require 'spec_helper'
 
 describe Tag do
-  describe "validation" do
-    it "should create a new instance given file_name" do
-      Tag.create!(name: "magnificient")
-    end
-
-    it "should not be valid with a blank name" do
+  describe 'validations' do
+    it 'should not be valid with a blank name' do
       Tag.new(name: "").should_not be_valid
     end
 
-    it "should not be valid with a name too long" do
-      long_tag_name = "a" * 21
-      Tag.new(name: long_tag_name).should_not be_valid
+    it 'should not be valid with a name too long' do
+      Tag.new(name: 'a' * 21).should_not be_valid
     end
 
-    it "should have an unique name" do
-      valid_tag   = Tag.create!(name: "great")
-      invalid_tag = Tag.new(name: "great")
+    it 'should have an unique name' do
+      valid_tag   = Tag.create!(name: 'great')
+      invalid_tag = Tag.new(name: 'great')
       invalid_tag.should_not be_valid
     end
   end
 
-  describe "tagging songs" do
-    before(:each) do
-      @song = Song.create!(:file_name => "01.testing.mp3")
-      @tag  = Tag.create!(:name => "great")
-    end
+  describe '.all_associated_with_songs' do
+    it 'should return all tags associated with songs when called' do
+      tag  = Tag.create!(name: 'great')
+      song = Song.create!(file_name: '01.testing.mp3')
+      song.tags << tag
 
-    it "should respond to a song_tags method" do
-      @tag.should respond_to(:song_tags)
-    end
+      tag_not_associated = Tag.create!(name: 'notassociated')
 
-    it "should rspond to a songs method" do
-      @tag.should respond_to(:songs)
-    end
-
-    it "should show the song being attached to" do
-      @song.song_tags.create(tag: @tag)
-      @tag.songs.find(@song).should == @song
-    end
-
-    it "should respond to a all_associated_with_songs method" do
-      Tag.should respond_to(:all_associated_with_songs)
-    end
-
-    it "should return all tags associated with songs when called" do
-      @song.song_tags.create(:tag_id => @tag)
-      tag_not_associated = Tag.create!(name: "notassociated")
-
-      Tag.all_associated_with_songs.should include(@tag)
-      Tag.all_associated_with_songs.should_not include(tag_not_associated)
+      associated = Tag.all_associated_with_songs
+      associated.should include(tag)
+      associated.should_not include(tag_not_associated)
     end
   end
 end

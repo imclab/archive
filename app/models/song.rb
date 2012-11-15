@@ -3,11 +3,11 @@ class Song < ActiveRecord::Base
 
   belongs_to :session
   has_many :song_tags
-  has_many :tags, through: :song_tags, :dependent => :destroy
+  has_many :tags, through: :song_tags, dependent: :destroy
 
-  has_many :comments, :dependent => :destroy
+  has_many :comments, dependent: :destroy
 
-  validates :file_name, presence: true, format: {
+  validates :file_name, format: {
     with: %r{\.(mp3|wav|flac)$}i,
     message: 'must be a mp3/wav/flac file.'
   }
@@ -31,7 +31,7 @@ class Song < ActiveRecord::Base
   end
 
   private
-    
+
     def destroy_ghost_tags
       self.tags.each do |tag|
         tag.songs.delete(self)

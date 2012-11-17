@@ -1,20 +1,23 @@
 require 'spec_helper'
 
-describe "Voting Songs" do
+describe 'voting for a song' do
+  let(:session) {
+    Session.create!(session_date: Time.now)
+  }
+
   before(:each) do
-    session = Session.create!(session_date: Time.now)
-    @song   = session.songs.create!(file_name: "01.testing.mp3")
+    @song = session.songs.create!(file_name: '01.testing.mp3')
   end
 
-  it "allows visitors to upvote a song" do
+  it 'allows visitors to upvote and downvote a song' do
     visit song_path(@song)
-    click_on "Upvote"
-    page.should have_css("span.score", text: "1")
-  end
 
-  it "allows visitors to downvote a song" do
-    visit song_path(@song)
-    click_on "Downvote"
-    page.should have_css("span.score", text: "-1")
+    click_on 'Upvote'
+
+    page.should have_css('span.score', text: '1')
+
+    click_on 'Downvote'
+
+    page.should have_css('span.score', text: '0')
   end
 end

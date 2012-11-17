@@ -1,25 +1,25 @@
 class TagsController < ApplicationController
-  before_filter :authorize,       :only => [:create, :destroy]
-  before_filter :authorize_admin, :only => :destroy
+  before_filter :authorize,       only: [:create, :destroy]
+  before_filter :authorize_admin, only: :destroy
 
   def index
-    @title = "All tags"
-    @tags = Tag.all_associated_with_songs
+    @title = 'All tags'
+    @tags  = Tag.all_associated_with_songs
   end
 
   def show
-    @tag = Tag.find(params[:id])
+    @tag   = Tag.find(params[:id])
     @songs = @tag.songs
   end
 
   def create
     @song = Song.find(params[:tag][:song_id])
-    @tag = Tag.find_or_create_by_name(params[:tag][:name])
+    @tag  = Tag.find_or_create_by_name(params[:tag][:name])
 
     respond_to do |format|
       if @tag.errors.any?
         format.html do 
-          flash_message :error, "Tag could not be added!"
+          flash_message :error, 'Tag could not be added!'
           redirect_to song_path(@song)
         end
       else
@@ -37,7 +37,8 @@ class TagsController < ApplicationController
     tag = Tag.find(params[:id])
     tag.song_tags.destroy_all
     tag.destroy
-    flash_message :notification, "You successfully deleted a tag"
+
+    flash_message :notification, 'You successfully deleted a tag'
     redirect_to sessions_path
   end
 end

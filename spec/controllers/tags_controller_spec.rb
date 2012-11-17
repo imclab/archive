@@ -1,149 +1,143 @@
 require 'spec_helper'
 
 describe TagsController do
+  let(:song) {
+    Song.create!(file_name: 'testing.mp3')
+  }
 
-  describe "GET 'index'" do
-    it "should be successful" do
+  let(:user) {
+    create_user
+  }
+
+  describe 'index' do
+    it 'should show all the associated tags' do
+      unassociated_tag = Tag.create!(name: 'unassociated')
+      associated_tag   = Tag.create!(name: 'associated')
+
+      song.tags << associated_tag
+
       get :index
-      response.should be_success
+      assigns[:tags].should == [associated_tag]
     end
   end
 
-  describe "GET 'show'" do
+  describe 'show' do
+    it 'should find the right tag' do
+      tag = stub(:tag, songs: [])
 
-    before(:each) do
-      @tag   = Tag.create!(name: "testing")
-      @song1 = Song.create!(file_name: "01.testing.mp3")
-      @song2 = Song.create!(file_name: "02.testing.mp3")
-      @tag.song_tags.create!(song_id: @song1.id)
-      @tag.song_tags.create!(song_id: @song2.id)
+      Tag.should_receive(:find).with('1').and_return(tag)
+
+      get :show, id: '1'
     end
 
-    it "should be successful" do
-      get :show, :id => @tag
-      response.should be_success
-    end
+    it 'should find the associated songs' do
+      tag = stub(:tag, songs: [])
+      Tag.stub(find: tag)
 
-    it "should find the right tag" do
-      get :show, :id => @tag
-      assigns(:tag).should == @tag
-    end
+      get :show, id: '1'
 
-    it "should find the right associated songs" do
-      get :show, :id => @tag
-      assigns(:songs).should == [@song1, @song2]
+      assigns(:songs).should == tag.songs
     end
   end
 
-  describe "POST 'create'" do
-
-    before(:each) do
-      @song = Song.create(file_name: "testing.mp3")
-      @user = create_user
-      controller_sign_in(@user)
-    end
-
-    describe "failure" do
+  describe 'create' do
+    context 'as a logged-in user' do
       before(:each) do
-        @attr = { :name => "", :song_id => @song.id }
+        controller_sign_in(user)
       end
 
-      it "should not create a tag" do
-        lambda do
-          post :create, :tag => @attr
-        end.should_not change(Tag, :count).by(1)
+      context 'with the invalid attributes' do
+        it "should not create a tag" do
+          lambda do
+            post :create, tag: { name: '', song_id: song.id }
+          end.should_not change(Tag, :count).by(1)
+        end
+
+        it 'should redirect to the songs page' do
+          post :create, tag: { name: '', song_id: song.id }
+
+          response.should redirect_to(song_path(song))
+        end
       end
 
-      it "should render the songs page" do
-        post :create, :tag => @attr
-        response.should redirect_to(song_path(@song.id))
+      context 'with valid attributes' do
+        before(:each) do
+          @attr = { :name => "greeeat!", :song_id => song.id }
+        end
+
+        it 'should create a tag' do
+          lambda do
+            post :create, tag: { name: 'great!', song_id: song.id }
+          end.should change(Tag, :count).by(1)
+        end
+
+        it 'should add association between tag and song' do
+          lambda do
+            post :create, tag: { name: 'great!', song_id: song.id }
+          end.should change(SongTag, :count).by(1)
+        end
+
+        it "should redirect to songs page" do
+          post :create, tag: { name: 'great!', song_id: song.id }
+
+          response.should redirect_to(song_path(song))
+        end
       end
     end
 
-    describe "success" do
+    context 'as logged-out user' do
+      it 'should redirect to the signin-path' do
+        post :create, tag: {name: 'great', song_id: song.id}
 
-      before(:each) do
-        @attr = { :name => "greeeat!", :song_id => @song.id }
-      end
-
-      it "should create a tag" do
-        lambda do 
-          post :create, :tag => @attr
-        end.should change(Tag, :count).by(1)
-      end
-
-      it "should add association" do
-        lambda do 
-          post :create, :tag => @attr
-        end.should change(SongTag, :count).by(1)
-      end
-
-      it "should redirect to songs page" do
-        post :create, :tag => @attr
-        response.should redirect_to(song_path(@song.id))
-      end
-    end
-  end
-
-  describe "authentication of 'create action'" do
-    before(:each) do
-      @song = Song.create(file_name: "testing.mp3")
-      @attr = { :name => "greeeat!", :song_id => @song.id }
-      @user = create_user
-    end
-
-    describe "for non-signed in users" do
-      it "should deny access to 'new'" do
-        post :create, :tag => @attr
         response.should redirect_to(signin_path)
       end
     end
   end
-  describe "DELETE 'destroy'" do
+
+  describe 'destroy' do
     before(:each) do
-      @user = create_user
-      @song = Song.create!(file_name: "testing.mp3")
-      @tag = @song.tags.create!(:name => "great")
+      @tag = song.tags.create!(name: 'great')
     end
 
-    describe "as non-signed-in user" do
-      it "should deny access" do
-        delete :destroy, :id => @tag
+    context 'as logged-out user' do
+      it 'should redirect to the signin-path' do
+        delete :destroy, id: @tag.id
+
         response.should redirect_to(signin_path)
       end
     end
 
-    describe "as non-admin user" do
-      before(:each) do
-        controller_sign_in(@user)
-      end
+    context 'as logged-in user without admin rights' do
+      it 'should redirect to the sessions index' do
+        controller_sign_in(create_user)
 
-      it "should protect page and redirect" do
-        delete :destroy, :id => @tag
+        delete :destroy, id: @tag.id
+
         response.should redirect_to(sessions_path)
       end
     end
 
-    describe "as admin user" do
+    context 'as user with admin rights' do
       before(:each) do
-        @user.toggle!(:admin)
-        controller_sign_in(@user)
+        user.toggle!(:admin)
+        controller_sign_in(user)
       end
 
-      it "should delete the tag" do
+      it 'should delete the tag' do
         lambda do
-          delete :destroy, :id => @tag
+          delete :destroy, id: @tag.id
         end.should change(Tag, :count).by(-1)
       end
 
-      it "should delete associated SongTags" do
+      it 'should delete associated SongTags' do
         lambda do
-          delete :destroy, :id => @tag
+          delete :destroy, id: @tag.id
         end.should change(SongTag, :count).by(-1)
       end
 
-      it "should redirect" do
-        delete :destroy, :id => @tag
+      it 'should redirect to the sessions index' do
+        delete :destroy, id: @tag.id
+
         response.should redirect_to(sessions_path)
       end
     end

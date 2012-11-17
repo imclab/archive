@@ -1,9 +1,9 @@
-require 'spec_helper'
+require File.expand_path('../../../app/lib/songs_archive', __FILE__)
 
 describe SongsArchive::Directory do
   before(:each) do
-    test_dir = Rails.root.join("spec/fixtures/archive")
-    @archive = SongsArchive::Directory.new(test_dir)
+    new_dir  = File.expand_path('../../fixtures/archive', __FILE__)
+    @archive = SongsArchive::Directory.new(new_dir)
   end
 
   it "should return a list of sessions" do

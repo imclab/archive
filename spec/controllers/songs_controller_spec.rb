@@ -1,71 +1,84 @@
 require 'spec_helper'
 
 describe SongsController do
-  describe "GET 'index'" do
-    it "should be successful" do
+  describe 'index' do
+    it 'should be successful' do
       get :index
       response.should be_success
     end
-  end
 
-  describe "GET 'show'" do
-    before(:each) do
-      @session = Session.create!(session_date: Time.now)
-      @song    = @session.songs.create!(file_name: "01.breaking.bad.mp3")
+    it 'orders the songs based on the passed sort parameter' do
+      Song.should_receive(:by_count_of_tags)
+
+      get :index, sort: 'by_count_of_tags'
     end
 
-    it "should be successful" do
-      get :show, :id => @song
-      response.should be_success
-    end
-    
-    it "should find the right song" do
-      get :show, :id => @song
-      assigns(:song).should == @song
-    end
+    it 'reversed the order when the reverse param is passed in' do
+      songs = stub(:song)
+      Song.stub(by_count_of_tags: songs)
 
-    it "saves the current path in session variable" do
-      get :show, :id => @song
-      session[:return_to].should == song_path(@song)
+      songs.should_receive(:reverse!)
+
+      get :index, sort: 'by_count_of_tags', reverse: true
     end
   end
 
-  describe "DELETE 'destroy'" do
-    before(:each) do
-      @user       = create_user
-      @song       = Song.create!(file_name: '01.file.mp3')
-      @other_song = Song.create!(file_name: '02.file.mp3')
+  describe 'show' do
+    it 'find the right song' do
+      song = stub(:song, file_name: '01.breaking.bad.mp3')
+
+      Song.should_receive(:find).with('1').and_return(song)
+
+      get :show, id: '1'
     end
 
-    describe "as non-signed-in user" do
-      it "should deny access" do
-        delete :destroy, :id => @song
+    it 'saves the current path in session variable' do
+      song = stub(:song, file_name: '01.breaking.bad.mp3')
+      Song.stub(find: song)
+
+      get :show, id: '1'
+
+      session[:return_to].should == song_path('1')
+    end
+  end
+
+  describe 'destroy' do
+    context 'as non-signed-in user' do
+      it 'redirect to signin-path' do
+        delete :destroy, id: '1'
+
         response.should redirect_to(signin_path)
       end
     end
 
-    describe "as non-admin user" do
-      it "should protect page and redirect" do
-        controller_sign_in(@user)
-        delete :destroy, :id => @song
+    context 'as non-admin user' do
+      it 'should redirect to sessions index' do
+        controller_sign_in(create_user)
+
+        delete :destroy, id: '1'
+
         response.should redirect_to(sessions_path)
       end
     end
 
-    describe "as admin user" do
+    context 'as user with admin rights' do
       before(:each) do
-        @user.toggle!(:admin)
-        controller_sign_in(@user)
+        @song = Song.create!(file_name: '01.file.mp3')
+
+        user  = create_user
+        user.toggle!(:admin)
+        controller_sign_in(user)
       end
 
-      it "should delete the song" do
+      it 'should delete the song' do
         lambda do
-          delete :destroy, :id => @song
+          delete :destroy, id: @song.id
         end.should change(Song, :count).by(-1)
       end
 
-      it "should redirect" do
-        delete :destroy, :id => @song
+      it 'should redirect to sessions index after deleting the song' do
+        delete :destroy, id: @song.id
+
         response.should redirect_to(sessions_path)
       end
     end

@@ -11,10 +11,9 @@ describe ApplicationController do
     end
   end
 
-  context "with user" do
+  context 'as signed-in user' do
     before(:each) do
-      user = create_user
-      controller_sign_in(user)
+      controller_sign_in(create_user)
     end
 
     it 'saves the users last activity' do
@@ -33,7 +32,7 @@ describe ApplicationController do
     end
   end
 
-  context "without current_user" do
+  context 'as signed-out user' do
     it 'does not save the visitors last activity' do
       get :index
 

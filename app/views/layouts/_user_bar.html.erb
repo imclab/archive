@@ -1,5 +1,5 @@
 <p>
-<% if signed_in? %>
+<% if current_user %>
   <% if current_user.admin %>
     <span class="admin_tasks">
       <%= link_to "Add new sessions", new_session_path %> |

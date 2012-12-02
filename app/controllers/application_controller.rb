@@ -1,7 +1,5 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  helper_method :current_user, :signed_in?, :comments_since_last_activity
-
   after_filter :save_last_activity
 
   def flash_message(type, text)
@@ -17,6 +15,7 @@ class ApplicationController < ActionController::Base
     session[:user_id] = nil
   end
 
+  helper_method :current_user
   def current_user
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
   end
@@ -25,15 +24,12 @@ class ApplicationController < ActionController::Base
     user == current_user
   end
 
-  def signed_in?
-    current_user != nil
-  end
-
   def deny_access
     flash_message :notification, "Please sign in"
     redirect_to signin_path
   end
 
+  helper_method :comments_since_last_activity
   def comments_since_last_activity
     if cookies[:last_activity]
       @comments_since_last_activity ||= Comment.where('created_at > ?', cookies[:last_activity])

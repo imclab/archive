@@ -2,12 +2,10 @@
   <% song.comments.each do |c| %>
     <div class="comment purplebox">
       <span class="author"><i class="icon-user"></i><%= c.user.name %> wrote:</span>
-      <% if signed_in? %>
-        <% if current_user == c.user || current_user.admin %>
-          <span class="delete">
-            <%= link_to '<i class="icon-remove"></i>Delete this comment'.html_safe, c, method: :delete, data: {confirm: 'Are you sure?'} %>
-          </span>
-        <% end %>
+      <% if current_user && (current_user == c.user || current_user.admin) %>
+        <span class="delete">
+          <%= link_to '<i class="icon-remove"></i>Delete this comment'.html_safe, c, method: :delete, data: {confirm: 'Are you sure?'} %>
+        </span>
       <% end %>
       <p class="text"><%= c.text %></p>
       <span class="date">Posted <%= time_ago_in_words c.created_at %> ago</span>

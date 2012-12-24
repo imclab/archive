@@ -23,6 +23,12 @@ class Admin::SessionsController < Admin::BaseController
     end
     redirect_to admin_sessions_path
   end
+
+  def destroy
+    Session.find(params[:id]).destroy
+    flash_message :notification, "You successfully deleted a session"
+    redirect_to sessions_path
+  end
   
   private
 

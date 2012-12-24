@@ -6,7 +6,7 @@ Archive::Application.routes.draw do
 
   match 'sessions/oldest'   => 'sessions#index', sort: 'by_session_date'
   match 'sessions/newest'   => 'sessions#index', sort: 'by_session_date', reverse: true
-  resources :sessions, except: [:new, :create, :update, :edit]
+  resources :sessions, only: :index
 
   match 'songs/highest_score' => 'songs#index', sort: 'by_score'
   match 'songs/most_tagged'   => 'songs#index', sort: 'by_count_of_tags'

@@ -2,7 +2,12 @@
 <% unless @sessions.empty? %>
   <% @sessions.each do |session| %>
     <div class="session">
-      <h4><%= prettify_date(session.session_date) %></h4>
+      <h4>
+        <%= prettify_date(session.session_date) %>
+        <span class="delete">
+          <%= link_to 'Delete this session', admin_session_path(session), method: :delete, data: {confirm: 'Are you sure?'} %>
+        </span>
+      </h4>
       <%= render partial: 'shared/song_list', locals: { songs: session.songs } %>
     </div>
   <% end %>

@@ -68,4 +68,31 @@ describe Admin::SessionsController do
       end.should change(Session, :count).by(2)
     end
   end
+
+  describe 'destroy' do
+    before(:each) do
+      @session = Session.create!(session_date: Date.strptime('2011.07.14','%Y.%m.%d'))
+      @song = @session.songs.create!(file_name: '01.golden_fields.mp3')
+    end
+
+    it 'allows me to delete a session' do
+      lambda do
+        delete :destroy, id: @session.id
+      end.should change(Session, :count).by(-1)
+    end
+
+    it 'should delete associated songs' do
+      lambda do
+        delete :destroy, id: @session.id
+      end.should change(Song, :count).by(-1)
+    end
+
+    it 'should delete tags associated to songs' do
+      @song.tags.create!(name: 'great')
+
+      lambda do
+        delete :destroy, id: @session.id
+      end.should change(Tag, :count).by(-1)
+    end
+  end
 end

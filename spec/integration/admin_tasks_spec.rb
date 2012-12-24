@@ -14,19 +14,6 @@ describe "Admin Tasks" do
     end
   end
 
-  describe "DELETE a session in sessions index" do
-    before(:each) do
-      @session = Session.create!(session_date: Time.now)
-      @session.songs.create!(file_name: "01.testing.mp3")
-      visit '/sessions'
-    end
-
-    it "should show a DELETE link next to the session name" do
-      page.should have_css('span.delete')
-      page.should have_link('Delete this session', href: "/sessions/#{@session.id}")
-    end
-  end
-
   describe "DELETE a song in show page" do
     before(:each) do
       @session = Session.create(session_date: Time.now)

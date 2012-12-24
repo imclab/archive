@@ -38,6 +38,7 @@ describe 'Managing sessions' do
       let(:session) do
         Session.create!(session_date: Date.strptime("2011.07.14","%Y.%m.%d"))
       end
+
       before(:each) do
         session.songs.create!(file_name: '01.golden_fields.mp3')
 
@@ -64,6 +65,25 @@ describe 'Managing sessions' do
 
         page.should_not have_content('2011.07.14')
       end
+    end
+  end
+
+  describe 'deleting a session' do
+    let(:session) do
+      Session.create!(session_date: Date.strptime('2011.07.14','%Y.%m.%d'))
+    end
+
+    before(:each) do
+      session.songs.create!(file_name: '01.golden_fields.mp3')
+    end
+
+    it 'allows me to delete a session' do
+      click_link 'Sessions'
+
+      page.should have_content('Delete this session')
+      click_link 'Delete this session'
+
+      page.should_not have_content('01.golden_fields.mp3')
     end
   end
 end

@@ -1,11 +1,6 @@
 class UsersController < ApplicationController
-  before_filter :authorize,       only: [:edit, :update, :index, :destroy]
-  before_filter :correct_user,    only: [:edit, :update]
-  before_filter :authorize_admin, only: [:destroy, :index]
-
-  def index
-    @users = User.all
-  end
+  before_filter :authorize,    only: [:edit, :update, :index]
+  before_filter :correct_user, only: [:edit, :update]
 
   def new
     @user = User.new
@@ -34,12 +29,6 @@ class UsersController < ApplicationController
     else
       render 'edit'
     end
-  end
-
-  def destroy
-    User.find(params[:id]).destroy
-    flash_message :notification, 'User successfully deleted.'
-    redirect_to sessions_path
   end
 
   private

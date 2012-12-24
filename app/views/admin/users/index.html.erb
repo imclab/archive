@@ -1,0 +1,12 @@
+<ul class="user-list">
+  <% @users.each do |user| %>
+    <% unless current_user == user %>
+      <li>
+        <%= "#{user.name} (#{user.email})" %> 
+        <span class="delete">
+          <%= link_to 'Delete this user', admin_user_path(user), method: :delete, data: {confirm: 'Are you sure?'} %>
+        </span>
+      </li>
+    <% end %>
+  <% end %>
+</ul>

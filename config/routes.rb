@@ -2,6 +2,7 @@ Archive::Application.routes.draw do
   namespace :admin do
     resource :dashboard, only: :show
     resources :sessions, except: [:update, :edit]
+    resources :users, only: [:index, :destroy]
   end
 
   match 'sessions/oldest'   => 'sessions#index', sort: 'by_session_date'
@@ -17,7 +18,7 @@ Archive::Application.routes.draw do
   end
 
   resources :tags, except: [:new, :update, :edit]
-  resources :users, except: :show
+  resources :users, except: [:index, :destroy, :show]
   match '/signup' => 'users#new'
 
   resources :user_sessions, only: [:new, :create, :destroy]

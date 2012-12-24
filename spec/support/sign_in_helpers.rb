@@ -12,3 +12,8 @@ def integration_sign_in(email = "johnny@foobar.com", password = "password")
   end
   click_button 'Log in'
 end
+
+def admin_integration_sign_in(email = 'johnny@foobar.com', password = 'password')
+  integration_sign_in(email, password)
+  click_link 'Admin Dashboard'
+end

@@ -8,74 +8,12 @@ describe "Admin Tasks" do
   end
 
   describe "Admin links in user bar" do
-    it "should show a link to add sessions" do
-      visit root_path
-      page.should have_css('span.admin_tasks')
-      page.should have_link('Add new sessions',  :href => new_session_path)
-    end
     it "should show a link to list users" do
       visit root_path
       page.should have_link('List users', :href => users_path)
     end
   end
 
-  describe "Adding new sessions" do
-    it "should show files in fixtures/archive" do
-      visit '/sessions/new'
-      page.should have_content('01.down.south.mp3')
-    end
-
-    describe "showing addable sessions/songs" do
-      let(:session) do
-        Session.create!(:session_date => Date.strptime("2011.07.14","%Y.%m.%d"))
-      end
-
-      before(:each) do
-        session.songs.create!(:file_name => "01.golden_fields.mp3")
-      end
-
-      it "should not show a song that is already in DB" do
-        visit '/sessions/new'
-
-        page.should_not have_content('01.golden_fields.mp3')
-      end
-
-      it "should show a session with some files not yet in DB" do
-        visit '/sessions/new'
-
-        page.should have_content('2011.07.14')
-        page.should have_content('02.grapevine.mp3')
-      end
-
-      it "should NOT show a session with all files already in DB" do
-        session.songs.create!(file_name: "02.grapevine.mp3")
-
-        visit '/sessions/new'
-
-        page.should_not have_css('p', text: '2011.07.14')
-      end
-    end
-
-    describe "adding new sessions/songs via form" do
-      it "should add selected sessions/songs" do
-        visit '/sessions/new'
-
-        check 'zombies_in_hospital_beds.mp3'
-        click_button 'Add selected files' 
-
-        page.should have_content('zombies_in_hospital_beds.mp3')
-      end
-    end
-
-    it "should print message when no song is selected" do
-      visit '/sessions/new'
-      page.should have_css('h3', :text => 'Add new sessions')
-      
-      click_button 'Add selected files' 
-      page.should have_css('div.notification', text: 'Please select some files!')
-    end
-  end
-  
   describe "DELETE a session in sessions index" do
     before(:each) do
       @session = Session.create!(session_date: Time.now)

@@ -1,11 +1,12 @@
 Archive::Application.routes.draw do
   namespace :admin do
     resource :dashboard, only: :show
+    resources :sessions, except: [:update, :edit]
   end
 
   match 'sessions/oldest'   => 'sessions#index', sort: 'by_session_date'
   match 'sessions/newest'   => 'sessions#index', sort: 'by_session_date', reverse: true
-  resources :sessions, except: [:update, :edit]
+  resources :sessions, except: [:new, :create, :update, :edit]
 
   match 'songs/highest_score' => 'songs#index', sort: 'by_score'
   match 'songs/most_tagged'   => 'songs#index', sort: 'by_count_of_tags'

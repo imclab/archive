@@ -9,15 +9,14 @@
 </head>
 
 <body>
+  <nav id="admin-navigation">
+    <%= link_to 'Sessions', admin_sessions_path %>
+  </nav>
   <div id="container">
     <div id="main" role="main">
       <% render_flash_messages %>
       <%= yield %>
     </div>
-
-    <footer>
-    <%= render 'layouts/footer' %>
-    </footer>
   </div>
 </body>
 </html>

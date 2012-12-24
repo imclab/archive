@@ -1,9 +1,8 @@
 <h3>Add new sessions</h3>
 <% if @new_files.any? %>
   <p>Please select the files on the harddrive you want to add to the Archive.</p>
-  <%= form_tag sessions_path, :method => :post,
-                              :class  => "purplebox sessions-new" do %>
-    <%= render :partial => 'sessions/new_sessions_fields' %>
+  <%= form_tag admin_sessions_path, method: :post, class: 'purplebox sessions-new' do %>
+    <%= render 'new_sessions_fields' %>
   <% end %>
 <% else %>
   <p>There currently are no new files on the harddrive.</p>

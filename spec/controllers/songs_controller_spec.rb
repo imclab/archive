@@ -41,46 +41,4 @@ describe SongsController do
       session[:return_to].should == song_path('1')
     end
   end
-
-  describe 'destroy' do
-    context 'as non-signed-in user' do
-      it 'redirect to signin-path' do
-        delete :destroy, id: '1'
-
-        response.should redirect_to(signin_path)
-      end
-    end
-
-    context 'as non-admin user' do
-      it 'should redirect to sessions index' do
-        controller_sign_in(create_user)
-
-        delete :destroy, id: '1'
-
-        response.should redirect_to(sessions_path)
-      end
-    end
-
-    context 'as user with admin rights' do
-      before(:each) do
-        @song = Song.create!(file_name: '01.file.mp3')
-
-        user  = create_user
-        user.toggle!(:admin)
-        controller_sign_in(user)
-      end
-
-      it 'should delete the song' do
-        lambda do
-          delete :destroy, id: @song.id
-        end.should change(Song, :count).by(-1)
-      end
-
-      it 'should redirect to sessions index after deleting the song' do
-        delete :destroy, id: @song.id
-
-        response.should redirect_to(sessions_path)
-      end
-    end
-  end
 end

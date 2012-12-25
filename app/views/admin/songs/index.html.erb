@@ -1,0 +1,11 @@
+<ul class="song-list">
+<% @songs.each do |song| %>
+  <li>
+    <%= prettify_date(song.session.session_date) %> -
+    <%= song.file_name %>
+    <span class="delete">
+      <%= link_to 'Delete this song', admin_song_path(song), method: :delete, data: {confirm: 'Are you sure?'} %>
+    </span>
+  </li>
+<% end %>
+</ul>

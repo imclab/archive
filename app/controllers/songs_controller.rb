@@ -1,6 +1,4 @@
 class SongsController < ApplicationController
-  before_filter :authorize,             only: :destroy
-  before_filter :authorize_admin,       only: :destroy
   before_filter :remember_current_path, only: :show
 
   def index
@@ -13,7 +11,7 @@ class SongsController < ApplicationController
       @songs = Song.includes(:tags, :comments)
     end
 
-    @title = "All songs"
+    @title = 'All songs'
   end
 
   def show
@@ -21,12 +19,6 @@ class SongsController < ApplicationController
     @tag     = Tag.new
     @comment = Comment.new
     @title   = @song.file_name
-  end
-
-  def destroy
-    Song.find(params[:id]).destroy
-    flash_message :notification, 'You successfully deleted a song'
-    redirect_to sessions_path
   end
 
   protected

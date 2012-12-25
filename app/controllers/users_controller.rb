@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_filter :authorize,    only: [:edit, :update, :index]
+  before_filter :authorize,    only: [:edit, :update]
   before_filter :correct_user, only: [:edit, :update]
 
   def new

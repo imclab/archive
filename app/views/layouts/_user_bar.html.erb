@@ -2,8 +2,7 @@
 <% if current_user %>
   <% if current_user.admin %>
     <span class="admin_tasks">
-      <%= link_to 'Admin Dashboard', admin_dashboard_path %> |
-      <%= link_to "List users", users_path %>
+      <%= link_to 'Admin Dashboard', admin_dashboard_path %>
     </span>
   <% end %>
   <span id="user-controls">

@@ -4,7 +4,7 @@ gem 'bcrypt-ruby'
 gem 'capistrano'
 gem 'font-awesome-rails', git: 'git://github.com/mrnugget/font-awesome-rails.git'
 gem 'jquery-rails'
-gem 'rails', '3.2.9'
+gem 'rails', '3.2.10'
 gem 'sqlite3'
 
 group :production do

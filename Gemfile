@@ -2,7 +2,7 @@ source 'http://rubygems.org'
 
 gem 'bcrypt-ruby'
 gem 'capistrano'
-gem 'font-awesome-rails', git: 'git://github.com/mrnugget/font-awesome-rails.git'
+gem 'font-awesome-rails'
 gem 'jquery-rails'
 gem 'rails', '3.2.13'
 

@@ -1,8 +1,7 @@
 class SessionsController < ApplicationController
+  SORT_OPTIONS = ['by_session_date']
   def index
-    valid_options = ['by_session_date']
-
-    if valid_options.include? params[:sort]
+    if SORT_OPTIONS.include? params[:sort]
       @sessions = Session.send(params[:sort])
       @sessions.reverse! if params[:reverse]
     else

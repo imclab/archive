@@ -1,10 +1,6 @@
 require 'spec_helper'
 
 describe 'Managing songs' do
-  let(:admin) do
-    create_user
-  end
-
   let(:session) do
     session = Session.create!(session_date: Time.now)
   end
@@ -14,12 +10,12 @@ describe 'Managing songs' do
   end
 
   before(:each) do
-    admin.toggle!(:admin)
+    @admin = create_user.tap {|user| user.toggle!(:admin) }
     admin_integration_sign_in
   end
 
   it 'allows me to see a songs tags and comments' do
-    song.comments.create!(user: admin, text: 'This is a comment')
+    song.comments.create!(user: @admin, text: 'This is a comment')
     song.tags.create!(name: 'amazing')
 
     click_link 'Songs'

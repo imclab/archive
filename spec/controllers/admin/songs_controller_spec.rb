@@ -5,14 +5,19 @@ describe Admin::SongsController do
     admin = create_user
     admin.toggle!(:admin)
     controller_sign_in(admin)
+    session = Session.create!(session_date: Time.now)
+    @song = session.songs.create!(file_name: '01.testing.mp3')
+  end
+
+  describe 'show' do
+    it 'loads the song' do
+      Song.should_receive(:find).with(@song.id.to_s)
+
+      get :show, id: @song.id
+    end
   end
 
   describe 'destroy' do
-    before(:each) do
-      session = Session.create!(session_date: Time.now)
-      @song = session.songs.create!(file_name: '01.testing.mp3')
-    end
-
     it 'deletes a song' do
       lambda do
         delete :destroy, id: @song.id

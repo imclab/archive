@@ -3,6 +3,10 @@ class Admin::SongsController < Admin::BaseController
     @songs = Song.includes(:session)
   end
 
+  def show
+    @song = Song.find(params[:id])
+  end
+
   def destroy
     Song.find(params[:id]).destroy
     flash_message :notification, 'Song successfully deleted.'

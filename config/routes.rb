@@ -3,7 +3,7 @@ Archive::Application.routes.draw do
     resource :dashboard, only: :show
     resources :sessions, except: [:update, :edit]
     resources :users, only: [:index, :destroy]
-    resources :songs, only: [:index, :destroy]
+    resources :songs, only: [:index, :show, :destroy]
   end
 
   match 'sessions/oldest'   => 'sessions#index', sort: 'by_session_date'

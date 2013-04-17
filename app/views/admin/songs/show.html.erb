@@ -1,0 +1,15 @@
+<%= @song.file_name %>
+
+<h3>Tags</h3>
+<ul>
+  <% @song.tags.each do |tag| %>
+    <li><%= tag.name %></li>
+  <% end %>
+</ul>
+
+<h3>Comments</h3>
+<ul>
+  <% @song.comments.each do |comment| %>
+    <li><%= comment.user.email %> wrote: <%= comment.text %></li>
+  <% end %>
+</ul>

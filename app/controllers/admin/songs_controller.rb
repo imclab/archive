@@ -4,7 +4,7 @@ class Admin::SongsController < Admin::BaseController
   end
 
   def show
-    @song = Song.find(params[:id])
+    @song = Song.includes(song_tags: :tag, comments: :user).find(params[:id])
   end
 
   def destroy

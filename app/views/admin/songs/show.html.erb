@@ -1,15 +1,26 @@
-<%= @song.file_name %>
+<h2><%= @song.file_name %></h2>
 
 <h3>Tags</h3>
+<% if @song.song_tags.any? %>
 <ul>
-  <% @song.tags.each do |tag| %>
-    <li><%= tag.name %></li>
+  <% @song.song_tags.each do |songtag| %>
+    <li>
+      <%= songtag.tag.name %>
+      <%= link_to '(Remove this tag)', admin_song_tag_path(songtag), method: :delete %>
+    </li>
   <% end %>
 </ul>
+<% else %>
+  This song has no comments.
+<% end %>
 
 <h3>Comments</h3>
-<ul>
-  <% @song.comments.each do |comment| %>
-    <li><%= comment.user.email %> wrote: <%= comment.text %></li>
-  <% end %>
-</ul>
+<% if @song.comments.any? %>
+  <ul>
+    <% @song.comments.each do |comment| %>
+      <li><%= comment.user.email %> wrote: <%= comment.text %></li>
+    <% end %>
+  </ul>
+<% else %>
+  This song has no comments.
+<% end %>

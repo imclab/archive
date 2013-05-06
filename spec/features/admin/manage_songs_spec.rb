@@ -25,6 +25,17 @@ describe 'Managing songs' do
     page.should have_content('amazing')
   end
 
+  it 'allows me to remove a comment from a song' do
+    song.tags.create!(name: 'amazing')
+
+    click_link 'Songs'
+    click_link '01.testing.mp3'
+
+    click_link 'Remove this tag'
+
+    page.should have_content('Tag removed from song and deleted.')
+  end
+
   it 'allows me to delete a song' do
     session = Session.create!(session_date: Time.now)
     session.songs.create!(file_name: '01.testing.mp3')

@@ -314,6 +314,15 @@ div #main {
 }
 
 /* Headers */
+h2 {
+  font-family: 'Oswald', sans-serif;
+  font-size: 2em;
+  font-weight: normal;
+  color: hsla(45, 100%, 61%, 1);
+  text-decoration: none;
+  margin: 0px 5px 20px 5px;
+}
+
 h3 {
   font-family: 'Oswald', sans-serif;
   font-size: 1.6em;

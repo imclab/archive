@@ -24,6 +24,9 @@ class TagsController < ApplicationController
         end
       else
         @song.tags << @tag
+
+        expire_fragment('all_sessions_with_songs')
+
         format.html do
           flash_message :success, "Tag \"#{@tag.name}\" saved!"
           redirect_to song_path(@song)
@@ -37,6 +40,8 @@ class TagsController < ApplicationController
     tag = Tag.find(params[:id])
     tag.song_tags.destroy_all
     tag.destroy
+
+    expire_fragment('all_sessions_with_songs')
 
     flash_message :notification, 'You successfully deleted a tag'
     redirect_to sessions_path

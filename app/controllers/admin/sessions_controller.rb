@@ -17,6 +17,7 @@ class Admin::SessionsController < Admin::BaseController
     params[:sessions].each do |new_session, new_songs|
       if build_new_session(new_session, new_songs).save
         flash_message :success, "Session #{new_session} saved!"
+        expire_fragment('all_sessions_with_songs')
       else
         flash_message :error, "Session #{new_session} could not be saved!"
       end
@@ -26,6 +27,9 @@ class Admin::SessionsController < Admin::BaseController
 
   def destroy
     Session.find(params[:id]).destroy
+
+    expire_fragment('all_sessions_with_songs')
+
     flash_message :notification, "You successfully deleted a session"
     redirect_to sessions_path
   end

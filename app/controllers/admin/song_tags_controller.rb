@@ -3,6 +3,8 @@ class Admin::SongTagsController < Admin::BaseController
     song_tag = SongTag.find(params[:id])
     song_tag.destroy
 
+    expire_fragment('all_sessions_with_songs')
+
     tag = Tag.find(song_tag.tag_id)
     if tag.songs.empty?
       tag.destroy

@@ -6,6 +6,8 @@ class CommentsController < ApplicationController
     comment = Comment.new(params[:comment])
 
     if comment.save
+      expire_fragment('all_sessions_with_songs')
+
       flash_message :success, "You successfully added a comment!"
       redirect_to song_path(params[:comment][:song_id])
     else
@@ -16,6 +18,9 @@ class CommentsController < ApplicationController
 
   def destroy
     @comment.destroy
+
+    expire_fragment('all_sessions_with_songs')
+
     flash_message :notification, 'You successfully deleted a comment!'
     redirect_to song_path(@comment.song)
   end

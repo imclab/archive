@@ -4,6 +4,7 @@ Archive::Application.routes.draw do
     resources :sessions, except: [:update, :edit]
     resources :users, only: [:index, :destroy]
     resources :songs, only: [:index, :show, :destroy]
+    resources :song_tags, only: :destroy
   end
 
   match 'sessions/oldest'   => 'sessions#index', sort: 'by_session_date'

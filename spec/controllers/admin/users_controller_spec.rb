@@ -8,13 +8,17 @@ describe Admin::UsersController do
   end
 
   describe 'destroy' do
+    let(:user) do
+      create_user('john@example.com')
+    end
+
     before(:each) do
-      @user = create_user('john@example.com')
+      user.touch
     end
 
     it 'deletes a user' do
       lambda do
-        delete :destroy, id: @user.id
+        delete :destroy, id: user.id
       end.should change(User, :count).by(-1)
     end
   end

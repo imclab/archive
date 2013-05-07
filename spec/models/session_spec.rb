@@ -1,8 +1,6 @@
 require 'spec_helper'
 
 describe Session do
-  it { should have(1).error_on(:session_date) }
-
   it 'should not be valid with a wrong session_date' do
     Session.new(session_date: 'foobar').should_not be_valid
   end

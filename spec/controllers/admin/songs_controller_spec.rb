@@ -11,7 +11,10 @@ describe Admin::SongsController do
 
   describe 'show' do
     it 'loads the song' do
-      Song.should_receive(:find).with(@song.id.to_s)
+      songs_stub = stub(:songs_with_include)
+
+      Song.should_receive(:includes).and_return(songs_stub)
+      songs_stub.should_receive(:find).with(@song.id.to_s)
 
       get :show, id: @song.id
     end

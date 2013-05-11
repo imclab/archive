@@ -3,17 +3,19 @@ $(function() {
   // FUNCTIONS
   //
 
-  // text_counter(input, target):
+  // countInputText(input, target):
   // Writes to 'target' how many chars are left to type in 'input'
-  function text_counter(input, target) {
+  function countInputText(input, target) {
     var max = input.attr("maxlength");
     var min = input.attr("data-minlength");
+
     input.focus(function() {
       target.removeClass('invisible');
       $(this).parents().eq(1).addClass('active');
       var left = max - this.value.length;
       target.text("You have " + left + " characters remaining");
     });
+
     input.blur(function() {
       if (min && this.value.length < min) {
         target.text("Needs to be at least " + min + " characters");
@@ -24,6 +26,7 @@ $(function() {
       };
       $(this).parents().eq(1).removeClass('active');
     });
+
     input.keyup(function() {
       var left = max - this.value.length;
       target.text("You have " + left + " characters remaining");
@@ -65,6 +68,6 @@ $(function() {
 
   for (var i = 0; i < inputs.length; i++) {
     var item = inputs[i];
-    text_counter($(item.input), $(item.target));
+    countInputText($(item.input), $(item.target));
   };
 });

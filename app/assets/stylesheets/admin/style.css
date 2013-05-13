@@ -1,0 +1,23 @@
+#admin-navigation {
+  float: left;
+}
+#admin-navigation li {
+  margin-top: 10px;
+}
+#admin-navigation li {
+  margin-bottom: 15px;
+}
+#admin-navigation a {
+  font-family: 'Oswald', sans-serif;
+  font-size: 2.5em;
+  font-weight: normal;
+  letter-spacing: 0em;
+  color: hsla(45, 100%, 61%, 1);
+  text-shadow: #DB5E1E 2px 2px 0px, rgba(0, 0, 0, 0.199219) 2px 5px 1px, rgba(0, 0, 0, 0.296875) 2px 0px 10px, rgba(0, 0, 0, 0.398438) 2px 3px 5px, rgba(0, 0, 0, 0.496094) 2px 6px 5px, rgba(0, 0, 0, 0.597656) 2px 10px 10px;
+  text-decoration: none;
+  display: inline;
+  margin: 15px;
+}
+#admin-navigation a:hover {
+  border-bottom: 5px solid hsla(45, 100%, 61%, 1);
+}

@@ -3,6 +3,7 @@
   <title>Howling Vibes Archive - Admin Dashboard</title>
   <meta charset="utf-8">
   <%= stylesheet_link_tag "application" %>
+  <%= stylesheet_link_tag "admin" %>
   <%= csrf_meta_tag %>
   <%= javascript_include_tag "application" %>
   <link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
@@ -10,9 +11,11 @@
 
 <body>
   <nav id="admin-navigation">
-    <%= link_to 'Sessions', admin_sessions_path %>
-    <%= link_to 'Users', admin_users_path %>
-    <%= link_to 'Songs', admin_songs_path %>
+    <ul>
+      <li><%= link_to 'Sessions', admin_sessions_path %></li>
+      <li><%= link_to 'Users', admin_users_path %></li>
+      <li><%= link_to 'Songs', admin_songs_path %></li>
+    </ul>
   </nav>
   <div id="container">
     <div id="main" role="main">

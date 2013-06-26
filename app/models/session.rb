@@ -4,7 +4,7 @@ class Session < ActiveRecord::Base
   validates :session_date, presence: true
   validates_associated :songs
 
-  def self.by_session_date
+  scope :by_session_date, lambda {
     includes(songs: [:comments, :tags]).order('session_date')
-  end
+  }
 end

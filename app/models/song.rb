@@ -14,21 +14,21 @@ class Song < ActiveRecord::Base
 
   # Returns all songs ordered by the count of their tags
   # Default order is highest tag count to lowest
-  def self.by_count_of_tags
+  scope :by_count_of_tags, lambda {
     includes([:session, :tags, :comments]).sort_by { |s| -s.tags.length }
-  end
+  }
 
   # Returns all songs ordered by their session's session_date
   # Default order is oldest to newest
-  def self.by_session_date
+  scope :by_session_date, lambda {
     includes([:session, :tags, :comments]).sort_by { |s| s.session.session_date }
-  end
+  }
 
   # Returns all songs ordered by their score
   # Default order is highest to lowest
-  def self.by_score
+  scope :by_score, lambda {
     includes([:session, :tags, :comments]).sort_by { |s| -s.score }
-  end
+  }
 
   private
 

@@ -7,7 +7,7 @@ class Tag < ActiveRecord::Base
 
   default_scope -> { order('tags.name ASC') }
 
-  def self.all_associated_with_songs
+  scope :all_associated_with_songs, lambda {
     SongTag.all.map { |st| Tag.find(st.tag_id) if Song.find(st.song_id) }.uniq
-  end
+  }
 end

@@ -4,6 +4,8 @@ Archive::Application.configure do
   # Code is not reloaded between requests
   config.cache_classes = true
 
+  config.eager_load = true
+
   # Full error reports are disabled and caching is turned on
   config.consider_all_requests_local       = false
   config.action_controller.perform_caching = true
@@ -19,6 +21,8 @@ Archive::Application.configure do
 
   # Generate digests for assets URLs
   config.assets.digest = true
+
+  config.assets.js_compressor = :uglifier
 
   # Defaults to Rails.root.join("public/assets")
   # config.assets.manifest = YOUR_PATH

@@ -3,7 +3,7 @@ class CommentsController < ApplicationController
   before_filter :correct_user_or_admin,    only: :destroy
 
   def create
-    comment = Comment.new(params[:comment])
+    comment = Comment.new(comment_params)
 
     if comment.save
       expire_fragment('all_sessions_with_songs')
@@ -32,5 +32,9 @@ class CommentsController < ApplicationController
       unless current_user && (current_user?(@comment.user) || current_user.admin)
         redirect_to(signin_path)
       end
+    end
+
+    def comment_params
+      params.require(:comment).permit(:text, :song_id, :user_id)
     end
 end

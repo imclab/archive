@@ -4,16 +4,13 @@ gem 'bcrypt-ruby'
 gem 'capistrano'
 gem 'font-awesome-rails'
 gem 'jquery-rails'
-gem 'rails', '3.2.13'
+gem 'rails', '4.0.0'
+gem 'uglifier'
 
 group :production do
   gem 'mysql2'
   gem 'execjs'
   gem 'therubyracer'
-end
-
-group :assets do
-  gem 'uglifier'
 end
 
 group :development do

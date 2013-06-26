@@ -14,7 +14,7 @@ class TagsController < ApplicationController
 
   def create
     @song = Song.find(params[:tag][:song_id])
-    @tag  = Tag.find_or_create_by_name(params[:tag][:name])
+    @tag  = Tag.find_or_create_by(name: params[:tag][:name])
 
     respond_to do |format|
       if @tag.errors.any?

@@ -41,7 +41,7 @@ class Admin::SessionsController < Admin::BaseController
     end
 
     def build_new_session(session, songs)
-      session = Session.find_or_initialize_by_session_date(session_date: folder_name_to_date(session))
+      session = Session.find_or_initialize_by(session_date: folder_name_to_date(session))
       songs.each { |song| session.songs.build(file_name: song) }
       session
     end
